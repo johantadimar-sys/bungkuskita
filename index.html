@@ -3,91 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>johantadimar - Desain & Cetak Boks Kemasan</title>
+    <title>BungkusKita - Desain & Cetak Boks Kemasan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow-x: hidden; background: #0a2a1a; }
-
+        body { font-family: 'Inter', 'Segoe UI', sans-serif; overflow-x: hidden; background: #0a2a1a; }
         .sections-container { scroll-snap-type: y mandatory; overflow-y: scroll; height: 100vh; scroll-behavior: smooth; }
         .section { position: relative; width: 100%; height: 100vh; scroll-snap-align: start; overflow: hidden; }
         .section-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center 30%; background-repeat: no-repeat; z-index: 0; }
         .section-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.45) 100%); z-index: 1; }
         .section-content { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 20px; text-align: center; color: white; }
         .content-wrapper { max-width: 600px; width: 100%; margin: 0 auto; }
-
         h1, h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; }
         h1 span, h2 span { color: #ffb703; }
         .tagline { font-size: 1.1rem; margin-bottom: 30px; }
         .btn-wa { display: inline-block; background: #25D366; color: white; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
         .btn-wa:hover { background: #128C7E; transform: scale(1.05); }
-
         .scroll-indicator { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 3; animation: bounce 2s infinite; cursor: pointer; }
         .scroll-indicator span { display: block; font-size: 0.7rem; opacity: 0.7; }
         .scroll-arrow { font-size: 1.2rem; }
         @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
-
         .about-box { background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); border-radius: 20px; padding: 25px; text-align: left; }
         .visi-misi { display: flex; flex-direction: column; gap: 20px; }
         .visi h3, .misi h3 { color: #ffb703; margin-bottom: 10px; }
         .misi ul { list-style: none; padding-left: 0; }
         .misi ul li { padding: 5px 0; padding-left: 20px; position: relative; }
         .misi ul li::before { content: "✓"; position: absolute; left: 0; color: #ffb703; }
-
         .produk-grid, .bahan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 15px; margin-top: 20px; }
-        .produk-item, .bahan-item { background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); border-radius: 15px; padding: 15px 10px; text-align: center; cursor: pointer; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2); }
-        .produk-item:hover, .bahan-item:hover { background: rgba(27,94,63,0.8); transform: translateY(-3px); }
-        .produk-icon, .bahan-icon { font-size: 2rem; margin-bottom: 8px; }
-        .produk-item span, .bahan-item span { font-size: 0.8rem; font-weight: 500; }
-        .bahan-item small { font-size: 0.65rem; opacity: 0.8; display: block; }
-
         .layanan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
-        .layanan-item { background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; text-align: center; }
-        .layanan-icon { font-size: 2.5rem; margin-bottom: 10px; }
-        .layanan-item h3 { color: #ffb703; margin-bottom: 8px; }
-
+        .produk-item, .bahan-item, .layanan-item { background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); border-radius: 15px; padding: 15px 10px; text-align: center; cursor: pointer; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2); }
+        .produk-item:hover, .bahan-item:hover, .layanan-item:hover { background: rgba(27,94,63,0.8); transform: translateY(-3px); }
+        .produk-icon, .bahan-icon, .layanan-icon { font-size: 2rem; margin-bottom: 8px; }
+        .produk-item span, .bahan-item span { font-size: 0.8rem; font-weight: 500; color: white; }
+        .layanan-item h3 { font-size: 1rem; color: #ffb703; margin-bottom: 8px; }
+        .layanan-item p { font-size: 0.75rem; margin-bottom: 5px; color: white; }
+        .layanan-item small { font-size: 0.65rem; opacity: 0.8; color: #ccc; }
         .kontak-box { background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; margin-bottom: 20px; }
         .kontak-item { display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2); }
         .kontak-item:last-child { border-bottom: none; }
-        .kontak-icon { font-size: 1.8rem; width: 50px; }
-        .kontak-item a { color: white; text-decoration: none; }
-        .info-penting { background: rgba(27,94,63,0.8); backdrop-filter: blur(10px); border-radius: 15px; padding: 15px; font-size: 0.75rem; text-align: left; }
-
-        .menu-toggle { position: fixed; top: 20px; right: 20px; width: 45px; height: 45px; background: #1b5e3f; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; cursor: pointer; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .menu-toggle span { width: 22px; height: 2px; background: white; border-radius: 2px; }
+        .kontak-icon { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
+        .kontak-img { width: 40px; height: 40px; object-fit: contain; border-radius: 10px; }
+        .kontak-item h3 { font-size: 0.9rem; margin-bottom: 4px; color: #ffb703; }
+        .kontak-item p, .kontak-item a { font-size: 0.85rem; color: white; text-decoration: none; }
+        .kontak-item a:hover { color: #ffb703; }
+        .info-penting { background: rgba(27,94,63,0.8); backdrop-filter: blur(10px); border-radius: 15px; padding: 15px; font-size: 0.75rem; text-align: left; color: white; }
+        .info-penting p { margin: 5px 0; }
         .side-menu { position: fixed; top: 0; right: -280px; width: 260px; height: 100vh; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); z-index: 1001; transition: right 0.3s ease; display: flex; flex-direction: column; }
         .side-menu.active { right: 0; }
         .menu-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .menu-logo span { font-weight: bold; font-size: 1.2rem; color: #ffb703; }
         .menu-close { background: none; border: none; font-size: 28px; cursor: pointer; color: white; }
-        .menu-nav { list-style: none; padding: 20px 0; flex: 1; }
+        .menu-nav { list-style: none; padding: 20px 0; flex: 1; text-align: center; }
         .menu-nav li { border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .menu-nav a { display: block; padding: 15px 25px; text-decoration: none; color: white; font-weight: 500; transition: all 0.3s ease; }
-        .menu-nav a:hover { background: rgba(27,94,63,0.5); padding-left: 35px; }
+        .menu-nav a { display: block; padding: 15px 25px; text-decoration: none; color: white; font-weight: 500; transition: all 0.3s ease; text-align: center; }
+        .menu-nav a:hover { background: rgba(27,94,63,0.5); }
         .menu-footer { padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.7rem; color: #ccc; text-align: center; }
+        .menu-toggle { position: fixed; top: 20px; right: 20px; width: 45px; height: 45px; background: #1b5e3f; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; cursor: pointer; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .menu-toggle span { width: 22px; height: 2px; background: white; border-radius: 2px; }
         .menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: none; }
         .menu-overlay.active { display: block; }
-
+        
+        /* MODAL */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1100; justify-content: center; align-items: center; }
         .modal.active { display: flex; }
-        .modal-content { background: rgba(0,0,0,0.95); padding: 30px; border-radius: 20px; max-width: 350px; width: 85%; text-align: center; }
+        .modal-content { background: rgba(0,0,0,0.95); padding: 30px; border-radius: 20px; max-width: 350px; width: 85%; text-align: center; max-height: 85vh; overflow-y: auto; }
         .modal-close { float: right; font-size: 28px; cursor: pointer; color: white; }
-        .modal-content h3 { color: #ffb703; margin: 10px 0; }
+        .modal-content h3 { color: #ffb703; margin: 10px 0; font-size: 1.3rem; }
+        .modal-product-image { width: 100%; max-width: 250px; height: auto; margin: 15px auto; display: block; border-radius: 15px; background: #2d2d2d; padding: 10px; }
+        .modal-product-image img { width: 100%; height: auto; border-radius: 10px; }
+        .no-image-placeholder { background: #2d2d2d; color: #999; padding: 40px; text-align: center; border-radius: 10px; font-size: 0.85rem; }
         .btn-wa-modal { display: inline-block; background: #25D366; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; margin-top: 15px; }
-
-        @media (min-width: 1024px) { h1, h2 { font-size: 3.5rem; } .produk-grid { grid-template-columns: repeat(5, 1fr); } .bahan-grid { grid-template-columns: repeat(4, 1fr); } .layanan-grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 480px) { h1, h2 { font-size: 1.8rem; } .produk-grid { grid-template-columns: repeat(3, 1fr); } .bahan-grid { grid-template-columns: repeat(2, 1fr); } .layanan-grid { grid-template-columns: 1fr; } }
-
+        
+        #modalMessage {
+            color: white !important;
+            text-align: left;
+            margin: 15px 0;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            white-space: pre-line;
+        }
+        
         .fade-up { opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s ease forwards; }
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
         .delay-1 { animation-delay: 0.2s; } .delay-2 { animation-delay: 0.4s; } .delay-3 { animation-delay: 0.6s; }
-
-        /* Background colors for each section (fallback if no image) */
-        #beranda .section-bg { background-color: #0d3b26; background-image: url('images/bg-beranda.jpg'); }
-        #tentang .section-bg { background-color: #1a3a2a; background-image: url('images/bg-tentang.jpg'); }
-        #produk .section-bg { background-color: #1a4a2a; background-image: url('images/bg-produk.jpg'); }
-        #bahan .section-bg { background-color: #2a3a1a; background-image: url('images/bg-bahan.jpg'); }
-        #layanan .section-bg { background-color: #1a3a3a; background-image: url('images/bg-layanan.jpg'); }
-        #kontak .section-bg { background-color: #2a1a3a; background-image: url('images/bg-kontak.jpg'); }
+        @media (min-width: 1024px) { h1, h2 { font-size: 3.5rem; } .produk-grid { grid-template-columns: repeat(5, 1fr); } .bahan-grid { grid-template-columns: repeat(4, 1fr); } .layanan-grid { grid-template-columns: repeat(3, 1fr); } .content-wrapper { max-width: 800px; } }
+        @media (max-width: 480px) { h1, h2 { font-size: 1.8rem; } .produk-grid { grid-template-columns: repeat(2, 1fr); } .bahan-grid { grid-template-columns: repeat(2, 1fr); } .layanan-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -95,7 +95,7 @@
 <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
 
 <nav class="side-menu" id="sideMenu">
-    <div class="menu-header"><div class="menu-logo"><span>johantadimar</span></div><button class="menu-close" id="menuClose">&times;</button></div>
+    <div class="menu-header"><div class="menu-logo"><span>BungkusKita</span></div><button class="menu-close" id="menuClose">&times;</button></div>
     <ul class="menu-nav">
         <li><a href="#beranda" class="menu-link">🏠 Beranda</a></li>
         <li><a href="#tentang" class="menu-link">📖 Tentang</a></li>
@@ -104,15 +104,15 @@
         <li><a href="#layanan" class="menu-link">⚙️ Layanan</a></li>
         <li><a href="#kontak" class="menu-link">📞 Kontak</a></li>
     </ul>
-    <div class="menu-footer"><p>📱 +62 857-1696-7671</p><p>📧 johantadimar@gmail.com</p></div>
+    <div class="menu-footer"><p>📱 +62 857-1696-7671</p><p>📧 info@bungkuskita.com</p></div>
 </nav>
-
 <div class="menu-overlay" id="menuOverlay"></div>
 
 <main class="sections-container">
-    <!-- BERANDA -->
+
+    <!-- ========== HALAMAN 1: BERANDA ========== -->
     <section id="beranda" class="section active">
-        <div class="section-bg"></div>
+        <div class="section-bg" style="background-image: url('images/bg-beranda.jpg');"></div>
         <div class="section-overlay"></div>
         <div class="section-content">
             <div class="content-wrapper">
@@ -124,9 +124,9 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
-    <!-- TENTANG -->
+    <!-- ========== HALAMAN 2: TENTANG ========== -->
     <section id="tentang" class="section">
-        <div class="section-bg"></div>
+        <div class="section-bg" style="background-image: url('images/bg-tentang.jpg');"></div>
         <div class="section-overlay"></div>
         <div class="section-content">
             <div class="content-wrapper">
@@ -142,81 +142,124 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
-    <!-- PRODUK -->
+    <!-- ========== HALAMAN 3: PRODUK (15 PRODUK) ========== -->
     <section id="produk" class="section">
-        <div class="section-bg"></div>
+        <div class="section-bg" style="background-image: url('images/bg-produk.jpg');"></div>
         <div class="section-overlay"></div>
         <div class="section-content">
             <div class="content-wrapper">
                 <h2 class="fade-up">Katalog <span>Produk</span></h2>
-                <p class="section-subtitle fade-up delay-1" style="margin-bottom:20px;">Model Tutup Sambung | 100 pcs per Pack</p>
+                <p class="section-subtitle fade-up delay-1">Klik produk untuk melihat detail</p>
                 <div class="produk-grid fade-up delay-2">
-                    <div class="produk-item" data-produk="Boks Martabak S (11x15x4,2 cm)"><div class="produk-icon">🥚</div><span>Box Martabak Size S</span></div>
-                    <div class="produk-item" data-produk="Boks Martabak M (12x17,5x4,2 cm)"><div class="produk-icon">🥚</div><span>Box Martabak Size M</span></div>
-                    <div class="produk-item" data-produk="Boks Martabak L (21x13x4,2 cm)"><div class="produk-icon">🥚</div><span>Box Martabak Size L</span></div>
-                    <div class="produk-item" data-produk="Boks Catering (18x18x7,5 cm)"><div class="produk-icon">🍱</div><span>Box Catering 18x18</span></div>
-                    <div class="produk-item" data-produk="Boks Catering Large (20x20x7,5 cm)"><div class="produk-icon">🍱</div><span>Box Catering 20x20</span></div>
-                    <div class="produk-item" data-produk="Boks Snack (12x12x7 cm)"><div class="produk-icon">🍪</div><span>Snack 12x12</span></div>
-                    <div class="produk-item" data-produk="Boks Snack (12x16x7 cm)"><div class="produk-icon">🍪</div><span>Snack 12x16</span></div>
-                    <div class="produk-item" data-produk="Lunch Boks M (10x17,5x4,5 cm)"><div class="produk-icon">🍽️</div><span>Lunch Box Size M</span></div>
-                    <div class="produk-item" data-produk="Lunch Boks L (12x20x4,5 cm)"><div class="produk-icon">🍽️</div><span>Lunch Box Size L</span></div>
+                    <!-- Box Snack -->
+                    <div class="produk-item" data-produk="Box Snack 12x12" data-ukuran="12 x 12 cm" data-kategori="Box Snack" data-gambar="images/produk/produk-box-snack-12.jpg"><div class="produk-icon">🍪</div><span>Box Snack 12x12</span></div>
+                    <div class="produk-item" data-produk="Box Snack 12x14" data-ukuran="12 x 14 cm" data-kategori="Box Snack" data-gambar="images/produk/produk-box-snack-14.jpg"><div class="produk-icon">🍪</div><span>Box Snack 12x14</span></div>
+                    <div class="produk-item" data-produk="Box Snack 12x16" data-ukuran="12 x 16 cm" data-kategori="Box Snack" data-gambar="images/produk/produk-box-snack-16.jpg"><div class="produk-icon">🍪</div><span>Box Snack 12x16</span></div>
+                    <!-- Box Martabak -->
+                    <div class="produk-item" data-produk="Box Martabak 10x15x4" data-ukuran="10 x 15 x 4 cm" data-kategori="Box Martabak" data-gambar="images/produk/produk-box-martabak-10.jpg"><div class="produk-icon">🥚</div><span>Martabak 10x15x4</span></div>
+                    <div class="produk-item" data-produk="Box Martabak 12x17,5x4,2" data-ukuran="12 x 17,5 x 4,2 cm" data-kategori="Box Martabak" data-gambar="images/produk/produk-box-martabak-12.jpg"><div class="produk-icon">🥚</div><span>Martabak 12x17,5x4,2</span></div>
+                    <div class="produk-item" data-produk="Box Martabak 13,5x21x4,2" data-ukuran="13,5 x 21 x 4,2 cm" data-kategori="Box Martabak" data-gambar="images/produk/produk-box-martabak-13.jpg"><div class="produk-icon">🥚</div><span>Martabak 13,5x21x4,2</span></div>
+                    <!-- Box Catering GS -->
+                    <div class="produk-item" data-produk="Box Catering GS 18x18" data-ukuran="18 x 18 cm" data-kategori="Box Catering GS" data-gambar="images/produk/produk-box-catering-gs18.jpg"><div class="produk-icon">🍱</div><span>Catering GS 18x18</span></div>
+                    <div class="produk-item" data-produk="Box Catering GS 20x20" data-ukuran="20 x 20 cm" data-kategori="Box Catering GS" data-gambar="images/produk/produk-box-catering-gs20.jpg"><div class="produk-icon">🍱</div><span>Catering GS 20x20</span></div>
+                    <!-- Box Catering TP -->
+                    <div class="produk-item" data-produk="Box Catering TP 18x18" data-ukuran="18 x 18 cm" data-kategori="Box Catering TP" data-gambar="images/produk/produk-box-catering-tp18.jpg"><div class="produk-icon">🍱</div><span>Catering TP 18x18</span></div>
+                    <div class="produk-item" data-produk="Box Catering TP 20x20" data-ukuran="20 x 20 cm" data-kategori="Box Catering TP" data-gambar="images/produk/produk-box-catering-tp20.jpg"><div class="produk-icon">🍱</div><span>Catering TP 20x20</span></div>
+                    <!-- Lunch Box -->
+                    <div class="produk-item" data-produk="Lunch Box Size M" data-ukuran="10 x 17,5 cm" data-kategori="Lunch Box" data-gambar="images/produk/produk-lunchbox-m.jpg"><div class="produk-icon">🍽️</div><span>Lunch Box M</span><small>10x17,5 cm</small></div>
+                    <div class="produk-item" data-produk="Lunch Box Size L" data-ukuran="12 x 20 cm" data-kategori="Lunch Box" data-gambar="images/produk/produk-lunchbox-l.jpg"><div class="produk-icon">🍽️</div><span>Lunch Box L</span><small>12x20 cm</small></div>
+                    <!-- Display -->
+                    <div class="produk-item" data-produk="Menu A4" data-ukuran="21 x 29,7 cm" data-kategori="Display" data-gambar="images/produk/produk-menu-a4.jpg"><div class="produk-icon">📋</div><span>Menu A4</span><small>21x29,7 cm</small></div>
+                    <div class="produk-item" data-produk="Menu Sticker" data-ukuran="Variatif" data-kategori="Display" data-gambar="images/produk/produk-sticker.jpg"><div class="produk-icon">🏷️</div><span>Menu Sticker</span><small>Custom size</small></div>
+                    <div class="produk-item" data-produk="Spanduk" data-ukuran="Variatif" data-kategori="Display" data-gambar="images/produk/produk-spanduk.jpg"><div class="produk-icon">📢</div><span>Spanduk</span><small>Custom size</small></div>
                 </div>
+                <p style="margin-top:20px; font-size:0.7rem; opacity:0.7;">✨ Klik produk untuk melihat detail & gambar</p>
             </div>
         </div>
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
-    <!-- BAHAN -->
+    <!-- ========== HALAMAN 4: BAHAN (LENGKAP DENGAN GAMBAR) ========== -->
     <section id="bahan" class="section">
-        <div class="section-bg"></div>
+        <div class="section-bg" style="background-image: url('images/bg-bahan.jpg');"></div>
         <div class="section-overlay"></div>
         <div class="section-content">
             <div class="content-wrapper">
                 <h2 class="fade-up">Jenis <span>Bahan</span></h2>
-                <div class="bahan-grid fade-up delay-1">
-                    <div class="bahan-item" data-bahan="Kraft Liner 275/315/350 Gr"><div class="bahan-icon">📦</div><span>Kraft Liner</span><small>275 | 315 | 350 Gr</small></div>
-                    <div class="bahan-item" data-bahan="Kraft PE 290/325 Gr"><div class="bahan-icon">💧</div><span>Kraft PE</span><small>290 | 325 Gr</small></div>
-                    <div class="bahan-item" data-bahan="Duplek 250/310/350 Gr"><div class="bahan-icon">📄</div><span>Duplek</span><small>250 | 310 | 350 Gr</small></div>
-                    <div class="bahan-item" data-bahan="Ivory 230/250/270/300 Gr"><div class="bahan-icon">✨</div><span>Ivory</span><small>230 | 250 | 270 | 300 Gr</small></div>
+                <div class="bahan-grid fade-up delay-2">
+                    <!-- Kraft Liner -->
+                    <div class="bahan-item" data-bahan="Kraft Liner" data-gambar="images/bahan/kraft-liner.jpg" data-deskripsi="Kertas kraft alami, kuat, ramah lingkungan" data-spesifikasi="Gramatur: 275 | 315 | 350 Gr">
+                        <div class="bahan-icon">📦</div><span>Kraft Liner</span><small>Natural & Kuat</small>
+                    </div>
+                    <!-- Kraft Laminasi (Kraft PE) -->
+                    <div class="bahan-item" data-bahan="Kraft Laminasi" data-gambar="images/bahan/kraft-pe.jpg" data-deskripsi="Tahan minyak dan air" data-spesifikasi="Gramatur: 290 | 325 Gr">
+                        <div class="bahan-icon">💧</div><span>Kraft Laminasi</span><small>Tahan Minyak</small>
+                    </div>
+                    <!-- Duplek -->
+                    <div class="bahan-item" data-bahan="Duplek" data-gambar="images/bahan/duplek.jpg" data-deskripsi="Permukaan halus, cetak tajam" data-spesifikasi="Gramatur: 250 | 310 | 350 Gr">
+                        <div class="bahan-icon">📄</div><span>Duplek</span><small>Halus & Tajam</small>
+                    </div>
+                    <!-- Ivori -->
+                    <div class="bahan-item" data-bahan="Ivori" data-gambar="images/bahan/ivori.jpg" data-deskripsi="Putih bersih, mewah, eksklusif" data-spesifikasi="Gramatur: 230 | 250 | 270 | 300 Gr">
+                        <div class="bahan-icon">✨</div><span>Ivori</span><small>Putih & Premium</small>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
-    <!-- LAYANAN -->
+    <!-- ========== HALAMAN 5: LAYANAN (LENGKAP DENGAN GAMBAR) ========== -->
     <section id="layanan" class="section">
-        <div class="section-bg"></div>
+        <div class="section-bg" style="background-image: url('images/bg-layanan.jpg');"></div>
         <div class="section-overlay"></div>
         <div class="section-content">
             <div class="content-wrapper">
                 <h2 class="fade-up">Layanan <span>Kami</span></h2>
-                <div class="layanan-grid fade-up delay-1">
-                    <div class="layanan-item"><div class="layanan-icon">🎨</div><h3>Desain Aja</h3><p>Bantuan desain kemasan profesional</p><small>File siap cetak | Revisi 2x</small></div>
-                    <div class="layanan-item"><div class="layanan-icon">🖨️</div><h3>Cetak Aja</h3><p>Cetak berkualitas tinggi</p><small>Hasil tajam | Bahan lengkap</small></div>
-                    <div class="layanan-item"><div class="layanan-icon">⭐</div><h3>Desain + Cetak</h3><p>Paket lengkap dari konsep hingga jadi</p><small>Konsultasi gratis | Garansi</small></div>
+                <div class="layanan-grid fade-up delay-2">
+                    <!-- Desain -->
+                    <div class="layanan-item" data-layanan="Desain" data-gambar="images/layanan/desain.jpg" data-deskripsi="Jasa desain kemasan profesional" data-fitur="✓ File siap cetak (CDR/AI/PDF)&#10;✓ Revisi 2x gratis&#10;✓ Konsultasi desain">
+                        <div class="layanan-icon">🎨</div>
+                        <h3>Desain</h3>
+                        <p>Bantuan desain kemasan</p>
+                        <small>File siap cetak</small>
+                    </div>
+                    <!-- Cetak -->
+                    <div class="layanan-item" data-layanan="Cetak" data-gambar="images/layanan/cetak.jpg" data-deskripsi="Cetak berkualitas tinggi" data-fitur="✓ Hasil cetak tajam&#10;✓ Pilihan bahan lengkap&#10;✓ Proses cepat">
+                        <div class="layanan-icon">🖨️</div>
+                        <h3>Cetak</h3>
+                        <p>Cetak berkualitas</p>
+                        <small>Hasil tajam</small>
+                    </div>
+                    <!-- Desain & Cetak -->
+                    <div class="layanan-item" data-layanan="Desain & Cetak" data-gambar="images/layanan/desain-cetak.jpg" data-deskripsi="Paket lengkap dari konsep hingga jadi" data-fitur="✓ Konsultasi gratis&#10;✓ Cetak berkualitas&#10;✓ Garansi kepuasan">
+                        <div class="layanan-icon">⭐</div>
+                        <h3>Desain & Cetak</h3>
+                        <p>Paket lengkap</p>
+                        <small>Konsultasi gratis</small>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
-    <!-- KONTAK -->
+    <!-- ========== HALAMAN 6: KONTAK ========== -->
     <section id="kontak" class="section">
-        <div class="section-bg"></div>
+        <div class="section-bg" style="background-image: url('images/bg-kontak.jpg');"></div>
         <div class="section-overlay"></div>
         <div class="section-content">
             <div class="content-wrapper">
                 <h2 class="fade-up">Hubungi <span>Kami</span></h2>
                 <div class="kontak-box fade-up delay-1">
-                    <div class="kontak-item"><div class="kontak-icon">📱</div><div><h3>WhatsApp</h3><a href="https://wa.me/6285716967671" target="_blank">+62 857-1696-7671</a></div></div>
-                    <div class="kontak-item"><div class="kontak-icon">📧</div><div><h3>Email</h3><a href="mailto:johantadimar@gmail.com">johantadimar@gmail.com</a></div></div>
-                    <div class="kontak-item"><div class="kontak-icon">🏢</div><div><h3>Alamat</h3><p>Jakarta Barat, Indonesia</p></div></div>
-                    <div class="kontak-item"><div class="kontak-icon">🕒</div><div><h3>Jam Operasional</h3><p>Senin - Sabtu, 09:00 - 17:00</p></div></div>
+                    <div class="kontak-item"><div class="kontak-icon"><img src="images/kontak/icon-wa.png" alt="WA" class="kontak-img" onerror="this.src='https://placehold.co/50x50/25D366/white?text=WA'"></div><div><h3>WhatsApp</h3><a href="https://wa.me/6285716967671" target="_blank">+62 857-1696-7671</a></div></div>
+                    <div class="kontak-item"><div class="kontak-icon"><img src="images/kontak/icon-email.png" alt="Email" class="kontak-img" onerror="this.src='https://placehold.co/50x50/EA4335/white?text=@'"></div><div><h3>Email</h3><a href="mailto:info@bungkuskita.com">info@bungkuskita.com</a></div></div>
+                    <div class="kontak-item"><div class="kontak-icon"><img src="images/kontak/icon-alamat.png" alt="Alamat" class="kontak-img" onerror="this.src='https://placehold.co/50x50/4285F4/white?text=📍'"></div><div><h3>Alamat</h3><p>Jakarta Barat, Indonesia</p></div></div>
+                    <div class="kontak-item"><div class="kontak-icon"><img src="images/kontak/icon-jam.png" alt="Jam" class="kontak-img" onerror="this.src='https://placehold.co/50x50/FF9800/white?text=🕒'"></div><div><h3>Jam Operasional</h3><p>Senin - Sabtu, 09:00 - 17:00</p></div></div>
                 </div>
                 <div class="info-penting fade-up delay-2">
                     <p><strong>💰 Pembayaran:</strong> DP 50% sebelum desain | Lunas sebelum produksi</p>
-                    <p><strong>🚚 Pengiriman:</strong> Gratis ongkir (Jakarta, Bekasi, Tangerang, MOQ≥5000)</p>
+                    <p><strong>🚚 Pengiriman:</strong> Gratis ongkir (Jakarta Barat, Bekasi, Tangerang, MOQ≥5000)</p>
                     <p><strong>⏱️ Produksi:</strong> 7 Hari Kerja setelah desain ACC</p>
                 </div>
             </div>
@@ -224,81 +267,106 @@
     </section>
 </main>
 
+<!-- MODAL -->
 <div id="modal" class="modal">
     <div class="modal-content">
         <span class="modal-close">&times;</span>
         <h3 id="modalTitle"></h3>
-        <p id="modalMessage"></p>
-        <a href="https://wa.me/6285716967671" class="btn-wa-modal" target="_blank">📞 Pesan via WhatsApp</a>
+        <div id="modalImage" class="modal-product-image"><div class="no-image-placeholder">📷 Gambar menyusul</div></div>
+        <div id="modalMessage"></div>
+        <a href="https://wa.me/6285716967671" id="modalWaLink" class="btn-wa-modal" target="_blank">📞 Konsultasi via WhatsApp</a>
     </div>
 </div>
 
 <script>
-    // Menu
+    // ========== MENU POPUP ==========
     const menuToggle = document.getElementById('menuToggle');
     const sideMenu = document.getElementById('sideMenu');
     const menuOverlay = document.getElementById('menuOverlay');
     const menuClose = document.getElementById('menuClose');
-
     function openMenu() { sideMenu.classList.add('active'); menuOverlay.classList.add('active'); }
     function closeMenu() { sideMenu.classList.remove('active'); menuOverlay.classList.remove('active'); }
-
     if(menuToggle) menuToggle.addEventListener('click', openMenu);
     if(menuClose) menuClose.addEventListener('click', closeMenu);
     if(menuOverlay) menuOverlay.addEventListener('click', closeMenu);
 
-    // Navigasi
-    const sections = document.querySelectorAll('.section');
+    // ========== NAVIGASI ==========
     const container = document.querySelector('.sections-container');
-
     function showSection(sectionId) {
         const target = document.getElementById(sectionId);
         if(target && container) container.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
         closeMenu();
     }
-
     document.querySelectorAll('.menu-link').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            const sectionId = link.getAttribute('href').substring(1);
-            showSection(sectionId);
+            showSection(link.getAttribute('href').substring(1));
         });
     });
-
-    // Scroll indicator
     document.querySelectorAll('.scroll-indicator').forEach(ind => {
         ind.addEventListener('click', () => {
             if(container) container.scrollTo({ top: container.scrollTop + window.innerHeight, behavior: 'smooth' });
         });
     });
 
-    // Modal
+    // ========== MODAL ==========
     const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modalTitle');
     const modalMessage = document.getElementById('modalMessage');
-    const modalClose = document.querySelector('.modal-close');
-
-    function showModal(title, message) {
+    const modalImage = document.getElementById('modalImage');
+    const modalCloseBtn = document.querySelector('.modal-close');
+    const modalWaLink = document.getElementById('modalWaLink');
+    function closeModal() { modal.classList.remove('active'); }
+    if(modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+    function showModal(title, message, imageUrl = '', waMessage = '') {
         modalTitle.innerText = title;
-        modalMessage.innerText = message;
+        if(imageUrl && imageUrl !== '') {
+            modalImage.innerHTML = `<img src="${imageUrl}" alt="${title}">`;
+        } else {
+            modalImage.innerHTML = `<div class="no-image-placeholder">📷 Gambar ${title} menyusul</div>`;
+        }
+        modalMessage.innerHTML = message;
+        modalWaLink.href = waMessage ? `https://wa.me/6285716967671?text=${encodeURIComponent(waMessage)}` : `https://wa.me/6285716967671?text=Halo%20BungkusKita,%20saya%20tertarik%20dengan%20${encodeURIComponent(title)}`;
         modal.classList.add('active');
     }
 
-    function closeModal() { modal.classList.remove('active'); }
-    if(modalClose) modalClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
-
+    // ========== PRODUK ==========
     document.querySelectorAll('.produk-item').forEach(item => {
         item.addEventListener('click', () => {
-            const produk = item.getAttribute('data-produk') || item.querySelector('span')?.innerText;
-            showModal(produk, `Tertarik dengan ${produk}? Klik tombol di bawah untuk memesan.`);
+            const nama = item.getAttribute('data-produk');
+            const ukuran = item.getAttribute('data-ukuran');
+            const kategori = item.getAttribute('data-kategori');
+            const gambar = item.getAttribute('data-gambar');
+            const pesan = "📦 " + nama + "\n📏 Ukuran: " + ukuran + "\n🏷️ Kategori: " + kategori + "\n\n✨ Tertarik dengan produk ini? Klik tombol di bawah untuk memesan via WhatsApp.";
+            const waMsg = "Halo BungkusKita, saya tertarik dengan produk " + nama + " (" + ukuran + "). Mohon info harga dan minimal order.";
+            showModal(nama, pesan, gambar, waMsg);
         });
     });
 
+    // ========== BAHAN (LENGKAP DENGAN GAMBAR) ==========
     document.querySelectorAll('.bahan-item').forEach(item => {
         item.addEventListener('click', () => {
-            const bahan = item.getAttribute('data-bahan') || item.querySelector('span')?.innerText;
-            showModal(bahan, `Informasi lebih lanjut tentang ${bahan}? Klik tombol di bawah untuk konsultasi.`);
+            const nama = item.getAttribute('data-bahan');
+            const gambar = item.getAttribute('data-gambar');
+            const deskripsi = item.getAttribute('data-deskripsi');
+            const spesifikasi = item.getAttribute('data-spesifikasi');
+            const pesan = "📄 " + nama + "\n📝 " + deskripsi + "\n📊 " + spesifikasi + "\n\n✨ Tertarik? Klik tombol di bawah untuk konsultasi.";
+            const waMsg = "Halo BungkusKita, saya tertarik dengan bahan " + nama + ". Mohon info lebih lanjut dan contohnya.";
+            showModal(nama, pesan, gambar, waMsg);
+        });
+    });
+
+    // ========== LAYANAN (LENGKAP DENGAN GAMBAR) ==========
+    document.querySelectorAll('.layanan-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const nama = item.getAttribute('data-layanan');
+            const gambar = item.getAttribute('data-gambar');
+            const deskripsi = item.getAttribute('data-deskripsi');
+            const fitur = item.getAttribute('data-fitur');
+            const pesan = "⚙️ " + nama + "\n📝 " + deskripsi + "\n\n" + fitur.replace(/&#10;/g, '\n') + "\n\n✨ Tertarik? Klik tombol di bawah untuk konsultasi.";
+            const waMsg = "Halo BungkusKita, saya tertarik dengan layanan " + nama + ". Mohon info lebih lanjut dan harga.";
+            showModal(nama, pesan, gambar, waMsg);
         });
     });
 </script>
