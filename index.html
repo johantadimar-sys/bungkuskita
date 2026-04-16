@@ -51,6 +51,49 @@
         .layanan-item p { font-size: 0.7rem; margin-bottom: 4px; color: white; }
         .layanan-item small { font-size: 0.6rem; opacity: 0.8; color: #ccc; }
         
+        /* CONTOH PRODUK */
+        .contoh-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .contoh-item {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .contoh-item:hover {
+            transform: translateY(-5px);
+            background: rgba(27,94,63,0.8);
+        }
+        .contoh-image {
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+        }
+        .contoh-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        .contoh-item:hover .contoh-image img {
+            transform: scale(1.05);
+        }
+        .contoh-info {
+            padding: 12px;
+            text-align: center;
+        }
+        .contoh-info p {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: white;
+        }
+        
         .kontak-box { background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); border-radius: 20px; padding: 15px; margin-bottom: 15px; color: white; }
         .kontak-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.2); }
         .kontak-item:last-child { border-bottom: none; }
@@ -111,9 +154,11 @@
             .produk-grid { grid-template-columns: repeat(5, 1fr); gap: 15px; }
             .bahan-grid { grid-template-columns: repeat(4, 1fr); gap: 15px; }
             .layanan-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+            .contoh-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
             .content-wrapper { max-width: 800px; }
             .produk-icon-img { width: 100px; height: 100px; }
             .produk-item span { font-size: 0.8rem; }
+            .contoh-image { height: 180px; }
         }
         
         @media (min-width: 1024px) {
@@ -133,6 +178,7 @@
         <li><a href="#produk" class="menu-link">📦 Produk</a></li>
         <li><a href="#bahan" class="menu-link">📄 Bahan</a></li>
         <li><a href="#layanan" class="menu-link">⚙️ Layanan</a></li>
+        <li><a href="#contoh" class="menu-link">📸 Contoh Produk</a></li>
         <li><a href="#kontak" class="menu-link">📞 Kontak</a></li>
     </ul>
     <div class="menu-footer"><p>📱 +62 857-1696-7671</p><p>📧 johantadimar@gmail.com</p></div>
@@ -140,6 +186,7 @@
 <div class="menu-overlay" id="menuOverlay"></div>
 
 <main class="sections-container">
+    <!-- BERANDA -->
     <section id="beranda" class="section active">
         <div class="section-bg" style="background-image: url('images/bg-beranda.jpg');"></div>
         <div class="section-overlay"></div>
@@ -153,6 +200,7 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
+    <!-- TENTANG -->
     <section id="tentang" class="section">
         <div class="section-bg" style="background-image: url('images/bg-tentang.jpg');"></div>
         <div class="section-overlay"></div>
@@ -170,6 +218,7 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
+    <!-- PRODUK -->
     <section id="produk" class="section">
         <div class="section-bg" style="background-image: url('images/bg-produk.jpg');"></div>
         <div class="section-overlay"></div>
@@ -183,6 +232,7 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
+    <!-- BAHAN -->
     <section id="bahan" class="section">
         <div class="section-bg" style="background-image: url('images/bg-bahan.jpg');"></div>
         <div class="section-overlay"></div>
@@ -195,6 +245,7 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
+    <!-- LAYANAN -->
     <section id="layanan" class="section">
         <div class="section-bg" style="background-image: url('images/bg-layanan.jpg');"></div>
         <div class="section-overlay"></div>
@@ -207,6 +258,22 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
+    <!-- CONTOH PRODUK -->
+    <section id="contoh" class="section">
+        <div class="section-bg" style="background-image: url('images/bg-contoh.jpg');"></div>
+        <div class="section-overlay"></div>
+        <div class="section-content">
+            <div class="content-wrapper">
+                <h2 class="fade-up">Contoh <span>Produk Kami</span></h2>
+                <p class="section-subtitle fade-up delay-1">Beberapa hasil cetakan untuk pelanggan setia</p>
+                <div class="contoh-grid fade-up delay-2" id="contohGrid"></div>
+                <p style="margin-top:15px; font-size:0.7rem; opacity:0.7;">✨ Masih banyak lagi produk lainnya ✨</p>
+            </div>
+        </div>
+        <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
+    </section>
+
+    <!-- KONTAK -->
     <section id="kontak" class="section">
         <div class="section-bg" style="background-image: url('images/bg-kontak.jpg');"></div>
         <div class="section-overlay"></div>
@@ -216,7 +283,7 @@
                 <div class="kontak-box fade-up delay-1">
                     <div class="kontak-item"><div class="kontak-icon"><img src="images/kontak/icon-wa.png" alt="WA" class="kontak-img" onerror="this.src='https://placehold.co/50x50/25D366/white?text=WA'"></div><div><h3>WhatsApp</h3><a href="https://wa.me/6285716967671" target="_blank">+62 857-1696-7671</a></div></div>
                     <div class="kontak-item"><div class="kontak-icon"><img src="images/kontak/icon-email.png" alt="Email" class="kontak-img" onerror="this.src='https://placehold.co/50x50/EA4335/white?text=@'"></div><div><h3>Email</h3><a href="mailto:johantadimar@gmail.com">johantadimar@gmail.com</a></div></div>
-                    <div class="kontak-item"><div class="kontak-icon"><img src="images/kontak/icon-alamat.png" alt="Alamat" class="kontak-img" onerror="this.src='https://placehold.co/50x50/4285F4/white?text=📍'"></div><div><h3>Alamat</h3><p>Jakarta, Indonesia</p></div></div>
+                    <div class="kontak-item"><div class="kontak-icon"><img src="images/kontak/icon-alamat.png" alt="Alamat" class="kontak-img" onerror="this.src='https://placehold.co/50x50/4285F4/white?text=📍'"></div><div><h3>Alamat</h3><p>Jakarta Barat</p></div></div>
                     <div class="kontak-item"><div class="kontak-icon"><img src="images/kontak/icon-jam.png" alt="Jam" class="kontak-img" onerror="this.src='https://placehold.co/50x50/FF9800/white?text=🕒'"></div><div><h3>Jam Operasional</h3><p>Senin - Jumat: 09:00 - 17:00<br>Sabtu: 09:00 - 14:00<br>Minggu: Libur</p></div></div>
                 </div>
                 <div class="info-penting fade-up delay-2">
@@ -263,7 +330,6 @@
         const grid = document.getElementById('produkGrid');
         if (!grid) return;
         grid.innerHTML = '';
-        
         produkData.forEach(prod => {
             const card = document.createElement('div');
             card.className = 'produk-item';
@@ -447,6 +513,35 @@ Mohon info harga dan ketersediaan. Terima kasih.`;
         modal.classList.add('active');
     }
 
+    // CONTOH PRODUK
+    const contohData = [
+        { nama: "Box Kue Pukis & Kamir Syakila 88", gambar: "images/contoh/contoh-1.jpg" },
+        { nama: "Box Snack - Bazar Hut Pabrik", gambar: "images/contoh/contoh-2.jpg" },
+        { nama: "Box Kue Dongkal - Jajanan Pasar", gambar: "images/contoh/contoh-3.jpg" },
+        { nama: "Box Catering Ayam Taliwang Saudara", gambar: "images/contoh/contoh-4.jpg" },
+        { nama: "Senyum Pelanggan", gambar: "images/contoh/contoh-5.jpg" },
+        { nama: "Ayam Bakar, Box Catering, Martabak Mini", gambar: "images/contoh/contoh-6.jpg" }
+    ];
+
+    function renderContoh() {
+        const grid = document.getElementById('contohGrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        contohData.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'contoh-item';
+            card.innerHTML = `
+                <div class="contoh-image">
+                    <img src="${item.gambar}" alt="${item.nama}" onerror="this.src='https://placehold.co/300x200/1b5e3f/white?text=Contoh+Produk'">
+                </div>
+                <div class="contoh-info">
+                    <p>📦 ${item.nama}</p>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
     // MENU
     const menuToggle = document.getElementById('menuToggle');
     const sideMenu = document.getElementById('sideMenu');
@@ -485,6 +580,7 @@ Mohon info harga dan ketersediaan. Terima kasih.`;
     renderProduk();
     renderBahan();
     renderLayanan();
+    renderContoh();
 </script>
 </body>
 </html>
