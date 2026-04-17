@@ -86,7 +86,6 @@
         .modal-close{float:right;font-size:24px;cursor:pointer;color:#666;transition:all .2s}
         .modal-close:hover{color:#1b5e3f}
         .modal-content h3{color:#1b5e3f;margin:8px 0 5px;font-size:1.2rem;border-bottom:2px solid #ffb703;display:inline-block;padding-bottom:4px}
-        /* GAMBAR ZOOMABLE - UKURAN 80% */
         .modal-product-image{width:80%;max-width:300px;height:auto;margin:8px auto;display:block;border-radius:14px;background:#e8f5e9;padding:8px;border:1px solid #a5d6a7;overflow:auto;cursor:zoom-in}
         .modal-product-image img{width:100%;height:auto;border-radius:10px;transition:transform .2s ease;display:block;margin:0 auto}
         .modal-product-image.zoomed{cursor:zoom-out}
@@ -112,9 +111,11 @@
             .contoh-image{height:180px}
         }
         
+        /* UKURAN GAMBAR INSPIRASI DI HP - DIPERKECIL */
         @media(max-width:767px){
-            .contoh-grid{grid-template-columns:repeat(2,1fr);gap:15px}
-            .contoh-image{height:120px}
+            .contoh-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+            .contoh-image{height:100px}
+            .contoh-info p{font-size:.65rem}
         }
         
         @media(min-width:1024px){h1,h2{font-size:3rem}}
@@ -256,7 +257,7 @@
 </div>
 
 <script>
-// ========== FITUR ZOOM DAN DRAG (Seperti Tokopedia) ==========
+// ========== FITUR ZOOM DAN DRAG ==========
 let isZoomed = false;
 let isDragging = false;
 let startX, startY, scrollLeft, scrollTop;
@@ -267,19 +268,16 @@ function initZoomFeature() {
     
     if (!imageContainer || !modalImage) return;
     
-    // Klik untuk toggle zoom
     imageContainer.addEventListener('click', function(e) {
         if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
         
         if (!isZoomed) {
-            // Zoom in
             modalImage.style.transform = 'scale(2)';
             modalImage.style.cursor = 'grab';
             imageContainer.style.cursor = 'zoom-out';
             imageContainer.classList.add('zoomed');
             isZoomed = true;
         } else {
-            // Zoom out
             modalImage.style.transform = 'scale(1)';
             modalImage.style.cursor = 'default';
             imageContainer.style.cursor = 'zoom-in';
@@ -290,7 +288,6 @@ function initZoomFeature() {
         }
     });
     
-    // Mouse down untuk drag (PC)
     imageContainer.addEventListener('mousedown', function(e) {
         if (!isZoomed) return;
         isDragging = true;
@@ -302,7 +299,6 @@ function initZoomFeature() {
         e.preventDefault();
     });
     
-    // Mouse move untuk drag
     window.addEventListener('mousemove', function(e) {
         if (!isDragging || !isZoomed) return;
         const x = e.pageX - imageContainer.offsetLeft;
@@ -313,13 +309,11 @@ function initZoomFeature() {
         imageContainer.scrollTop = scrollTop - walkY;
     });
     
-    // Mouse up
     window.addEventListener('mouseup', function() {
         isDragging = false;
         if (modalImage && isZoomed) modalImage.style.cursor = 'grab';
     });
     
-    // Touch events untuk HP (drag & zoom)
     let initialDistance = 0;
     let initialScale = 1;
     
@@ -332,7 +326,6 @@ function initZoomFeature() {
             );
             initialScale = isZoomed ? 2 : 1;
         } else if (e.touches.length === 1 && isZoomed) {
-            // Single touch untuk drag di HP
             const touch = e.touches[0];
             startX = touch.pageX - imageContainer.offsetLeft;
             startY = touch.pageY - imageContainer.offsetTop;
@@ -371,7 +364,6 @@ function initZoomFeature() {
                 modalImage.style.transform = `scale(${newScale})`;
             }
         } else if (e.touches.length === 1 && isZoomed && isDragging) {
-            // Drag di HP
             const touch = e.touches[0];
             const x = touch.pageX - imageContainer.offsetLeft;
             const y = touch.pageY - imageContainer.offsetTop;
