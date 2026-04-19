@@ -47,11 +47,13 @@
         .layanan-item h3{font-size:.9rem;color:#ffb703;margin-bottom:5px}
         .layanan-item p{font-size:.7rem;margin-bottom:4px;color:#fff}
         .layanan-item small{font-size:.6rem;opacity:.8;color:#ccc}
+        /* GRID INSPIRASI - 2 kolom di HP, 5 kolom di PC */
         .contoh-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:20px}
         .contoh-item{background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .3s ease;border:1px solid rgba(255,255,255,.2)}
         .contoh-item:hover{transform:translateY(-5px);background:rgba(27,94,63,.8)}
-        .contoh-image{width:100%;height:150px;overflow:hidden}
-        .contoh-image img{width:100%;height:100%;object-fit:cover;transition:all .3s ease}
+        /* Gambar inspirasi di grid - otomatis dikecilkan, rasio landscape 3:2 */
+        .contoh-image{width:100%;height:auto;overflow:hidden;background:#e8f5e9}
+        .contoh-image img{width:100%;height:auto;object-fit:cover;display:block;transition:all .3s ease}
         .contoh-item:hover .contoh-image img{transform:scale(1.05)}
         .contoh-info{padding:12px;text-align:center}
         .contoh-info p{font-size:.75rem;font-weight:500;color:#fff}
@@ -79,15 +81,16 @@
         .menu-toggle span{width:20px;height:2px;background:#fff;border-radius:2px}
         .menu-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:1000;display:none}
         .menu-overlay.active{display:block}
-        /* MODAL DENGAN FITUR ZOOM DAN DRAG */
-        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:1100;justify-content:center;align-items:center}
+        /* MODAL UNTUK GAMBAR INSPIRASI - BISA FULLSCREEN */
+        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:1100;justify-content:center;align-items:center}
         .modal.active{display:flex}
-        .modal-content{background:#fff;padding:20px;border-radius:20px;max-width:450px;width:90%;text-align:center;max-height:85vh;overflow-y:auto;border:1px solid #a5d6a7;box-shadow:0 10px 30px rgba(0,0,0,.2)}
-        .modal-close{float:right;font-size:24px;cursor:pointer;color:#666;transition:all .2s}
+        .modal-content{background:#fff;padding:20px;border-radius:20px;max-width:90vw;width:auto;text-align:center;max-height:90vh;overflow-y:auto;border:1px solid #a5d6a7;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+        .modal-close{float:right;font-size:28px;cursor:pointer;color:#666;transition:all .2s}
         .modal-close:hover{color:#1b5e3f}
         .modal-content h3{color:#1b5e3f;margin:8px 0 5px;font-size:1.2rem;border-bottom:2px solid #ffb703;display:inline-block;padding-bottom:4px}
-        .modal-product-image{width:80%;max-width:300px;height:auto;margin:8px auto;display:block;border-radius:14px;background:#e8f5e9;padding:8px;border:1px solid #a5d6a7;overflow:auto;cursor:zoom-in}
-        .modal-product-image img{width:100%;height:auto;border-radius:10px;transition:transform .2s ease;display:block;margin:0 auto}
+        /* GAMBAR INSPIRASI DI MODAL - TAMPIL BESAR */
+        .modal-product-image{width:100%;max-width:100%;height:auto;margin:10px auto;display:block;border-radius:14px;background:#e8f5e9;padding:8px;border:1px solid #a5d6a7;overflow:auto;cursor:zoom-in;text-align:center}
+        .modal-product-image img{max-width:100%;max-height:70vh;width:auto;height:auto;border-radius:10px;transition:transform .2s ease;display:block;margin:0 auto}
         .modal-product-image.zoomed{cursor:zoom-out}
         .modal-product-image.zoomed img{transform:scale(1.8);cursor:grab}
         .modal-product-image.zoomed img:active{cursor:grabbing}
@@ -99,6 +102,7 @@
         @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
         .delay-1{animation-delay:.2s}.delay-2{animation-delay:.4s}.delay-3{animation-delay:.6s}
         
+        /* PC: 5 kolom untuk inspirasi */
         @media(min-width:768px){
             h1,h2{font-size:2.5rem}.tagline{font-size:1.1rem}
             .produk-grid{grid-template-columns:repeat(5,1fr);gap:15px}
@@ -108,14 +112,15 @@
             .content-wrapper{max-width:800px}
             .produk-icon-img{width:100px;height:100px}
             .produk-item span{font-size:.8rem}
-            .contoh-image{height:180px}
+            .modal-content{max-width:70vw}
         }
         
-        /* UKURAN GAMBAR INSPIRASI DI HP - DIPERKECIL */
+        /* HP: 2 kolom untuk inspirasi */
         @media(max-width:767px){
             .contoh-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-            .contoh-image{height:100px}
             .contoh-info p{font-size:.65rem}
+            .modal-content{max-width:95vw}
+            .modal-product-image img{max-height:60vh}
         }
         
         @media(min-width:1024px){h1,h2{font-size:3rem}}
@@ -249,7 +254,7 @@
         <span class="modal-close">&times;</span>
         <h3 id="modalTitle"></h3>
         <div id="modalImageContainer" class="modal-product-image">
-            <img id="modalImage" src="" alt="Gambar produk" style="width:100%; height:auto; border-radius:10px;">
+            <img id="modalImage" src="" alt="Gambar inspirasi">
         </div>
         <div id="modalMessage"></div>
         <a href="#" id="modalWaLink" class="btn-pesan-modal" target="_blank">📞 Tanya Harga & Pesan via WhatsApp</a>
@@ -257,6 +262,89 @@
 </div>
 
 <script>
+// ========== DATA PRODUK KATALOG (10 PRODUK) ==========
+const produkData = [
+    { id:1, nama:"Box Catering TP 18x18", ukuranBox:"18 x 18 cm", bahan:"Duplek 310 Gr", isiPerPack:50, isiPerIkat:5, beratPerPack:2.5, beratPerIkat:12.5, jenis:"Tutup Pisah (TP)", gambar:"images/produk/produk-box-catering-tp18.jpg" },
+    { id:2, nama:"Box Catering TS 18x18", ukuranBox:"18 x 18 x 7,5 cm", bahan:"Kraft PE 325 Gr", isiPerPack:50, isiPerIkat:5, beratPerPack:2.85, beratPerIkat:14.25, jenis:"Tutup Sambung (TS)", gambar:"images/produk/produk-box-catering-gs18.jpg" },
+    { id:3, nama:"Lunch Box Size L", ukuranBox:"12 x 20 cm", bahan:"Kraft PE 290 Gr", isiPerPack:100, isiPerIkat:5, beratPerPack:0.85, beratPerIkat:4.25, jenis:"Lunch Box", gambar:"images/produk/produk-lunchbox-l.jpg" },
+    { id:4, nama:"Box Snack Size S", ukuranBox:"12 x 12 x 6,5 cm", bahan:"Duplek 250 Gr", isiPerPack:100, isiPerIkat:5, beratPerPack:2.31, beratPerIkat:11.55, jenis:"Die Cut - Tanpa Lem", gambar:"images/produk/produk-box-snack-12.jpg" },
+    { id:5, nama:"Box Snack Size L", ukuranBox:"12 x 16 x 6,5 cm", bahan:"Duplek 250 Gr", isiPerPack:100, isiPerIkat:5, beratPerPack:2.79, beratPerIkat:13.95, jenis:"Die Cut - Tanpa Lem", gambar:"images/produk/produk-box-snack-16.jpg" },
+    { id:6, nama:"Box Martabak Size S", ukuranBox:"11 x 15 x 4 cm", bahan:"Kraft Laminasi 290 Gr", isiPerPack:100, isiPerIkat:5, beratPerPack:2.42, beratPerIkat:12.10, jenis:"Tutup Sambung", gambar:"images/produk/produk-box-martabak-10.jpg" },
+    { id:7, nama:"Box Martabak Size L", ukuranBox:"13,5 x 21 x 4,2 cm", bahan:"Ivory 270 Gr", isiPerPack:100, isiPerIkat:5, beratPerPack:3.11, beratPerIkat:15.55, jenis:"Tutup Sambung", gambar:"images/produk/produk-box-martabak-13.jpg" },
+    { id:8, nama:"Menu A4", ukuranBox:"21 x 29,7 cm", bahan:"Art Karton 300 Gr", isiPerPack:1, isiPerIkat:10, beratPerPack:0.19, beratPerIkat:1.9, jenis:"Display", gambar:"images/produk/produk-menu-a4.jpg" },
+    { id:9, nama:"Sticker Menu Vinyl", ukuranBox:"Custom", bahan:"Sticker Vinyl 300 Gr", isiPerPack:1, isiPerIkat:1, beratPerPack:0.30, beratPerIkat:0.30, jenis:"Display", gambar:"images/produk/produk-sticker.jpg" },
+    { id:10, nama:"Spanduk Flexi China", ukuranBox:"Custom", bahan:"Flexi China 300 Gr", isiPerPack:1, isiPerIkat:1, beratPerPack:0.50, beratPerIkat:0.50, jenis:"Display", gambar:"images/produk/produk-spanduk.jpg" }
+];
+
+function renderProduk(){
+    let g=document.getElementById('produkGrid'); if(!g) return; g.innerHTML='';
+    produkData.forEach(p=>{
+        let c=document.createElement('div'); c.className='produk-item';
+        c.innerHTML=`<img src="${p.gambar}" class="produk-icon-img" alt="${p.nama}" onerror="this.src='https://placehold.co/200x200/1b5e3f/white?text=${p.nama.substring(0,3)}'"><span>${p.nama}</span>`;
+        c.onclick=()=>showProductModal(p.id); g.appendChild(c);
+    });
+}
+
+let cp=null;
+function showProductModal(id){
+    cp=produkData.find(p=>p.id===id); if(!cp) return;
+    let m=document.getElementById('modal'), mt=document.getElementById('modalTitle'), mi=document.getElementById('modalImage'), mm=document.getElementById('modalMessage'), mw=document.getElementById('modalWaLink');
+    mt.innerText=cp.nama;
+    mi.src=cp.gambar;
+    mi.alt=cp.nama;
+    mi.onerror=function(){ this.src='https://placehold.co/500x500/1b5e3f/white?text='+cp.nama; };
+    let txt=`📦 ${cp.nama}\n📏 Ukuran: ${cp.ukuranBox}\n📄 Bahan: ${cp.bahan}\n🔧 Model: ${cp.jenis}\n📦 Isi per Pack: ${cp.isiPerPack} pcs\n📦 Isi per Ikat: ${cp.isiPerIkat} pack = ${cp.isiPerIkat*cp.isiPerPack} pcs\n⚖️ Berat per Pack: ${cp.beratPerPack.toFixed(2)} kg\n⚖️ Berat per Ikat: ${cp.beratPerIkat} kg\n\n💡 Harga menyesuaikan harga kertas. Klik tombol di bawah untuk tanya harga & pesan.`;
+    mm.innerHTML=txt.replace(/\n/g,'<br>');
+    mw.onclick=(e)=>{ e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan produk:\n${cp.nama}\n📏 Ukuran Box: ${cp.ukuranBox}\n📄 Bahan: ${cp.bahan}\n🔧 Model: ${cp.jenis}\n\nMohon info harga dan ketersediaan. Terima kasih.`)}`,'_blank'); };
+    m.classList.add('active');
+    resetZoom();
+}
+
+// ========== INSPIRASI KEMASAN (10 PRODUK) ==========
+// Cukup 1 folder: images/contoh/ (gambar ukuran 1000x667 px)
+const contohData = [
+    { nama:"Martabak Manis", gambar:"images/contoh/contoh-martabak-manis.jpg", narasi:"Martabak manis legendaris dari Timur Tengah, populer di Indonesia. Rasa legit dengan topping meses, keju, kacang. Kemasan lipat manual menjaga kehangatan & tekstur." },
+    { nama:"Pisang Goreng Crispy", gambar:"images/contoh/contoh-pisang-goreng.jpg", narasi:"Pisang goreng crispy, camilan favorit semua kalangan. Kulit renyah, dalamnya manis lembut. Kemasan lipat manual menjaga kerenyahan lebih lama. Praktis untuk jualan pinggir jalan atau cafe." },
+    { nama:"Kue Dongkal", gambar:"images/contoh/contoh-kue-dongkal.jpg", narasi:"Kue dongkal / kue lumpur / kue pukis. Kemasan lipat manual ukuran pas, tinggal lipat. Hemat waktu produksi, hasil rapi dan higienis." },
+    { nama:"Kue Pia", gambar:"images/contoh/contoh-kue-pia.jpg", narasi:"Kue pia / kue kering. Desain elegan dengan warna natural. Model tutup sambung, mudah dibuka dan ditutup. Bahan Ivory memberikan kesan premium." },
+    { nama:"Singkong Keju", gambar:"images/contoh/contoh-singkong-keju.jpg", narasi:"Singkong keju / singkong goreng. Bahan Kraft PE tahan minyak. Desain ventilasi kecil agar uap bisa keluar. Kemasan praktis untuk take away." },
+    { nama:"Box Ayam Bakar", gambar:"images/contoh/contoh-ayam-bakar.jpg", narasi:"Ayam bakar / ayam geprek. Bahan Kraft PE tahan panas & minyak. Model tutup pisah, cocok untuk ayam bakar, nasi, dan sambal." },
+    { nama:"Box Catering", gambar:"images/contoh/contoh-box-catering.jpg", narasi:"Nasi box catering. Bahan Duplek kuat dan kokoh. Desain custom sesuai brand. Model tutup sambung, rapi dan aman untuk dibawa." },
+    { nama:"Box Donat", gambar:"images/contoh/contoh-box-donat.jpg", narasi:"Donat 6 pcs / 12 pcs. Bahan Ivory putih bersih. Ada jendela plastik. Kemasan lipat manual, tinggal lipat. Hemat biaya produksi!" },
+    { nama:"Box Roti Bakar", gambar:"images/contoh/contoh-roti-bakar.jpg", narasi:"Roti bakar / sandwich. Desain modern dengan warna hitam atau coklat. Model tutup sambung, praktis untuk take away." },
+    { nama:"Fried Chicken", gambar:"images/contoh/contoh-fried-chicken.jpg", narasi:"Fried chicken, ayam goreng crispy favorit semua umur. Kulit renyah, daging empuk juicy. Kemasan lipat manual menjaga kerenyahan. Cocok untuk bisnis fast food atau cafe." }
+];
+
+function renderContoh(){
+    let g=document.getElementById('contohGrid'); if(!g) return; g.innerHTML='';
+    contohData.forEach(i=>{
+        let c=document.createElement('div'); c.className='contoh-item';
+        c.innerHTML=`
+            <div class="contoh-image">
+                <img src="${i.gambar}" alt="${i.nama}" onerror="this.src='https://placehold.co/1000x667/1b5e3f/white?text=${i.nama}'">
+            </div>
+            <div class="contoh-info">
+                <p>🍽️ ${i.nama}</p>
+            </div>
+        `;
+        c.onclick=()=>showContohModal(i);
+        g.appendChild(c);
+    });
+}
+
+function showContohModal(i){
+    let m=document.getElementById('modal'), mt=document.getElementById('modalTitle'), mi=document.getElementById('modalImage'), mm=document.getElementById('modalMessage'), mw=document.getElementById('modalWaLink');
+    mt.innerText="💡 Inspirasi: "+i.nama;
+    mi.src=i.gambar;
+    mi.alt=i.nama;
+    mi.onerror=function(){ this.src='https://placehold.co/1000x667/1b5e3f/white?text='+i.nama; };
+    let txt=`${i.narasi}\n\n✨ Tertarik membuat kemasan seperti ini? BungkusKita siap membantu desain & cetak!\n\nKlik tombol di bawah untuk konsultasi gratis.`;
+    mm.innerHTML=txt.replace(/\n/g,'<br>');
+    mw.onclick=(e)=>{ e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan kemasan untuk ${i.nama}. Mohon info desain dan harga.`)}`,'_blank'); };
+    m.classList.add('active');
+    resetZoom();
+}
+
 // ========== FITUR ZOOM DAN DRAG ==========
 let isZoomed = false;
 let isDragging = false;
@@ -270,9 +358,8 @@ function initZoomFeature() {
     
     imageContainer.addEventListener('click', function(e) {
         if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
-        
         if (!isZoomed) {
-            modalImage.style.transform = 'scale(2)';
+            modalImage.style.transform = 'scale(1.8)';
             modalImage.style.cursor = 'grab';
             imageContainer.style.cursor = 'zoom-out';
             imageContainer.classList.add('zoomed');
@@ -320,11 +407,8 @@ function initZoomFeature() {
     imageContainer.addEventListener('touchstart', function(e) {
         if (e.touches.length === 2) {
             e.preventDefault();
-            initialDistance = Math.hypot(
-                e.touches[0].pageX - e.touches[1].pageX,
-                e.touches[0].pageY - e.touches[1].pageY
-            );
-            initialScale = isZoomed ? 2 : 1;
+            initialDistance = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+            initialScale = isZoomed ? 1.8 : 1;
         } else if (e.touches.length === 1 && isZoomed) {
             const touch = e.touches[0];
             startX = touch.pageX - imageContainer.offsetLeft;
@@ -338,10 +422,7 @@ function initZoomFeature() {
     imageContainer.addEventListener('touchmove', function(e) {
         if (e.touches.length === 2 && initialDistance > 0) {
             e.preventDefault();
-            const currentDistance = Math.hypot(
-                e.touches[0].pageX - e.touches[1].pageX,
-                e.touches[0].pageY - e.touches[1].pageY
-            );
+            const currentDistance = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
             const scale = currentDistance / initialDistance;
             let newScale = initialScale * scale;
             newScale = Math.min(Math.max(1, newScale), 3);
@@ -380,44 +461,6 @@ function initZoomFeature() {
     });
 }
 
-// ========== DATA PRODUK KATALOG (10 PRODUK) ==========
-const produkData = [
-    { id:1, nama:"Box Catering TP 18x18", ukuranBox:"18 x 18 cm", bahan:"Duplek 310 Gr", isiPerPack:50, isiPerIkat:5, beratPerPack:2.5, beratPerIkat:12.5, jenis:"Tutup Pisah (TP)", gambar:"images/produk/produk-box-catering-tp18.jpg" },
-    { id:2, nama:"Box Catering TS 18x18", ukuranBox:"18 x 18 x 7,5 cm", bahan:"Kraft PE 325 Gr", isiPerPack:50, isiPerIkat:5, beratPerPack:2.85, beratPerIkat:14.25, jenis:"Tutup Sambung (TS)", gambar:"images/produk/produk-box-catering-gs18.jpg" },
-    { id:3, nama:"Lunch Box Size L", ukuranBox:"12 x 20 cm", bahan:"Kraft PE 290 Gr", isiPerPack:100, isiPerIkat:5, beratPerPack:0.85, beratPerIkat:4.25, jenis:"Lunch Box", gambar:"images/produk/produk-lunchbox-l.jpg" },
-    { id:4, nama:"Box Snack Size S", ukuranBox:"12 x 12 x 6,5 cm", bahan:"Duplek 250 Gr", isiPerPack:100, isiPerIkat:5, beratPerPack:2.31, beratPerIkat:11.55, jenis:"Die Cut - Tanpa Lem", gambar:"images/produk/produk-box-snack-12.jpg" },
-    { id:5, nama:"Box Snack Size L", ukuranBox:"12 x 16 x 6,5 cm", bahan:"Duplek 250 Gr", isiPerPack:100, isiPerIkat:5, beratPerPack:2.79, beratPerIkat:13.95, jenis:"Die Cut - Tanpa Lem", gambar:"images/produk/produk-box-snack-16.jpg" },
-    { id:6, nama:"Box Martabak Size S", ukuranBox:"11 x 15 x 4 cm", bahan:"Kraft Laminasi 290 Gr", isiPerPack:100, isiPerIkat:5, beratPerPack:2.42, beratPerIkat:12.10, jenis:"Tutup Sambung", gambar:"images/produk/produk-box-martabak-10.jpg" },
-    { id:7, nama:"Box Martabak Size L", ukuranBox:"13,5 x 21 x 4,2 cm", bahan:"Ivory 270 Gr", isiPerPack:100, isiPerIkat:5, beratPerPack:3.11, beratPerIkat:15.55, jenis:"Tutup Sambung", gambar:"images/produk/produk-box-martabak-13.jpg" },
-    { id:8, nama:"Menu A4", ukuranBox:"21 x 29,7 cm", bahan:"Art Karton 300 Gr", isiPerPack:1, isiPerIkat:10, beratPerPack:0.19, beratPerIkat:1.9, jenis:"Display", gambar:"images/produk/produk-menu-a4.jpg" },
-    { id:9, nama:"Sticker Menu Vinyl", ukuranBox:"Custom", bahan:"Sticker Vinyl 300 Gr", isiPerPack:1, isiPerIkat:1, beratPerPack:0.30, beratPerIkat:0.30, jenis:"Display", gambar:"images/produk/produk-sticker.jpg" },
-    { id:10, nama:"Spanduk Flexi China", ukuranBox:"Custom", bahan:"Flexi China 300 Gr", isiPerPack:1, isiPerIkat:1, beratPerPack:0.50, beratPerIkat:0.50, jenis:"Display", gambar:"images/produk/produk-spanduk.jpg" }
-];
-
-function renderProduk(){
-    let g=document.getElementById('produkGrid'); if(!g) return; g.innerHTML='';
-    produkData.forEach(p=>{
-        let c=document.createElement('div'); c.className='produk-item';
-        c.innerHTML=`<img src="${p.gambar}" class="produk-icon-img" alt="${p.nama}" onerror="this.src='https://placehold.co/200x200/1b5e3f/white?text=${p.nama.substring(0,3)}'"><span>${p.nama}</span>`;
-        c.onclick=()=>showProductModal(p.id); g.appendChild(c);
-    });
-}
-
-let cp=null;
-function showProductModal(id){
-    cp=produkData.find(p=>p.id===id); if(!cp) return;
-    let m=document.getElementById('modal'), mt=document.getElementById('modalTitle'), mi=document.getElementById('modalImage'), mm=document.getElementById('modalMessage'), mw=document.getElementById('modalWaLink');
-    mt.innerText=cp.nama;
-    mi.src=cp.gambar;
-    mi.alt=cp.nama;
-    mi.onerror=function(){ this.src='https://placehold.co/500x500/1b5e3f/white?text='+cp.nama; };
-    let txt=`📦 ${cp.nama}\n📏 Ukuran: ${cp.ukuranBox}\n📄 Bahan: ${cp.bahan}\n🔧 Model: ${cp.jenis}\n📦 Isi per Pack: ${cp.isiPerPack} pcs\n📦 Isi per Ikat: ${cp.isiPerIkat} pack = ${cp.isiPerIkat*cp.isiPerPack} pcs\n⚖️ Berat per Pack: ${cp.beratPerPack.toFixed(2)} kg\n⚖️ Berat per Ikat: ${cp.beratPerIkat} kg\n\n💡 Harga menyesuaikan harga kertas. Klik tombol di bawah untuk tanya harga & pesan.`;
-    mm.innerHTML=txt.replace(/\n/g,'<br>');
-    mw.onclick=(e)=>{ e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan produk:\n${cp.nama}\n📏 Ukuran Box: ${cp.ukuranBox}\n📄 Bahan: ${cp.bahan}\n🔧 Model: ${cp.jenis}\n\nMohon info harga dan ketersediaan. Terima kasih.`)}`,'_blank'); };
-    m.classList.add('active');
-    resetZoom();
-}
-
 function resetZoom() {
     const modalImage = document.getElementById('modalImage');
     const imageContainer = document.getElementById('modalImageContainer');
@@ -433,42 +476,6 @@ function resetZoom() {
     }
     isZoomed = false;
     isDragging = false;
-}
-
-// ========== INSPIRASI KEMASAN (10 PRODUK) ==========
-const contohData = [
-    { nama:"Martabak Manis", gambar:"images/contoh/contoh-martabak-manis.jpg", narasi:"Martabak manis legendaris dari Timur Tengah, populer di Indonesia. Rasa legit dengan topping meses, keju, kacang. Kemasan lipat manual menjaga kehangatan & tekstur." },
-    { nama:"Pisang Goreng Crispy", gambar:"images/contoh/contoh-pisang-goreng.jpg", narasi:"Pisang goreng crispy, camilan favorit semua kalangan. Kulit renyah, dalamnya manis lembut. Kemasan lipat manual menjaga kerenyahan lebih lama. Praktis untuk jualan pinggir jalan atau cafe." },
-    { nama:"Kue Dongkal", gambar:"images/contoh/contoh-kue-dongkal.jpg", narasi:"Kue dongkal / kue lumpur / kue pukis. Kemasan lipat manual ukuran pas, tinggal lipat. Hemat waktu produksi, hasil rapi dan higienis." },
-    { nama:"Kue Pia", gambar:"images/contoh/contoh-kue-pia.jpg", narasi:"Kue pia / kue kering. Desain elegan dengan warna natural. Model tutup sambung, mudah dibuka dan ditutup. Bahan Ivory memberikan kesan premium." },
-    { nama:"Singkong Keju", gambar:"images/contoh/contoh-singkong-keju.jpg", narasi:"Singkong keju / singkong goreng. Bahan Kraft PE tahan minyak. Desain ventilasi kecil agar uap bisa keluar. Kemasan praktis untuk take away." },
-    { nama:"Box Ayam Bakar", gambar:"images/contoh/contoh-ayam-bakar.jpg", narasi:"Ayam bakar / ayam geprek. Bahan Kraft PE tahan panas & minyak. Model tutup pisah, cocok untuk ayam bakar, nasi, dan sambal." },
-    { nama:"Box Catering", gambar:"images/contoh/contoh-box-catering.jpg", narasi:"Nasi box catering. Bahan Duplek kuat dan kokoh. Desain custom sesuai brand. Model tutup sambung, rapi dan aman untuk dibawa." },
-    { nama:"Box Donat", gambar:"images/contoh/contoh-box-donat.jpg", narasi:"Donat 6 pcs / 12 pcs. Bahan Ivory putih bersih. Ada jendela plastik. Kemasan lipat manual, tinggal lipat. Hemat biaya produksi!" },
-    { nama:"Box Roti Bakar", gambar:"images/contoh/contoh-roti-bakar.jpg", narasi:"Roti bakar / sandwich. Desain modern dengan warna hitam atau coklat. Model tutup sambung, praktis untuk take away." },
-    { nama:"Fried Chicken", gambar:"images/contoh/contoh-fried-chicken.jpg", narasi:"Fried chicken, ayam goreng crispy favorit semua umur. Kulit renyah, daging empuk juicy. Kemasan lipat manual menjaga kerenyahan. Cocok untuk bisnis fast food atau cafe." }
-];
-
-function renderContoh(){
-    let g=document.getElementById('contohGrid'); if(!g) return; g.innerHTML='';
-    contohData.forEach(i=>{
-        let c=document.createElement('div'); c.className='contoh-item';
-        c.innerHTML=`<div class="contoh-image"><img src="${i.gambar}" alt="${i.nama}" onerror="this.src='https://placehold.co/300x200/1b5e3f/white?text=${i.nama}'"></div><div class="contoh-info"><p>🍽️ ${i.nama}</p></div>`;
-        c.onclick=()=>showContohModal(i); g.appendChild(c);
-    });
-}
-
-function showContohModal(i){
-    let m=document.getElementById('modal'), mt=document.getElementById('modalTitle'), mi=document.getElementById('modalImage'), mm=document.getElementById('modalMessage'), mw=document.getElementById('modalWaLink');
-    mt.innerText="💡 Inspirasi: "+i.nama;
-    mi.src=i.gambar;
-    mi.alt=i.nama;
-    mi.onerror=function(){ this.src='https://placehold.co/500x500/1b5e3f/white?text='+i.nama; };
-    let txt=`${i.narasi}\n\n✨ Tertarik membuat kemasan seperti ini? BungkusKita siap membantu desain & cetak!\n\nKlik tombol di bawah untuk konsultasi gratis.`;
-    mm.innerHTML=txt.replace(/\n/g,'<br>');
-    mw.onclick=(e)=>{ e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan kemasan untuk ${i.nama}. Mohon info desain dan harga.`)}`,'_blank'); };
-    m.classList.add('active');
-    resetZoom();
 }
 
 // ========== BAHAN ==========
