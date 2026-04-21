@@ -29,11 +29,18 @@
         .misi ul{list-style:none;padding-left:0}
         .misi ul li{padding:4px 0;padding-left:18px;position:relative;font-size:.85rem}
         .misi ul li::before{content:"✓";position:absolute;left:0;color:#ffb703}
+        /* PRODUK GRID - 3 kolom (untuk 6 produk per halaman di PC) */
         .produk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px;padding:0 5px}
         .produk-item{background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-radius:15px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .3s ease;border:1px solid rgba(255,255,255,.2)}
         .produk-item:hover{background:rgba(27,94,63,.8);transform:translateY(-2px)}
         .produk-icon-img{width:80px;height:80px;object-fit:cover;margin-bottom:8px;border-radius:12px;background:#fff}
         .produk-item span{font-size:.7rem;font-weight:500;color:#fff;display:block}
+        /* PAGINATION */
+        .pagination{display:flex;justify-content:center;align-items:center;gap:15px;margin-top:20px;flex-wrap:wrap}
+        .page-btn{background:#ffb703;color:#2c1810;border:none;padding:8px 20px;border-radius:30px;font-weight:bold;cursor:pointer;transition:all .3s ease;font-size:.85rem}
+        .page-btn:hover{background:#e6a500;transform:scale(1.02)}
+        .page-btn:disabled{background:#ccc;cursor:not-allowed;transform:none}
+        .page-info{color:white;font-size:.85rem;background:rgba(0,0,0,.5);padding:5px 12px;border-radius:20px}
         .bahan-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px}
         .bahan-item{background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-radius:15px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .3s ease;border:1px solid rgba(255,255,255,.2)}
         .bahan-item:hover{background:rgba(27,94,63,.8);transform:translateY(-2px)}
@@ -47,13 +54,11 @@
         .layanan-item h3{font-size:.9rem;color:#ffb703;margin-bottom:5px}
         .layanan-item p{font-size:.7rem;margin-bottom:4px;color:#fff}
         .layanan-item small{font-size:.6rem;opacity:.8;color:#ccc}
-        /* GRID INSPIRASI - 2 kolom di HP, 5 kolom di PC */
         .contoh-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:20px}
         .contoh-item{background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .3s ease;border:1px solid rgba(255,255,255,.2)}
         .contoh-item:hover{transform:translateY(-5px);background:rgba(27,94,63,.8)}
-        /* Gambar inspirasi di grid - otomatis dikecilkan, rasio landscape 3:2 */
-        .contoh-image{width:100%;height:auto;overflow:hidden;background:#e8f5e9}
-        .contoh-image img{width:100%;height:auto;object-fit:cover;display:block;transition:all .3s ease}
+        .contoh-image{width:100%;height:150px;overflow:hidden}
+        .contoh-image img{width:100%;height:100%;object-fit:cover;transition:all .3s ease}
         .contoh-item:hover .contoh-image img{transform:scale(1.05)}
         .contoh-info{padding:12px;text-align:center}
         .contoh-info p{font-size:.75rem;font-weight:500;color:#fff}
@@ -81,16 +86,14 @@
         .menu-toggle span{width:20px;height:2px;background:#fff;border-radius:2px}
         .menu-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:1000;display:none}
         .menu-overlay.active{display:block}
-        /* MODAL UNTUK GAMBAR INSPIRASI - BISA FULLSCREEN */
-        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:1100;justify-content:center;align-items:center}
+        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:1100;justify-content:center;align-items:center}
         .modal.active{display:flex}
-        .modal-content{background:#fff;padding:20px;border-radius:20px;max-width:90vw;width:auto;text-align:center;max-height:90vh;overflow-y:auto;border:1px solid #a5d6a7;box-shadow:0 10px 30px rgba(0,0,0,.2)}
-        .modal-close{float:right;font-size:28px;cursor:pointer;color:#666;transition:all .2s}
+        .modal-content{background:#fff;padding:20px;border-radius:20px;max-width:90vw;width:auto;text-align:center;max-height:85vh;overflow-y:auto;border:1px solid #a5d6a7;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+        .modal-close{float:right;font-size:24px;cursor:pointer;color:#666;transition:all .2s}
         .modal-close:hover{color:#1b5e3f}
         .modal-content h3{color:#1b5e3f;margin:8px 0 5px;font-size:1.2rem;border-bottom:2px solid #ffb703;display:inline-block;padding-bottom:4px}
-        /* GAMBAR INSPIRASI DI MODAL - TAMPIL BESAR */
-        .modal-product-image{width:100%;max-width:100%;height:auto;margin:10px auto;display:block;border-radius:14px;background:#e8f5e9;padding:8px;border:1px solid #a5d6a7;overflow:auto;cursor:zoom-in;text-align:center}
-        .modal-product-image img{max-width:100%;max-height:70vh;width:auto;height:auto;border-radius:10px;transition:transform .2s ease;display:block;margin:0 auto}
+        .modal-product-image{width:100%;max-width:100%;height:auto;margin:8px auto;display:block;border-radius:14px;background:#e8f5e9;padding:8px;border:1px solid #a5d6a7;overflow:auto;cursor:zoom-in}
+        .modal-product-image img{max-width:100%;max-height:60vh;width:auto;height:auto;border-radius:10px;transition:transform .2s ease;display:block;margin:0 auto}
         .modal-product-image.zoomed{cursor:zoom-out}
         .modal-product-image.zoomed img{transform:scale(1.8);cursor:grab}
         .modal-product-image.zoomed img:active{cursor:grabbing}
@@ -102,25 +105,24 @@
         @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
         .delay-1{animation-delay:.2s}.delay-2{animation-delay:.4s}.delay-3{animation-delay:.6s}
         
-        /* PC: 5 kolom untuk inspirasi */
         @media(min-width:768px){
             h1,h2{font-size:2.5rem}.tagline{font-size:1.1rem}
-            .produk-grid{grid-template-columns:repeat(5,1fr);gap:15px}
+            .produk-grid{grid-template-columns:repeat(3,1fr);gap:15px}
             .bahan-grid{grid-template-columns:repeat(4,1fr);gap:15px}
             .layanan-grid{grid-template-columns:repeat(3,1fr);gap:20px}
             .contoh-grid{grid-template-columns:repeat(5,1fr);gap:20px}
             .content-wrapper{max-width:800px}
             .produk-icon-img{width:100px;height:100px}
             .produk-item span{font-size:.8rem}
-            .modal-content{max-width:70vw}
+            .contoh-image{height:180px}
         }
         
-        /* HP: 2 kolom untuk inspirasi */
         @media(max-width:767px){
+            .produk-grid{grid-template-columns:repeat(2,1fr);gap:12px}
             .contoh-grid{grid-template-columns:repeat(2,1fr);gap:12px}
             .contoh-info p{font-size:.65rem}
             .modal-content{max-width:95vw}
-            .modal-product-image img{max-height:60vh}
+            .modal-product-image img{max-height:50vh}
         }
         
         @media(min-width:1024px){h1,h2{font-size:3rem}}
@@ -176,6 +178,7 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
+    <!-- KATALOG PRODUK DENGAN PAGINATION (6 PRODUK PER HALAMAN) -->
     <section id="produk" class="section">
         <div class="section-bg" style="background-image:url('images/bg-produk.jpg')"></div>
         <div class="section-overlay"></div>
@@ -184,6 +187,11 @@
                 <h2 class="fade-up">Katalog <span>Produk</span></h2>
                 <p class="section-subtitle fade-up delay-1">Klik produk untuk detail & pesan</p>
                 <div class="produk-grid fade-up delay-2" id="produkGrid"></div>
+                <div class="pagination" id="pagination">
+                    <button id="prevBtn" class="page-btn" disabled>◀ Previous</button>
+                    <span id="pageInfo" class="page-info">Halaman 1 dari 2</span>
+                    <button id="nextBtn" class="page-btn">Next ▶</button>
+                </div>
             </div>
         </div>
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
@@ -254,7 +262,7 @@
         <span class="modal-close">&times;</span>
         <h3 id="modalTitle"></h3>
         <div id="modalImageContainer" class="modal-product-image">
-            <img id="modalImage" src="" alt="Gambar inspirasi">
+            <img id="modalImage" src="" alt="Gambar produk">
         </div>
         <div id="modalMessage"></div>
         <a href="#" id="modalWaLink" class="btn-pesan-modal" target="_blank">📞 Tanya Harga & Pesan via WhatsApp</a>
@@ -263,7 +271,7 @@
 
 <script>
 // ========== DATA PRODUK KATALOG (10 PRODUK) ==========
-const produkData = [
+const semuaProduk = [
     { id:1, nama:"Box Catering TP 18x18", ukuranBox:"18 x 18 cm", bahan:"Duplek 310 Gr", isiPerPack:50, isiPerIkat:5, beratPerPack:2.5, beratPerIkat:12.5, jenis:"Tutup Pisah (TP)", gambar:"images/produk/produk-box-catering-tp18.jpg" },
     { id:2, nama:"Box Catering TS 18x18", ukuranBox:"18 x 18 x 7,5 cm", bahan:"Kraft PE 325 Gr", isiPerPack:50, isiPerIkat:5, beratPerPack:2.85, beratPerIkat:14.25, jenis:"Tutup Sambung (TS)", gambar:"images/produk/produk-box-catering-gs18.jpg" },
     { id:3, nama:"Lunch Box Size L", ukuranBox:"12 x 20 cm", bahan:"Kraft PE 290 Gr", isiPerPack:100, isiPerIkat:5, beratPerPack:0.85, beratPerIkat:4.25, jenis:"Lunch Box", gambar:"images/produk/produk-lunchbox-l.jpg" },
@@ -276,32 +284,70 @@ const produkData = [
     { id:10, nama:"Spanduk Flexi China", ukuranBox:"Custom", bahan:"Flexi China 300 Gr", isiPerPack:1, isiPerIkat:1, beratPerPack:0.50, beratPerIkat:0.50, jenis:"Display", gambar:"images/produk/produk-spanduk.jpg" }
 ];
 
-function renderProduk(){
-    let g=document.getElementById('produkGrid'); if(!g) return; g.innerHTML='';
-    produkData.forEach(p=>{
-        let c=document.createElement('div'); c.className='produk-item';
-        c.innerHTML=`<img src="${p.gambar}" class="produk-icon-img" alt="${p.nama}" onerror="this.src='https://placehold.co/200x200/1b5e3f/white?text=${p.nama.substring(0,3)}'"><span>${p.nama}</span>`;
-        c.onclick=()=>showProductModal(p.id); g.appendChild(c);
-    });
+// PAGINATION: 6 produk per halaman
+const produkPerHalaman = 6;
+let currentPage = 1;
+const totalPages = Math.ceil(semuaProduk.length / produkPerHalaman);
+
+function getProdukForPage(page) {
+    const start = (page - 1) * produkPerHalaman;
+    const end = start + produkPerHalaman;
+    return semuaProduk.slice(start, end);
 }
 
-let cp=null;
+function renderProduk() {
+    const grid = document.getElementById('produkGrid');
+    if (!grid) return;
+    
+    const produkTampil = getProdukForPage(currentPage);
+    grid.innerHTML = '';
+    
+    produkTampil.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'produk-item';
+        card.innerHTML = `<img src="${p.gambar}" class="produk-icon-img" alt="${p.nama}" onerror="this.src='https://placehold.co/200x200/1b5e3f/white?text=${p.nama.substring(0,3)}'"><span>${p.nama}</span>`;
+        card.onclick = () => showProductModal(p.id);
+        grid.appendChild(card);
+    });
+    
+    // Update pagination info dan tombol
+    document.getElementById('pageInfo').innerText = `Halaman ${currentPage} dari ${totalPages}`;
+    document.getElementById('prevBtn').disabled = (currentPage === 1);
+    document.getElementById('nextBtn').disabled = (currentPage === totalPages);
+}
+
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        renderProduk();
+    }
+}
+
+function nextPage() {
+    if (currentPage < totalPages) {
+        currentPage++;
+        renderProduk();
+    }
+}
+
+let cp = null;
 function showProductModal(id){
-    cp=produkData.find(p=>p.id===id); if(!cp) return;
-    let m=document.getElementById('modal'), mt=document.getElementById('modalTitle'), mi=document.getElementById('modalImage'), mm=document.getElementById('modalMessage'), mw=document.getElementById('modalWaLink');
-    mt.innerText=cp.nama;
-    mi.src=cp.gambar;
-    mi.alt=cp.nama;
-    mi.onerror=function(){ this.src='https://placehold.co/500x500/1b5e3f/white?text='+cp.nama; };
-    let txt=`📦 ${cp.nama}\n📏 Ukuran: ${cp.ukuranBox}\n📄 Bahan: ${cp.bahan}\n🔧 Model: ${cp.jenis}\n📦 Isi per Pack: ${cp.isiPerPack} pcs\n📦 Isi per Ikat: ${cp.isiPerIkat} pack = ${cp.isiPerIkat*cp.isiPerPack} pcs\n⚖️ Berat per Pack: ${cp.beratPerPack.toFixed(2)} kg\n⚖️ Berat per Ikat: ${cp.beratPerIkat} kg\n\n💡 Harga menyesuaikan harga kertas. Klik tombol di bawah untuk tanya harga & pesan.`;
-    mm.innerHTML=txt.replace(/\n/g,'<br>');
-    mw.onclick=(e)=>{ e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan produk:\n${cp.nama}\n📏 Ukuran Box: ${cp.ukuranBox}\n📄 Bahan: ${cp.bahan}\n🔧 Model: ${cp.jenis}\n\nMohon info harga dan ketersediaan. Terima kasih.`)}`,'_blank'); };
+    cp = semuaProduk.find(p => p.id === id);
+    if (!cp) return;
+    
+    let m = document.getElementById('modal'), mt = document.getElementById('modalTitle'), mi = document.getElementById('modalImage'), mm = document.getElementById('modalMessage'), mw = document.getElementById('modalWaLink');
+    mt.innerText = cp.nama;
+    mi.src = cp.gambar;
+    mi.alt = cp.nama;
+    mi.onerror = function(){ this.src = 'https://placehold.co/500x500/1b5e3f/white?text=' + cp.nama; };
+    let txt = `📦 ${cp.nama}\n📏 Ukuran: ${cp.ukuranBox}\n📄 Bahan: ${cp.bahan}\n🔧 Model: ${cp.jenis}\n📦 Isi per Pack: ${cp.isiPerPack} pcs\n📦 Isi per Ikat: ${cp.isiPerIkat} pack = ${cp.isiPerIkat * cp.isiPerPack} pcs\n⚖️ Berat per Pack: ${cp.beratPerPack.toFixed(2)} kg\n⚖️ Berat per Ikat: ${cp.beratPerIkat} kg\n\n💡 Harga menyesuaikan harga kertas. Klik tombol di bawah untuk tanya harga & pesan.`;
+    mm.innerHTML = txt.replace(/\n/g, '<br>');
+    mw.onclick = (e) => { e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan produk:\n${cp.nama}\n📏 Ukuran Box: ${cp.ukuranBox}\n📄 Bahan: ${cp.bahan}\n🔧 Model: ${cp.jenis}\n\nMohon info harga dan ketersediaan. Terima kasih.`)}`, '_blank'); };
     m.classList.add('active');
     resetZoom();
 }
 
-// ========== INSPIRASI KEMASAN (10 PRODUK) ==========
-// Cukup 1 folder: images/contoh/ (gambar ukuran 1000x667 px)
+// ========== INSPIRASI KEMASAN ==========
 const contohData = [
     { nama:"Martabak Manis", gambar:"images/contoh/contoh-martabak-manis.jpg", narasi:"Martabak manis legendaris dari Timur Tengah, populer di Indonesia. Rasa legit dengan topping meses, keju, kacang. Kemasan lipat manual menjaga kehangatan & tekstur." },
     { nama:"Pisang Goreng Crispy", gambar:"images/contoh/contoh-pisang-goreng.jpg", narasi:"Pisang goreng crispy, camilan favorit semua kalangan. Kulit renyah, dalamnya manis lembut. Kemasan lipat manual menjaga kerenyahan lebih lama. Praktis untuk jualan pinggir jalan atau cafe." },
@@ -316,31 +362,24 @@ const contohData = [
 ];
 
 function renderContoh(){
-    let g=document.getElementById('contohGrid'); if(!g) return; g.innerHTML='';
-    contohData.forEach(i=>{
-        let c=document.createElement('div'); c.className='contoh-item';
-        c.innerHTML=`
-            <div class="contoh-image">
-                <img src="${i.gambar}" alt="${i.nama}" onerror="this.src='https://placehold.co/1000x667/1b5e3f/white?text=${i.nama}'">
-            </div>
-            <div class="contoh-info">
-                <p>🍽️ ${i.nama}</p>
-            </div>
-        `;
-        c.onclick=()=>showContohModal(i);
+    let g = document.getElementById('contohGrid'); if(!g) return; g.innerHTML = '';
+    contohData.forEach(i => {
+        let c = document.createElement('div'); c.className = 'contoh-item';
+        c.innerHTML = `<div class="contoh-image"><img src="${i.gambar}" alt="${i.nama}" onerror="this.src='https://placehold.co/1000x667/1b5e3f/white?text=${i.nama}'"></div><div class="contoh-info"><p>🍽️ ${i.nama}</p></div>`;
+        c.onclick = () => showContohModal(i);
         g.appendChild(c);
     });
 }
 
 function showContohModal(i){
-    let m=document.getElementById('modal'), mt=document.getElementById('modalTitle'), mi=document.getElementById('modalImage'), mm=document.getElementById('modalMessage'), mw=document.getElementById('modalWaLink');
-    mt.innerText="💡 Inspirasi: "+i.nama;
-    mi.src=i.gambar;
-    mi.alt=i.nama;
-    mi.onerror=function(){ this.src='https://placehold.co/1000x667/1b5e3f/white?text='+i.nama; };
-    let txt=`${i.narasi}\n\n✨ Tertarik membuat kemasan seperti ini? BungkusKita siap membantu desain & cetak!\n\nKlik tombol di bawah untuk konsultasi gratis.`;
-    mm.innerHTML=txt.replace(/\n/g,'<br>');
-    mw.onclick=(e)=>{ e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan kemasan untuk ${i.nama}. Mohon info desain dan harga.`)}`,'_blank'); };
+    let m = document.getElementById('modal'), mt = document.getElementById('modalTitle'), mi = document.getElementById('modalImage'), mm = document.getElementById('modalMessage'), mw = document.getElementById('modalWaLink');
+    mt.innerText = "💡 Inspirasi: " + i.nama;
+    mi.src = i.gambar;
+    mi.alt = i.nama;
+    mi.onerror = function(){ this.src = 'https://placehold.co/1000x667/1b5e3f/white?text=' + i.nama; };
+    let txt = `${i.narasi}\n\n✨ Tertarik membuat kemasan seperti ini? BungkusKita siap membantu desain & cetak!\n\nKlik tombol di bawah untuk konsultasi gratis.`;
+    mm.innerHTML = txt.replace(/\n/g, '<br>');
+    mw.onclick = (e) => { e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan kemasan untuk ${i.nama}. Mohon info desain dan harga.`)}`, '_blank'); };
     m.classList.add('active');
     resetZoom();
 }
@@ -353,7 +392,6 @@ let startX, startY, scrollLeft, scrollTop;
 function initZoomFeature() {
     const imageContainer = document.getElementById('modalImageContainer');
     const modalImage = document.getElementById('modalImage');
-    
     if (!imageContainer || !modalImage) return;
     
     imageContainer.addEventListener('click', function(e) {
@@ -396,14 +434,9 @@ function initZoomFeature() {
         imageContainer.scrollTop = scrollTop - walkY;
     });
     
-    window.addEventListener('mouseup', function() {
-        isDragging = false;
-        if (modalImage && isZoomed) modalImage.style.cursor = 'grab';
-    });
+    window.addEventListener('mouseup', function() { isDragging = false; if (modalImage && isZoomed) modalImage.style.cursor = 'grab'; });
     
-    let initialDistance = 0;
-    let initialScale = 1;
-    
+    let initialDistance = 0, initialScale = 1;
     imageContainer.addEventListener('touchstart', function(e) {
         if (e.touches.length === 2) {
             e.preventDefault();
@@ -426,7 +459,6 @@ function initZoomFeature() {
             const scale = currentDistance / initialDistance;
             let newScale = initialScale * scale;
             newScale = Math.min(Math.max(1, newScale), 3);
-            
             if (newScale > 1.05 && !isZoomed) {
                 modalImage.style.transform = `scale(${newScale})`;
                 modalImage.style.cursor = 'grab';
@@ -455,27 +487,15 @@ function initZoomFeature() {
         }
     });
     
-    imageContainer.addEventListener('touchend', function() {
-        initialDistance = 0;
-        isDragging = false;
-    });
+    imageContainer.addEventListener('touchend', function() { initialDistance = 0; isDragging = false; });
 }
 
 function resetZoom() {
     const modalImage = document.getElementById('modalImage');
     const imageContainer = document.getElementById('modalImageContainer');
-    if (modalImage) {
-        modalImage.style.transform = 'scale(1)';
-        modalImage.style.cursor = 'default';
-    }
-    if (imageContainer) {
-        imageContainer.style.cursor = 'zoom-in';
-        imageContainer.classList.remove('zoomed');
-        imageContainer.scrollLeft = 0;
-        imageContainer.scrollTop = 0;
-    }
-    isZoomed = false;
-    isDragging = false;
+    if (modalImage) { modalImage.style.transform = 'scale(1)'; modalImage.style.cursor = 'default'; }
+    if (imageContainer) { imageContainer.style.cursor = 'zoom-in'; imageContainer.classList.remove('zoomed'); imageContainer.scrollLeft = 0; imageContainer.scrollTop = 0; }
+    isZoomed = false; isDragging = false;
 }
 
 // ========== BAHAN ==========
@@ -487,22 +507,23 @@ const bahanData = [
 ];
 
 function renderBahan(){
-    let g=document.getElementById('bahanGrid'); if(!g) return; g.innerHTML='';
-    bahanData.forEach(b=>{
-        let c=document.createElement('div'); c.className='bahan-item';
-        c.innerHTML=`<div class="bahan-icon">${b.icon}</div><span>${b.nama}</span><small>${b.spesifikasi.split('|')[0]}</small>`;
-        c.onclick=()=>showBahanModal(b); g.appendChild(c);
+    let g = document.getElementById('bahanGrid'); if(!g) return; g.innerHTML = '';
+    bahanData.forEach(b => {
+        let c = document.createElement('div'); c.className = 'bahan-item';
+        c.innerHTML = `<div class="bahan-icon">${b.icon}</div><span>${b.nama}</span><small>${b.spesifikasi.split('|')[0]}</small>`;
+        c.onclick = () => showBahanModal(b);
+        g.appendChild(c);
     });
 }
 
 function showBahanModal(b){
-    let m=document.getElementById('modal'), mt=document.getElementById('modalTitle'), mi=document.getElementById('modalImage'), mm=document.getElementById('modalMessage'), mw=document.getElementById('modalWaLink');
-    mt.innerText=b.nama;
-    mi.src=b.gambar;
-    mi.alt=b.nama;
-    mi.onerror=function(){ this.src='https://placehold.co/500x500/1b5e3f/white?text='+b.nama; };
-    mm.innerHTML=`<strong>📝 ${b.deskripsi}</strong><br><br>📊 ${b.spesifikasi}<br><br>✨ Tertarik dengan bahan ini? Klik tombol di bawah untuk konsultasi.`;
-    mw.onclick=(e)=>{ e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan bahan ${b.nama} (${b.spesifikasi}). Mohon info lebih lanjut dan contohnya.`)}`,'_blank'); };
+    let m = document.getElementById('modal'), mt = document.getElementById('modalTitle'), mi = document.getElementById('modalImage'), mm = document.getElementById('modalMessage'), mw = document.getElementById('modalWaLink');
+    mt.innerText = b.nama;
+    mi.src = b.gambar;
+    mi.alt = b.nama;
+    mi.onerror = function(){ this.src = 'https://placehold.co/500x500/1b5e3f/white?text=' + b.nama; };
+    mm.innerHTML = `<strong>📝 ${b.deskripsi}</strong><br><br>📊 ${b.spesifikasi}<br><br>✨ Tertarik dengan bahan ini? Klik tombol di bawah untuk konsultasi.`;
+    mw.onclick = (e) => { e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan bahan ${b.nama} (${b.spesifikasi}). Mohon info lebih lanjut dan contohnya.`)}`, '_blank'); };
     m.classList.add('active');
     resetZoom();
 }
@@ -515,22 +536,23 @@ const layananData = [
 ];
 
 function renderLayanan(){
-    let g=document.getElementById('layananGrid'); if(!g) return; g.innerHTML='';
-    layananData.forEach(l=>{
-        let c=document.createElement('div'); c.className='layanan-item';
-        c.innerHTML=`<div class="layanan-icon">${l.icon}</div><h3>${l.nama}</h3><p>${l.deskripsi}</p><small>Klik untuk detail</small>`;
-        c.onclick=()=>showLayananModal(l); g.appendChild(c);
+    let g = document.getElementById('layananGrid'); if(!g) return; g.innerHTML = '';
+    layananData.forEach(l => {
+        let c = document.createElement('div'); c.className = 'layanan-item';
+        c.innerHTML = `<div class="layanan-icon">${l.icon}</div><h3>${l.nama}</h3><p>${l.deskripsi}</p><small>Klik untuk detail</small>`;
+        c.onclick = () => showLayananModal(l);
+        g.appendChild(c);
     });
 }
 
 function showLayananModal(l){
-    let m=document.getElementById('modal'), mt=document.getElementById('modalTitle'), mi=document.getElementById('modalImage'), mm=document.getElementById('modalMessage'), mw=document.getElementById('modalWaLink');
-    mt.innerText=l.nama;
-    mi.src=l.gambar;
-    mi.alt=l.nama;
-    mi.onerror=function(){ this.src='https://placehold.co/500x500/1b5e3f/white?text='+l.nama; };
-    mm.innerHTML=`<strong>📝 ${l.deskripsi}</strong><br><br><strong>Fitur:</strong><br>${l.fitur.replace(/\n/g,'<br>')}<br><br>✨ Tertarik dengan layanan ini? Klik tombol di bawah untuk konsultasi.`;
-    mw.onclick=(e)=>{ e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan layanan ${l.nama}. Mohon info lebih lanjut dan harga.`)}`,'_blank'); };
+    let m = document.getElementById('modal'), mt = document.getElementById('modalTitle'), mi = document.getElementById('modalImage'), mm = document.getElementById('modalMessage'), mw = document.getElementById('modalWaLink');
+    mt.innerText = l.nama;
+    mi.src = l.gambar;
+    mi.alt = l.nama;
+    mi.onerror = function(){ this.src = 'https://placehold.co/500x500/1b5e3f/white?text=' + l.nama; };
+    mm.innerHTML = `<strong>📝 ${l.deskripsi}</strong><br><br><strong>Fitur:</strong><br>${l.fitur.replace(/\n/g, '<br>')}<br><br>✨ Tertarik dengan layanan ini? Klik tombol di bawah untuk konsultasi.`;
+    mw.onclick = (e) => { e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan layanan ${l.nama}. Mohon info lebih lanjut dan harga.`)}`, '_blank'); };
     m.classList.add('active');
     resetZoom();
 }
@@ -538,22 +560,23 @@ function showLayananModal(l){
 // ========== MENU ==========
 function openMenu(){ document.getElementById('sideMenu').classList.add('active'); document.getElementById('menuOverlay').classList.add('active'); }
 function closeMenu(){ document.getElementById('sideMenu').classList.remove('active'); document.getElementById('menuOverlay').classList.remove('active'); }
-document.getElementById('menuToggle').addEventListener('click',openMenu);
-document.getElementById('menuClose').addEventListener('click',closeMenu);
-document.getElementById('menuOverlay').addEventListener('click',closeMenu);
+document.getElementById('menuToggle').addEventListener('click', openMenu);
+document.getElementById('menuClose').addEventListener('click', closeMenu);
+document.getElementById('menuOverlay').addEventListener('click', closeMenu);
 
-let cont=document.querySelector('.sections-container');
-function showSection(s){ let t=document.getElementById(s); if(t&&cont) cont.scrollTo({top:t.offsetTop,behavior:'smooth'}); closeMenu(); }
-document.querySelectorAll('.menu-link').forEach(l=>{ l.addEventListener('click',(e)=>{ e.preventDefault(); showSection(l.getAttribute('href').substring(1)); }); });
-document.querySelectorAll('.scroll-indicator').forEach(i=>{ i.addEventListener('click',()=>{ if(cont) cont.scrollTo({top:cont.scrollTop+window.innerHeight,behavior:'smooth'}); }); });
+let cont = document.querySelector('.sections-container');
+function showSection(s){ let t = document.getElementById(s); if(t && cont) cont.scrollTo({ top: t.offsetTop, behavior: 'smooth' }); closeMenu(); }
+document.querySelectorAll('.menu-link').forEach(l => { l.addEventListener('click', (e) => { e.preventDefault(); showSection(l.getAttribute('href').substring(1)); }); });
+document.querySelectorAll('.scroll-indicator').forEach(i => { i.addEventListener('click', () => { if(cont) cont.scrollTo({ top: cont.scrollTop + window.innerHeight, behavior: 'smooth' }); }); });
 
-let modal=document.getElementById('modal'), modalClose=document.querySelector('.modal-close');
-function closeModal(){ 
-    modal.classList.remove('active'); 
-    resetZoom(); 
-}
-if(modalClose) modalClose.addEventListener('click',closeModal);
-modal.addEventListener('click',(e)=>{ if(e.target===modal) closeModal(); });
+let modal = document.getElementById('modal'), modalClose = document.querySelector('.modal-close');
+function closeModal(){ modal.classList.remove('active'); resetZoom(); }
+if(modalClose) modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+
+// Event listener pagination
+document.getElementById('prevBtn').addEventListener('click', prevPage);
+document.getElementById('nextBtn').addEventListener('click', nextPage);
 
 initZoomFeature();
 renderProduk();
