@@ -29,13 +29,13 @@
         .misi ul{list-style:none;padding-left:0}
         .misi ul li{padding:4px 0;padding-left:18px;position:relative;font-size:.85rem}
         .misi ul li::before{content:"✓";position:absolute;left:0;color:#ffb703}
-        /* PRODUK GRID - 3 kolom (untuk 6 produk per halaman di PC) */
+        /* PRODUK GRID - default untuk HP (2 kolom) */
         .produk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px;padding:0 5px}
         .produk-item{background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-radius:15px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .3s ease;border:1px solid rgba(255,255,255,.2)}
         .produk-item:hover{background:rgba(27,94,63,.8);transform:translateY(-2px)}
         .produk-icon-img{width:80px;height:80px;object-fit:cover;margin-bottom:8px;border-radius:12px;background:#fff}
         .produk-item span{font-size:.7rem;font-weight:500;color:#fff;display:block}
-        /* PAGINATION */
+        /* PAGINATION (hanya muncul di HP) */
         .pagination{display:flex;justify-content:center;align-items:center;gap:15px;margin-top:20px;flex-wrap:wrap}
         .page-btn{background:#ffb703;color:#2c1810;border:none;padding:8px 20px;border-radius:30px;font-weight:bold;cursor:pointer;transition:all .3s ease;font-size:.85rem}
         .page-btn:hover{background:#e6a500;transform:scale(1.02)}
@@ -105,9 +105,11 @@
         @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
         .delay-1{animation-delay:.2s}.delay-2{animation-delay:.4s}.delay-3{animation-delay:.6s}
         
+        /* ========== PC (LAYAR LEBAR) ========== */
         @media(min-width:768px){
             h1,h2{font-size:2.5rem}.tagline{font-size:1.1rem}
-            .produk-grid{grid-template-columns:repeat(3,1fr);gap:15px}
+            /* PC: 5 kolom, semua produk tampil langsung tanpa pagination */
+            .produk-grid{grid-template-columns:repeat(5,1fr);gap:15px}
             .bahan-grid{grid-template-columns:repeat(4,1fr);gap:15px}
             .layanan-grid{grid-template-columns:repeat(3,1fr);gap:20px}
             .contoh-grid{grid-template-columns:repeat(5,1fr);gap:20px}
@@ -115,14 +117,19 @@
             .produk-icon-img{width:100px;height:100px}
             .produk-item span{font-size:.8rem}
             .contoh-image{height:180px}
+            /* Sembunyikan pagination di PC */
+            .pagination{display:none}
         }
         
+        /* ========== HP (LAYAR KECIL) ========== */
         @media(max-width:767px){
             .produk-grid{grid-template-columns:repeat(2,1fr);gap:12px}
             .contoh-grid{grid-template-columns:repeat(2,1fr);gap:12px}
             .contoh-info p{font-size:.65rem}
             .modal-content{max-width:95vw}
             .modal-product-image img{max-height:50vh}
+            /* Pagination tampil di HP */
+            .pagination{display:flex}
         }
         
         @media(min-width:1024px){h1,h2{font-size:3rem}}
@@ -178,7 +185,7 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
-    <!-- KATALOG PRODUK DENGAN PAGINATION (6 PRODUK PER HALAMAN) -->
+    <!-- KATALOG PRODUK -->
     <section id="produk" class="section">
         <div class="section-bg" style="background-image:url('images/bg-produk.jpg')"></div>
         <div class="section-overlay"></div>
@@ -281,10 +288,10 @@ const semuaProduk = [
     { id:7, nama:"Box Martabak Size L", ukuranBox:"13,5 x 21 x 4,2 cm", bahan:"Ivory 270 Gr", isiPerPack:100, isiPerIkat:5, beratPerPack:3.11, beratPerIkat:15.55, jenis:"Tutup Sambung", gambar:"images/produk/produk-box-martabak-13.jpg" },
     { id:8, nama:"Menu A4", ukuranBox:"21 x 29,7 cm", bahan:"Art Karton 300 Gr", isiPerPack:1, isiPerIkat:10, beratPerPack:0.19, beratPerIkat:1.9, jenis:"Display", gambar:"images/produk/produk-menu-a4.jpg" },
     { id:9, nama:"Sticker Menu Vinyl", ukuranBox:"Custom", bahan:"Sticker Vinyl 300 Gr", isiPerPack:1, isiPerIkat:1, beratPerPack:0.30, beratPerIkat:0.30, jenis:"Display", gambar:"images/produk/produk-sticker.jpg" },
-    { id:10, nama:"Spanduk Flexi China", ukuranBox:"Custom", bahan:"Flexi China 300 Gr", isiPerPack:1, isiPerIkat:1, beratPerPack:0.50, beratPerIkat:0.50, jenis:"Display", gambar:"images/produk/produk-spanduk.jpg" }
+    { id:10, nama:"Spanduk Flexi China", ukuranBox:"Custom", bahan:"Flexi China 300 Gr", isiPerPack:1, isiPerIkat:1, beratPerPack:0.50, beratPerIkat:0.50, jenis:"Display", gambar:"images/produk/produk-spanduk.jpg" )
 ];
 
-// PAGINATION: 6 produk per halaman
+// PAGINATION (hanya untuk HP) - 6 produk per halaman
 const produkPerHalaman = 6;
 let currentPage = 1;
 const totalPages = Math.ceil(semuaProduk.length / produkPerHalaman);
@@ -295,13 +302,30 @@ function getProdukForPage(page) {
     return semuaProduk.slice(start, end);
 }
 
+function isMobile() {
+    return window.innerWidth < 768;
+}
+
 function renderProduk() {
     const grid = document.getElementById('produkGrid');
     if (!grid) return;
     
-    const produkTampil = getProdukForPage(currentPage);
-    grid.innerHTML = '';
+    let produkTampil;
+    let isMobileDevice = isMobile();
     
+    if (isMobileDevice) {
+        // HP: tampilkan 6 produk per halaman
+        produkTampil = getProdukForPage(currentPage);
+        // Update pagination info
+        document.getElementById('pageInfo').innerText = `Halaman ${currentPage} dari ${totalPages}`;
+        document.getElementById('prevBtn').disabled = (currentPage === 1);
+        document.getElementById('nextBtn').disabled = (currentPage === totalPages);
+    } else {
+        // PC: tampilkan semua produk
+        produkTampil = semuaProduk;
+    }
+    
+    grid.innerHTML = '';
     produkTampil.forEach(p => {
         const card = document.createElement('div');
         card.className = 'produk-item';
@@ -309,11 +333,6 @@ function renderProduk() {
         card.onclick = () => showProductModal(p.id);
         grid.appendChild(card);
     });
-    
-    // Update pagination info dan tombol
-    document.getElementById('pageInfo').innerText = `Halaman ${currentPage} dari ${totalPages}`;
-    document.getElementById('prevBtn').disabled = (currentPage === 1);
-    document.getElementById('nextBtn').disabled = (currentPage === totalPages);
 }
 
 function prevPage() {
@@ -329,6 +348,11 @@ function nextPage() {
         renderProduk();
     }
 }
+
+// Event listener untuk resize layar (saat HP di rotate atau buka di PC)
+window.addEventListener('resize', function() {
+    renderProduk();
+});
 
 let cp = null;
 function showProductModal(id){
