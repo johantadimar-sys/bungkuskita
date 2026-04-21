@@ -114,13 +114,10 @@
         .info-detail{background:#e8f5e9;padding:12px;border-radius:14px;margin-bottom:15px;border:1px solid #a5d6a7}
         .info-detail p{margin:6px 0;color:#333;font-size:.85rem}
         .info-detail strong{color:#1b5e3f}
-        .order-form-modal label{display:block;color:#1b5e3f;font-weight:600;font-size:.8rem;margin-top:10px;margin-bottom:5px}
-        .order-form-modal input{width:100%;padding:8px 12px;border-radius:10px;border:1px solid #a5d6a7;background:#fff;color:#333;font-size:.9rem}
-        .total-berat{background:#1b5e3f;padding:10px;border-radius:14px;text-align:center;font-weight:bold;margin:12px 0;color:#fff;font-size:.9rem}
         .btn-pesan-modal{display:inline-block;background:#25D366;color:#fff;padding:12px 20px;border-radius:50px;text-decoration:none;font-weight:600;margin-top:10px;width:100%;text-align:center;transition:all .2s;border:none;cursor:pointer;font-size:.9rem}
         .btn-pesan-modal:hover{background:#128C7E;transform:scale(1.01)}
         
-        /* MODAL INSPIRASI - TOMBOL GESER TETAP, GAMBAR 120%, TANPA ZOOM */
+        /* MODAL INSPIRASI */
         .modal-inspirasi{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:1100;justify-content:center;align-items:center}
         .modal-inspirasi.active{display:flex}
         .modal-inspirasi .modal-content{background:#fff;padding:20px;border-radius:20px;max-width:90vw;width:90%;text-align:center;max-height:85vh;overflow-y:auto;border:1px solid #a5d6a7;box-shadow:0 10px 30px rgba(0,0,0,.2);position:relative}
@@ -132,7 +129,6 @@
         .inspirasi-nav-btn:hover{background:#e6a500;transform:scale(1.05)}
         .inspirasi-nav-btn:disabled{background:#ccc;cursor:not-allowed;transform:none}
         .inspirasi-counter{color:#1b5e3f;font-weight:bold;background:#e8f5e9;padding:5px 12px;border-radius:20px;font-size:.85rem}
-        /* GAMBAR INSPIRASI 120% - PERLU SCROLL HORIZONTAL */
         .modal-inspirasi .modal-product-image{width:100%;height:auto;margin:10px auto;display:block;border-radius:14px;background:#e8f5e9;padding:8px;border:1px solid #a5d6a7;overflow:auto;text-align:center}
         .modal-inspirasi .modal-product-image img{width:120%;height:auto;border-radius:10px;display:block;margin:0 auto}
         .modal-inspirasi .info-detail{background:#e8f5e9;padding:12px;border-radius:14px;margin:15px 0;border:1px solid #a5d6a7;text-align:left;line-height:1.3}
@@ -280,7 +276,7 @@
                 <div class="contoh-grid fade-up delay-2" id="contohGrid"></div>
                 <div class="contoh-pagination" id="contohPagination">
                     <button id="contohPrevBtn" class="contoh-page-btn" disabled>◀ Previous</button>
-                    <span id="contohPageInfo" class="contoh-page-info">Halaman 1 dari 2</span>
+                    <span id="contohPageInfo" class="contoh-page-info">Halaman 1 dari 3</span>
                     <button id="contohNextBtn" class="contoh-page-btn">Next ▶</button>
                 </div>
                 <p style="margin-top:15px; font-size:.7rem; opacity:.7;">✨ Klik gambar untuk melihat detail & inspirasi ✨</p>
@@ -440,9 +436,6 @@ function updateProdukModal(){
     mi.alt = cp.nama;
     mi.onerror = function(){ this.src = 'https://placehold.co/300x300/1b5e3f/white?text=' + cp.nama; };
     
-    const beratPerPack = cp.beratPerPack;
-    const beratPerIkat = cp.beratPerIkat;
-    
     let infoDetail = `
         <div class="info-detail">
             <p><strong>📏 Ukuran:</strong> ${cp.ukuranBox}</p>
@@ -450,39 +443,15 @@ function updateProdukModal(){
             <p><strong>🔧 Model:</strong> ${cp.jenis}</p>
             <p><strong>📦 Isi per Pack:</strong> ${cp.isiPerPack} pcs</p>
             <p><strong>📦 Isi per Ikat:</strong> ${cp.isiPerIkat} pack = ${cp.isiPerIkat * cp.isiPerPack} pcs</p>
-    `;
-    
-    // Tampilkan berat hanya di PC (lebar layar >= 768px)
-    if (window.innerWidth >= 768) {
-        infoDetail += `
-            <p><strong>⚖️ Berat per Pack:</strong> ${beratPerPack.toFixed(2)} kg</p>
-            <p><strong>⚖️ Berat per Ikat:</strong> ${beratPerIkat} kg</p>
-        `;
-    }
-    
-    infoDetail += `
         </div>
-        <label>📦 Jumlah Pesanan (dalam pack):</label>
-        <input type="number" id="jumlahPack" min="1" value="1">
-        <div id="totalBeratDisplay" class="total-berat">⚖️ Total Berat: 0 kg</div>
-        <p style="font-size:0.7rem; color:#666; margin-top:10px;">💡 Harga menyesuaikan harga kertas.</p>
+        <p style="font-size:0.75rem; color:#666; margin-top:5px;">💡 Klik tombol di bawah untuk tanya harga & pesan</p>
     `;
     
     mDetail.innerHTML = infoDetail;
     
-    const jumlahInput = document.getElementById('jumlahPack');
-    if (jumlahInput) {
-        jumlahInput.removeEventListener('input', updateTotalBerat);
-        jumlahInput.addEventListener('input', () => updateTotalBerat(beratPerPack));
-        updateTotalBerat(beratPerPack);
-    }
-    
     mw.onclick = (e) => { 
         e.preventDefault(); 
-        const jumlahPack = parseInt(document.getElementById('jumlahPack')?.value || 1);
-        const totalBerat = (beratPerPack * jumlahPack).toFixed(2);
-        const totalPcs = cp.isiPerPack * jumlahPack;
-        let message = `Halo BungkusKita, saya tertarik dengan produk:\n${cp.nama}\n📏 Ukuran Box: ${cp.ukuranBox}\n📄 Bahan: ${cp.bahan}\n🔧 Model: ${cp.jenis}\n📦 Jumlah: ${jumlahPack} pack (${totalPcs} pcs)\n⚖️ Total Berat: ${totalBerat} kg\n\nMohon info harga dan ketersediaan. Terima kasih.`;
+        let message = `Halo BungkusKita, saya tertarik dengan produk:\n${cp.nama}\n📏 Ukuran Box: ${cp.ukuranBox}\n📄 Bahan: ${cp.bahan}\n🔧 Model: ${cp.jenis}\n📦 Isi per Pack: ${cp.isiPerPack} pcs\n📦 Isi per Ikat: ${cp.isiPerIkat} pack (${cp.isiPerIkat * cp.isiPerPack} pcs)\n\nMohon info harga dan ketersediaan. Terima kasih.`;
         window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(message)}`, '_blank'); 
     };
     
@@ -492,14 +461,6 @@ function updateProdukModal(){
     const nextBtn = document.getElementById('produkNextBtn');
     if (prevBtn) prevBtn.disabled = (produkIndex === 0);
     if (nextBtn) nextBtn.disabled = (produkIndex === semuaProduk.length - 1);
-}
-
-function updateTotalBerat(beratPerPack) {
-    const jumlah = parseInt(document.getElementById('jumlahPack')?.value || 1);
-    const totalBerat = (beratPerPack * jumlah).toFixed(2);
-    const totalPcs = semuaProduk[produkIndex].isiPerPack * jumlah;
-    const display = document.getElementById('totalBeratDisplay');
-    if (display) display.innerHTML = `⚖️ Total Berat: ${totalBerat} kg (${totalPcs} pcs)`;
 }
 
 function produkPrev() { if (produkIndex > 0) { produkIndex--; updateProdukModal(); } }
@@ -529,8 +490,8 @@ const contohData = [
     { nama:"Fried Chicken", gambar:"images/contoh/contoh-fried-chicken.jpg", narasi:"Fried chicken, ayam goreng crispy favorit semua umur. Kulit renyah, daging empuk juicy. Kemasan lipat manual menjaga kerenyahan. Cocok untuk bisnis fast food atau cafe." }
 ];
 
-// PAGINATION INSPIRASI (HP)
-const inspirasiPerHalaman = 6;
+// PAGINATION INSPIRASI - KHUSUS HP (4 per halaman)
+const inspirasiPerHalaman = 4;
 let inspirasiPage = 1;
 const totalInspirasiPages = Math.ceil(contohData.length / inspirasiPerHalaman);
 
@@ -551,6 +512,9 @@ function renderContoh() {
         document.getElementById('contohNextBtn').disabled = (inspirasiPage === totalInspirasiPages);
     } else {
         inspirasiTampil = contohData;
+        // Sembunyikan pagination di PC
+        const paginationDiv = document.getElementById('contohPagination');
+        if (paginationDiv) paginationDiv.style.display = 'none';
     }
     grid.innerHTML = '';
     inspirasiTampil.forEach((item, idx) => {
@@ -724,6 +688,19 @@ document.getElementById('inspirasiPrevBtn').addEventListener('click', inspirasiP
 document.getElementById('inspirasiNextBtn').addEventListener('click', inspirasiNext);
 document.getElementById('contohPrevBtn').addEventListener('click', inspirasiPrevPage);
 document.getElementById('contohNextBtn').addEventListener('click', inspirasiNextPage);
+
+// Tampilkan/sembunyikan pagination inspirasi saat resize
+window.addEventListener('resize', function() { 
+    renderProduk(); 
+    renderContoh();
+    if (!isMobile()) {
+        const paginationDiv = document.getElementById('contohPagination');
+        if (paginationDiv) paginationDiv.style.display = 'none';
+    } else {
+        const paginationDiv = document.getElementById('contohPagination');
+        if (paginationDiv) paginationDiv.style.display = 'flex';
+    }
+});
 
 renderProduk();
 renderBahan();
