@@ -1,932 +1,282 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>BungkusKita - Desain & Cetak Boks Kemasan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Inter','Segoe UI',sans-serif;overflow-x:hidden;background:#0a2a1a}
-        .sections-container{scroll-snap-type:y mandatory;overflow-y:scroll;height:100vh;scroll-behavior:smooth}
-        .section{position:relative;width:100%;height:100vh;scroll-snap-align:start;overflow:hidden}
-        .section-bg{position:absolute;top:0;left:0;width:100%;height:100%;background-size:cover;background-position:center 30%;background-repeat:no-repeat;z-index:0}
-        .section-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,rgba(0,0,0,.65)0%,rgba(0,0,0,.45)100%);z-index:1}
-        .section-content{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:20px;text-align:center;color:#fff}
-        .content-wrapper{max-width:600px;width:100%;margin:0 auto}
-        h1,h2{font-size:2rem;font-weight:800;margin-bottom:20px}
-        h1 span,h2 span{color:#ffb703}
-        .tagline{font-size:1rem;margin-bottom:30px}
-        .btn-wa{display:inline-block;background:#25D366;color:#fff;padding:10px 25px;border-radius:50px;text-decoration:none;font-weight:600;transition:all .3s ease;font-size:.9rem}
-        .btn-wa:hover{background:#128C7E;transform:scale(1.02)}
-        .scroll-indicator{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);text-align:center;z-index:3;animation:bounce 2s infinite;cursor:pointer}
-        .scroll-indicator span{display:block;font-size:.65rem;opacity:.7}
-        .scroll-arrow{font-size:1rem}
-        @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
-        .about-box{background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-radius:20px;padding:20px;text-align:left;color:#fff}
-        .visi-misi{display:flex;flex-direction:column;gap:15px}
-        .visi h3,.misi h3{color:#ffb703;margin-bottom:8px;font-size:1rem}
-        .misi ul{list-style:none;padding-left:0}
-        .misi ul li{padding:4px 0;padding-left:18px;position:relative;font-size:.85rem}
-        .misi ul li::before{content:"✓";position:absolute;left:0;color:#ffb703}
-        
-        /* PRODUK GRID */
-        .produk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px;padding:0 5px}
-        .produk-item{background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-radius:15px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .3s ease;border:1px solid rgba(255,255,255,.2)}
-        .produk-item:hover{background:rgba(27,94,63,.8);transform:translateY(-2px)}
-        .produk-icon-img{width:80px;height:80px;object-fit:cover;margin-bottom:8px;border-radius:12px;background:#fff}
-        .produk-item span{font-size:.7rem;font-weight:500;color:#fff;display:block}
-        
-        /* PAGINATION */
-        .pagination{display:flex;justify-content:center;align-items:center;gap:15px;margin-top:20px;flex-wrap:wrap}
-        .page-btn{background:#ffb703;color:#2c1810;border:none;padding:8px 20px;border-radius:30px;font-weight:bold;cursor:pointer;transition:all .3s ease;font-size:.85rem}
-        .page-btn:hover{background:#e6a500;transform:scale(1.02)}
-        .page-btn:disabled{background:#ccc;cursor:not-allowed;transform:none}
-        .page-info{color:white;font-size:.85rem;background:rgba(0,0,0,.5);padding:5px 12px;border-radius:20px}
-        
-        /* BAHAN GRID */
-        .bahan-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px}
-        .bahan-item{background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-radius:15px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .3s ease;border:1px solid rgba(255,255,255,.2)}
-        .bahan-item:hover{background:rgba(27,94,63,.8);transform:translateY(-2px)}
-        .bahan-icon{font-size:1.8rem;margin-bottom:6px}
-        .bahan-item span{font-size:.75rem;font-weight:500;color:#fff}
-        .bahan-item small{display:block;font-size:.6rem;opacity:.8;color:#ccc}
-        
-        /* LAYANAN GRID */
-        .layanan-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:15px}
-        .layanan-item{background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-radius:15px;padding:12px 10px;text-align:center;cursor:pointer;transition:all .3s ease;border:1px solid rgba(255,255,255,.2)}
-        .layanan-item:hover{background:rgba(27,94,63,.8);transform:translateY(-2px)}
-        .layanan-icon{font-size:1.8rem;margin-bottom:6px}
-        .layanan-item h3{font-size:.9rem;color:#ffb703;margin-bottom:5px}
-        .layanan-item p{font-size:.7rem;margin-bottom:4px;color:#fff}
-        .layanan-item small{font-size:.6rem;opacity:.8;color:#ccc}
-        
-        /* CONTOH GRID */
-        .contoh-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:20px}
-        .contoh-item{background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .3s ease;border:1px solid rgba(255,255,255,.2)}
-        .contoh-item:hover{transform:translateY(-5px);background:rgba(27,94,63,.8)}
-        .contoh-image{width:100%;height:150px;overflow:hidden}
-        .contoh-image img{width:100%;height:100%;object-fit:cover;transition:all .3s ease}
-        .contoh-item:hover .contoh-image img{transform:scale(1.05)}
-        .contoh-info{padding:12px;text-align:center}
-        .contoh-info p{font-size:.75rem;font-weight:500;color:#fff}
-        .contoh-pagination{display:flex;justify-content:center;align-items:center;gap:15px;margin-top:20px;flex-wrap:wrap}
-        .contoh-page-btn{background:#ffb703;color:#2c1810;border:none;padding:8px 20px;border-radius:30px;font-weight:bold;cursor:pointer;transition:all .3s ease;font-size:.85rem}
-        .contoh-page-btn:hover{background:#e6a500;transform:scale(1.02)}
-        .contoh-page-btn:disabled{background:#ccc;cursor:not-allowed;transform:none}
-        .contoh-page-info{color:white;font-size:.85rem;background:rgba(0,0,0,.5);padding:5px 12px;border-radius:20px}
-        
-        /* KONTAK */
-        .kontak-box{background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-radius:20px;padding:15px;margin-bottom:15px;color:#fff}
-        .kontak-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.2)}
-        .kontak-item:last-child{border-bottom:none}
-        .kontak-icon{width:45px;height:45px;display:flex;align-items:center;justify-content:center}
-        .kontak-img{width:35px;height:35px;object-fit:contain;border-radius:8px}
-        .kontak-item h3{font-size:.85rem;margin-bottom:3px;color:#ffb703}
-        .kontak-item p,.kontak-item a{font-size:.8rem;color:#fff;text-decoration:none}
-        .kontak-item a:hover{color:#ffb703}
-        .info-penting{background:rgba(27,94,63,.8);backdrop-filter:blur(10px);border-radius:15px;padding:12px;font-size:.7rem;text-align:left;color:#fff}
-        .info-penting p{margin:4px 0}
-        
-        /* MENU POP-UP */
-        .menu-toggle{position:fixed;top:15px;right:15px;width:45px;height:45px;background:#1b5e3f;border-radius:50%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer;z-index:1001;box-shadow:0 5px 15px rgba(0,0,0,.3)}
-        .menu-toggle span{width:22px;height:2px;background:#fff;border-radius:2px}
-        .menu-toggle:hover{background:#0d3b26}
-        .side-menu{position:fixed;top:0;right:-280px;width:280px;height:100vh;background:rgba(0,0,0,.95);backdrop-filter:blur(15px);z-index:1002;transition:right .3s ease;display:flex;flex-direction:column}
-        .side-menu.active{right:0}
-        .menu-header{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid rgba(255,255,255,.1)}
-        .menu-logo span{font-weight:700;font-size:1.2rem;color:#ffb703}
-        .menu-close{background:0 0;border:none;font-size:28px;cursor:pointer;color:#fff;padding:5px}
-        .menu-close:hover{color:#ffb703}
-        .menu-nav{list-style:none;padding:20px 0;flex:1}
-        .menu-nav li{border-bottom:1px solid rgba(255,255,255,.05)}
-        .menu-nav a{display:block;padding:15px 25px;text-decoration:none;color:#fff;font-weight:500;transition:all .3s ease;font-size:1rem}
-        .menu-nav a:hover{background:rgba(27,94,63,.5);padding-left:30px}
-        .menu-footer{padding:20px;border-top:1px solid rgba(255,255,255,.1);font-size:.7rem;color:#ccc;text-align:center}
-        .menu-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:1001;display:none}
-        .menu-overlay.active{display:block}
-        
-        /* MODAL KATALOG PRODUK */
-        .modal-produk{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:1100;justify-content:center;align-items:center}
-        .modal-produk.active{display:flex}
-        .modal-produk .modal-content{background:#fff;padding:20px;border-radius:20px;max-width:900px;width:90%;text-align:center;max-height:85vh;overflow-y:auto;border:1px solid #a5d6a7;box-shadow:0 10px 30px rgba(0,0,0,.2);position:relative}
-        .modal-produk .modal-close{position:absolute;top:15px;right:20px;font-size:28px;cursor:pointer;color:#666;transition:all .2s;z-index:10}
-        .modal-produk .modal-close:hover{color:#1b5e3f}
-        .modal-produk h3{color:#1b5e3f;margin:0 0 10px 0;font-size:1.3rem;border-bottom:2px solid #ffb703;display:inline-block;padding-bottom:5px}
-        .produk-nav{display:flex;justify-content:center;align-items:center;gap:20px;margin-bottom:15px}
-        .produk-nav-btn{background:#ffb703;color:#2c1810;border:none;width:40px;height:40px;border-radius:50%;font-size:1.2rem;font-weight:bold;cursor:pointer;transition:all .3s ease}
-        .produk-nav-btn:hover{background:#e6a500;transform:scale(1.05)}
-        .produk-nav-btn:disabled{background:#ccc;cursor:not-allowed;transform:none}
-        .produk-counter{color:#1b5e3f;font-weight:bold;background:#e8f5e9;padding:5px 12px;border-radius:20px;font-size:.85rem}
-        .modal-flex{display:flex;flex-wrap:wrap;gap:20px;margin-top:15px}
-        .modal-image-area{flex:1;min-width:200px;text-align:center}
-        .modal-info-area{flex:1.5;min-width:250px;text-align:left}
-        .modal-product-image{width:100%;max-width:300px;height:auto;margin:0 auto;display:block;border-radius:14px;background:#e8f5e9;padding:8px;border:1px solid #a5d6a7}
-        .modal-product-image img{width:100%;height:auto;border-radius:10px;transition:transform 0.3s ease;cursor:zoom-in}
-        .modal-product-image img.zoomed{transform:scale(1.5);cursor:zoom-out}
-        .info-detail{background:#e8f5e9;padding:12px;border-radius:14px;margin-bottom:15px;border:1px solid #a5d6a7}
-        .info-detail p{margin:6px 0;color:#333;font-size:.85rem}
-        .info-detail strong{color:#1b5e3f}
-        .order-form-modal label{display:block;color:#1b5e3f;font-weight:600;font-size:.8rem;margin-top:10px;margin-bottom:5px}
-        .order-form-modal input{width:100%;padding:8px 12px;border-radius:10px;border:1px solid #a5d6a7;background:#fff;color:#333;font-size:.9rem}
-        .total-harga{background:#1b5e3f;padding:10px;border-radius:14px;text-align:center;font-weight:bold;margin:12px 0;color:#fff;font-size:.9rem}
-        .btn-pesan-modal{display:inline-block;background:#25D366;color:#fff;padding:12px 20px;border-radius:50px;text-decoration:none;font-weight:600;margin-top:10px;width:100%;text-align:center;transition:all .2s;border:none;cursor:pointer;font-size:.9rem}
-        .btn-pesan-modal:hover{background:#128C7E;transform:scale(1.01)}
-        
-        /* MODAL INSPIRASI - JUDUL & COUNTER 1 BARIS */
-        .modal-inspirasi{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);z-index:1100;justify-content:center;align-items:center}
-        .modal-inspirasi.active{display:flex}
-        .modal-inspirasi .modal-content{background:#fff;padding:20px;border-radius:20px;max-width:800px;width:90%;border:1px solid #a5d6a7;box-shadow:0 10px 30px rgba(0,0,0,.2);position:relative;display:flex;flex-direction:column;max-height:90vh}
-        .modal-inspirasi .modal-close{position:absolute;top:15px;right:20px;font-size:28px;cursor:pointer;color:#666;transition:all .2s;z-index:10}
-        .modal-inspirasi .modal-close:hover{color:#1b5e3f}
-        
-        /* HEADER: JUDUL + COUNTER DALAM 1 BARIS */
-        .inspirasi-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #ffb703;
-        }
-        
-        .inspirasi-header h3 {
-            color: #1b5e3f;
-            margin: 0;
-            font-size: 1.2rem;
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-        
-        .inspirasi-counter {
-            color: #1b5e3f;
-            font-weight: bold;
-            background: #e8f5e9;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: .85rem;
-            display: inline-block;
-            flex-shrink: 0;
-            margin-right: 40px;
-        }
-        
-        /* SLIDER CONTAINER */
-        .inspirasi-slider-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin: 15px 0;
-            position: relative;
-        }
-        
-        .inspirasi-nav-btn {
-            background: #ffb703;
-            color: #2c1810;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            font-size: 1.3rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all .3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        
-        .inspirasi-nav-btn:hover {
-            background: #e6a500;
-            transform: scale(1.05);
-        }
-        
-        .inspirasi-nav-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            opacity: 0.5;
-        }
-        
-        .inspirasi-image-box {
-            background: #e8f5e9;
-            padding: 15px;
-            border-radius: 14px;
-            border: 1px solid #a5d6a7;
-            flex: 1;
-            max-width: 400px;
-        }
-        
-        .inspirasi-image-box img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-            cursor: zoom-in;
-        }
-        
-        .inspirasi-image-box img.zoomed {
-            transform: scale(1.5);
-            cursor: zoom-out;
-        }
-        
-        /* NARASI BOX */
-        .inspirasi-narasi-box {
-            background: #e8f5e9;
-            padding: 15px;
-            border-radius: 14px;
-            border: 1px solid #a5d6a7;
-            margin: 10px 0;
-            text-align: left;
-            max-height: 120px;
-            overflow-y: auto;
-        }
-        
-        .inspirasi-narasi-text {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #333;
-            word-wrap: break-word;
-            white-space: normal;
-        }
-        
-        .inspirasi-narasi-text p {
-            margin: 0 0 10px 0;
-        }
-        
-        /* TOMBOL WA - FLEX SHRINK 0 AGAR TIDAK TERDORONG */
-        .btn-pesan-modal {
-            flex-shrink: 0;
-        }
-        
-        /* LOADING SPINNER */
-        .loading-spinner{display:flex;justify-content:center;align-items:center;padding:40px;color:#fff}
-        .loading-spinner::after{content:"";width:30px;height:30px;border:3px solid #ffb703;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin-left:10px}
-        @keyframes spin{to{transform:rotate(360deg)}}
-        
-        /* RESPONSIVE */
-        @media(max-width:767px){
-            .modal-inspirasi .modal-content{max-width:95vw;max-height:90vh}
-            .contoh-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-            .contoh-info p{font-size:.65rem}
-            .modal-produk .modal-content{max-width:95vw}
-            .modal-flex{flex-direction:column}
-            .modal-image-area{min-width:auto}
-            .modal-info-area{min-width:auto}
-            .produk-nav-btn{width:35px;height:35px;font-size:1rem}
-            .modal-product-image{width:80%;max-width:240px}
-            .inspirasi-narasi-text{font-size:.85rem}
-            .inspirasi-slider-container{gap:8px}
-            .inspirasi-nav-btn{width:35px;height:35px;font-size:1rem}
-            .inspirasi-image-box{max-width:250px;padding:10px}
-            .inspirasi-header h3{font-size:1rem}
-            .inspirasi-counter{font-size:.7rem;padding:3px 8px}
-        }
-        
-        @media(min-width:768px){
-            h1,h2{font-size:2.5rem}.tagline{font-size:1.1rem}
-            /* PC: 4 KOLOM */
-            .produk-grid{grid-template-columns:repeat(4,1fr);gap:15px}
-            .bahan-grid{grid-template-columns:repeat(4,1fr);gap:15px}
-            .layanan-grid{grid-template-columns:repeat(3,1fr);gap:20px}
-            .contoh-grid{grid-template-columns:repeat(5,1fr);gap:20px}
-            .content-wrapper{max-width:800px}
-            .produk-icon-img{width:100px;height:100px}
-            .produk-item span{font-size:.8rem}
-            .contoh-image{height:180px}
-            .modal-produk .modal-content{max-width:900px}
-            .modal-inspirasi .modal-content{max-width:700px;max-height:85vh}
-        }
-        
-        @media(min-width:1024px){h1,h2{font-size:3rem}}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bungkuskita - Box Makanan Premium</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #0f0f0f;
+    color: white;
+}
+
+/* NAVBAR */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    position: fixed;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: gold;
+}
+
+nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+.btn {
+    background: gold;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+    background: radial-gradient(circle at right, #3a2a00, #000);
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    line-height: 1.2;
+}
+
+.hero h1 span {
+    color: gold;
+}
+
+.hero p {
+    margin: 20px 0;
+    color: #ccc;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.secondary-btn {
+    border: 1px solid gold;
+    color: gold;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+/* SECTION */
+.section {
+    padding: 80px 60px;
+    text-align: center;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.highlight {
+    color: gold;
+}
+
+/* GRID PRODUK */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.card {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(255,215,0,0.2);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* FILTER */
+.filter-box {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.filter {
+    background: #1a1a1a;
+    padding: 25px;
+    border-radius: 12px;
+    width: 300px;
+    text-align: left;
+}
+
+.filter h3 {
+    margin-bottom: 15px;
+}
+
+.filter ul {
+    line-height: 1.8;
+}
+
+/* CTA */
+.cta {
+    background: linear-gradient(to right, #000, #2a1a00);
+    padding: 80px;
+}
+
+.cta h2 {
+    font-size: 36px;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    color: #777;
+}
+</style>
 </head>
+
 <body>
 
-<div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
-
-<nav class="side-menu" id="sideMenu">
-    <div class="menu-header"><div class="menu-logo"><span>BungkusKita</span></div><button class="menu-close" id="menuClose">&times;</button></div>
-    <ul class="menu-nav">
-        <li><a href="#beranda" class="menu-link">🏠 Beranda</a></li>
-        <li><a href="#tentang" class="menu-link">📖 Tentang</a></li>
-        <li><a href="#produk" class="menu-link">📦 Produk</a></li>
-        <li><a href="#bahan" class="menu-link">📄 Bahan</a></li>
-        <li><a href="#layanan" class="menu-link">⚙️ Layanan</a></li>
-        <li><a href="#contoh" class="menu-link">💡 Inspirasi Kemasan</a></li>
-        <li><a href="#kontak" class="menu-link">📞 Kontak</a></li>
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">bungkuskita</div>
+    <ul>
+        <li><a href="#">Beranda</a></li>
+        <li><a href="#">Produk</a></li>
+        <li><a href="#">Spesialisasi</a></li>
+        <li><a href="#">Portofolio</a></li>
     </ul>
-    <div class="menu-footer"><p>📱 +62 857-1696-7671</p><p>📧 bungkuskita9@gmail.com</p></div>
+    <a href="#" class="btn">Konsultasi</a>
 </nav>
-<div class="menu-overlay" id="menuOverlay"></div>
 
-<main class="sections-container">
-    <section id="beranda" class="section active">
-        <div class="section-bg" style="background-image:url('images/bg-beranda.jpg')"></div>
-        <div class="section-overlay"></div>
-        <div class="section-content">
-            <div class="content-wrapper">
-                <h1 class="fade-up">Bungkus<span>Kita</span></h1>
-                <p class="tagline fade-up delay-1">Desain & Cetak Boks Kemasan Berkualitas</p>
-                <a href="https://wa.me/6285716967671" class="btn-wa fade-up delay-2" target="_blank">📞 Konsultasi Sekarang</a>
-            </div>
-        </div>
-        <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
-    </section>
-
-    <section id="tentang" class="section">
-        <div class="section-bg" style="background-image:url('images/bg-tentang.jpg')"></div>
-        <div class="section-overlay"></div>
-        <div class="section-content">
-            <div class="content-wrapper">
-                <h2 class="fade-up">Tentang <span>Kami</span></h2>
-                <div class="about-box fade-up delay-1">
-                    <div class="visi-misi">
-                        <div class="visi"><h3>Visi</h3><p>Menjadi mitra terpercaya dalam penyediaan kemasan berkualitas untuk bisnis kuliner di Indonesia.</p></div>
-                        <div class="misi"><h3>Misi</h3><ul><li>Memberikan produk kemasan berkualitas dengan harga bersaing</li><li>Membantu pelaku usaha meningkatkan brand melalui kemasan</li><li>Memberikan pelayanan terbaik dan tepat waktu</li></ul></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
-    </section>
-
-    <section id="produk" class="section">
-        <div class="section-bg" style="background-image:url('images/bg-produk.jpg')"></div>
-        <div class="section-overlay"></div>
-        <div class="section-content">
-            <div class="content-wrapper">
-                <h2 class="fade-up">Katalog <span>Produk</span></h2>
-                <p class="section-subtitle fade-up delay-1">Klik produk untuk detail & pesan</p>
-                <div id="produkGridContainer">
-                    <div class="produk-grid fade-up delay-2" id="produkGrid">
-                        <div class="loading-spinner">Memuat produk...</div>
-                    </div>
-                </div>
-                <div class="pagination" id="pagination">
-                    <button id="prevBtn" class="page-btn" disabled>◀ Previous</button>
-                    <span id="pageInfo" class="page-info">Halaman 1 dari 2</span>
-                    <button id="nextBtn" class="page-btn">Next ▶</button>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
-    </section>
-
-    <section id="bahan" class="section">
-        <div class="section-bg" style="background-image:url('images/bg-bahan.jpg')"></div>
-        <div class="section-overlay"></div>
-        <div class="section-content">
-            <div class="content-wrapper">
-                <h2 class="fade-up">Jenis <span>Bahan</span></h2>
-                <div class="bahan-grid fade-up delay-2" id="bahanGrid"></div>
-            </div>
-        </div>
-        <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
-    </section>
-
-    <section id="layanan" class="section">
-        <div class="section-bg" style="background-image:url('images/bg-layanan.jpg')"></div>
-        <div class="section-overlay"></div>
-        <div class="section-content">
-            <div class="content-wrapper">
-                <h2 class="fade-up">Layanan <span>Kami</span></h2>
-                <div class="layanan-grid fade-up delay-2" id="layananGrid"></div>
-            </div>
-        </div>
-        <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
-    </section>
-
-    <section id="contoh" class="section">
-        <div class="section-bg" style="background-image:url('images/bg-contoh.jpg')"></div>
-        <div class="section-overlay"></div>
-        <div class="section-content">
-            <div class="content-wrapper">
-                <h2 class="fade-up">💡 <span>Inspirasi Kemasan</span></h2>
-                <p class="section-subtitle fade-up delay-1">10 kuliner yang cocok dikemas dengan sistem lipat manual - praktis, cepat, rapi!</p>
-                <div class="contoh-grid fade-up delay-2" id="contohGrid"></div>
-                <div class="contoh-pagination" id="contohPagination">
-                    <button id="contohPrevBtn" class="contoh-page-btn" disabled>◀ Previous</button>
-                    <span id="contohPageInfo" class="contoh-page-info">Halaman 1 dari 3</span>
-                    <button id="contohNextBtn" class="contoh-page-btn">Next ▶</button>
-                </div>
-                <p style="margin-top:15px; font-size:.7rem; opacity:.7;">✨ Klik gambar untuk melihat detail & inspirasi ✨</p>
-            </div>
-        </div>
-        <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
-    </section>
-
-    <section id="kontak" class="section">
-        <div class="section-bg" style="background-image:url('images/bg-kontak.jpg')"></div>
-        <div class="section-overlay"></div>
-        <div class="section-content">
-            <div class="content-wrapper">
-                <h2 class="fade-up">Hubungi <span>Kami</span></h2>
-                <div class="kontak-box fade-up delay-1">
-                    <div class="kontak-item"><div class="kontak-icon"><img src="images/kontak/icon-wa.png" alt="WA" class="kontak-img" onerror="this.src='https://placehold.co/50x50/25D366/white?text=WA'"></div><div><h3>WhatsApp</h3><a href="https://wa.me/6285716967671" target="_blank">+62 857-1696-7671</a></div></div>
-                    <div class="kontak-item"><div class="kontak-icon"><img src="images/kontak/icon-email.png" alt="Email" class="kontak-img" onerror="this.src='https://placehold.co/50x50/EA4335/white?text=@'"></div><div><h3>Email</h3><a href="mailto:bungkuskita9@gmail.com">bungkuskita9@gmail.com</a></div></div>
-                    <div class="kontak-item"><div class="kontak-icon"><img src="images/kontak/icon-alamat.png" alt="Alamat" class="kontak-img" onerror="this.src='https://placehold.co/50x50/4285F4/white?text=📍'"></div><div><h3>Alamat</h3><p>Jakarta Barat</p></div></div>
-                    <div class="kontak-item"><div class="kontak-icon"><img src="images/kontak/icon-jam.png" alt="Jam" class="kontak-img" onerror="this.src='https://placehold.co/50x50/FF9800/white?text=🕒'"></div><div><h3>Jam Operasional</h3><p>Senin - Jumat: 09:00 - 17:00<br>Sabtu: 09:00 - 14:00<br>Minggu: Libur</p></div></div>
-                </div>
-                <div class="info-penting fade-up delay-2">
-                    <p><strong>💰 Pembayaran:</strong> DP 50% sebelum desain | Lunas sebelum produksi</p>
-                    <p><strong>🚚 Pengiriman:</strong> Gratis ongkir (Jakarta, Bekasi, Tangerang, MOQ≥5000)</p>
-                    <p><strong>⏱️ Produksi:</strong> 7 Hari Kerja setelah desain ACC</p>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
-
-<!-- MODAL KATALOG PRODUK -->
-<div id="modalProduk" class="modal-produk">
-    <div class="modal-content">
-        <span class="modal-close">&times;</span>
-        <div class="produk-nav">
-            <button id="produkPrevBtn" class="produk-nav-btn">◀</button>
-            <span id="produkCounter" class="produk-counter">1 / 16</span>
-            <button id="produkNextBtn" class="produk-nav-btn">▶</button>
-        </div>
-        <h3 id="modalProdukTitle"></h3>
-        <div class="modal-flex">
-            <div class="modal-image-area">
-                <div id="modalProdukImageContainer" class="modal-product-image">
-                    <img id="modalProdukImage" src="" alt="Gambar produk">
-                </div>
-            </div>
-            <div class="modal-info-area">
-                <div id="modalProdukDetail" class="order-form-modal"></div>
-                <a href="#" id="modalProdukWaLink" class="btn-pesan-modal" target="_blank">📞 Tanya Harga & Pesan via WhatsApp</a>
-            </div>
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Kemasan yang <span>Meningkatkan</span> Nilai Brand Anda</h1>
+        <p>Kami spesialis box makanan premium non-corrugated untuk brand yang ingin tampil profesional dan dipercaya.</p>
+        
+        <div class="hero-buttons">
+            <a href="#" class="btn">Lihat Katalog</a>
+            <a href="#" class="secondary-btn">Ajukan Kerjasama</a>
         </div>
     </div>
-</div>
+</section>
 
-<!-- MODAL INSPIRASI - JUDUL & COUNTER 1 BARIS -->
-<div id="modalInspirasi" class="modal-inspirasi">
-    <div class="modal-content">
-        <span class="modal-close">&times;</span>
-        
-        <!-- HEADER: JUDUL + COUNTER DALAM 1 BARIS -->
-        <div class="inspirasi-header">
-            <h3 id="modalInspirasiTitle">💡 Inspirasi: Martabak Manis</h3>
-            <span id="inspirasiCounter" class="inspirasi-counter">1 / 10</span>
+<!-- STATEMENT -->
+<section class="section">
+    <h2>Kami <span class="highlight">Tidak</span> Untuk Semua Orang</h2>
+    <p>Kami bekerja dengan brand makanan yang serius membangun citra, bukan sekadar mencari kemasan murah.</p>
+</section>
+
+<!-- PRODUK -->
+<section class="section">
+    <h2>Produk Kami</h2>
+
+    <div class="grid">
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200">
+            <h3>Box Martabak</h3>
         </div>
-        
-        <!-- SLIDER DENGAN TOMBOL KIRI KANAN -->
-        <div class="inspirasi-slider-container">
-            <button id="inspirasiPrevBtn" class="inspirasi-nav-btn inspirasi-prev">◀</button>
-            <div class="inspirasi-image-box">
-                <img id="modalInspirasiImage" src="" alt="Gambar inspirasi">
-            </div>
-            <button id="inspirasiNextBtn" class="inspirasi-nav-btn inspirasi-next">▶</button>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200">
+            <h3>Box Fried Chicken</h3>
         </div>
-        
-        <!-- NARASI -->
-        <div class="inspirasi-narasi-box">
-            <div id="modalInspirasiDetail" class="inspirasi-narasi-text"></div>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200">
+            <h3>Box Cake</h3>
         </div>
-        
-        <a href="#" id="modalInspirasiWaLink" class="btn-pesan-modal" target="_blank">📞 Tanya Harga & Pesan via WhatsApp</a>
+
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200">
+            <h3>Box Snack</h3>
+        </div>
     </div>
-</div>
+</section>
 
-<script>
-// ========== DATA PRODUK DARI FILE JSON EKSTERNAL ==========
-let semuaProduk = [];
-let produkLoaded = false;
+<!-- FILTER -->
+<section class="section">
+    <h2>Spesialisasi Kami</h2>
 
-// PAGINATION PRODUK - 8 PRODUK PER HALAMAN (untuk semua device)
-let produkPerHalaman = 8;
-let currentPage = 1;
-let totalPages = 1;
+    <div class="filter-box">
 
-function getProdukForPage(page) {
-    const start = (page - 1) * produkPerHalaman;
-    const end = start + produkPerHalaman;
-    return semuaProduk.slice(start, end);
-}
-
-function renderProduk() {
-    const grid = document.getElementById('produkGrid');
-    if (!grid) return;
-    
-    if (!produkLoaded || semuaProduk.length === 0) {
-        grid.innerHTML = '<div class="loading-spinner">Memuat produk...</div>';
-        return;
-    }
-    
-    // SEMUA DEVICE PAKAI PAGINATION
-    const produkTampil = getProdukForPage(currentPage);
-    document.getElementById('pageInfo').innerText = `Halaman ${currentPage} dari ${totalPages}`;
-    document.getElementById('prevBtn').disabled = (currentPage === 1);
-    document.getElementById('nextBtn').disabled = (currentPage === totalPages);
-    document.getElementById('pagination').style.display = 'flex';
-    
-    grid.innerHTML = '';
-    produkTampil.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'produk-item';
-        card.innerHTML = `<img src="${p.gambar}" class="produk-icon-img" alt="${p.nama}" onerror="this.src='https://placehold.co/200x200/1b5e3f/white?text=${p.nama.substring(0,3)}'"><span>${p.nama}</span>`;
-        card.onclick = () => showProductModal(p.id);
-        grid.appendChild(card);
-    });
-}
-
-function prevPage() { if (currentPage > 1) { currentPage--; renderProduk(); } }
-function nextPage() { if (currentPage < totalPages) { currentPage++; renderProduk(); } }
-
-// Fungsi untuk memuat data dari file JSON
-async function loadProducts() {
-    try {
-        const timestamp = new Date().getTime();
-        const response = await fetch(`produk.json?t=${timestamp}`);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: File produk.json tidak ditemukan`);
-        }
-        
-        const data = await response.json();
-        semuaProduk = data.produk || [];
-        produkLoaded = true;
-        
-        totalPages = Math.ceil(semuaProduk.length / produkPerHalaman);
-        currentPage = 1;
-        
-        console.log(`✅ Data produk berhasil dimuat: ${semuaProduk.length} produk`);
-        
-        renderProduk();
-    } catch (error) {
-        console.error('❌ Gagal memuat data produk:', error);
-        produkLoaded = false;
-        const grid = document.getElementById('produkGrid');
-        if (grid) {
-            grid.innerHTML = `<div class="loading-spinner" style="color:#ffb703;">⚠️ Gagal memuat data. Pastikan file produk.json ada di folder yang sama.</div>`;
-        }
-    }
-}
-
-// ========== DATA INSPIRASI ==========
-const contohData = [
-    { nama:"Martabak Manis", gambar:"images/contoh/contoh-martabak-manis.jpg", narasi:"Martabak manis legendaris dari Timur Tengah, populer di Indonesia. Rasa legit dengan topping meses, keju, kacang. Kemasan lipat manual menjaga kehangatan & tekstur." },
-    { nama:"Pisang Goreng Crispy", gambar:"images/contoh/contoh-pisang-goreng.jpg", narasi:"Pisang goreng crispy, camilan favorit semua kalangan. Kulit renyah, dalamnya manis lembut. Kemasan lipat manual menjaga kerenyahan lebih lama. Praktis untuk jualan pinggir jalan atau cafe." },
-    { nama:"Kue Dongkal", gambar:"images/contoh/contoh-kue-dongkal.jpg", narasi:"Kue dongkal / kue lumpur / kue pukis. Kemasan lipat manual ukuran pas, tinggal lipat. Hemat waktu produksi, hasil rapi dan higienis." },
-    { nama:"Kue Pia", gambar:"images/contoh/contoh-kue-pia.jpg", narasi:"Kue pia / kue kering. Desain elegan dengan warna natural. Model tutup sambung, mudah dibuka dan ditutup. Bahan Ivory memberikan kesan premium." },
-    { nama:"Singkong Keju", gambar:"images/contoh/contoh-singkong-keju.jpg", narasi:"Singkong keju / singkong goreng. Bahan Kraft PE tahan minyak. Desain ventilasi kecil agar uap bisa keluar. Kemasan praktis untuk take away." },
-    { nama:"Box Ayam Bakar", gambar:"images/contoh/contoh-ayam-bakar.jpg", narasi:"Ayam bakar / ayam geprek. Bahan Kraft PE tahan panas & minyak. Model tutup pisah, cocok untuk ayam bakar, nasi, dan sambal." },
-    { nama:"Box Catering", gambar:"images/contoh/contoh-box-catering.jpg", narasi:"Nasi box catering. Bahan Duplek kuat dan kokoh. Desain custom sesuai brand. Model tutup sambung, rapi dan aman untuk dibawa." },
-    { nama:"Box Donat", gambar:"images/contoh/contoh-box-donat.jpg", narasi:"Donat 6 pcs / 12 pcs. Bahan Ivory putih bersih. Ada jendela plastik. Kemasan lipat manual, tinggal lipat. Hemat biaya produksi!" },
-    { nama:"Box Roti Bakar", gambar:"images/contoh/contoh-roti-bakar.jpg", narasi:"Roti bakar / sandwich. Desain modern dengan warna hitam atau coklat. Model tutup sambung, praktis untuk take away." },
-    { nama:"Fried Chicken", gambar:"images/contoh/contoh-fried-chicken.jpg", narasi:"Fried chicken, ayam goreng crispy favorit semua umur. Kulit renyah, daging empuk juicy. Kemasan lipat manual menjaga kerenyahan. Cocok untuk bisnis fast food atau cafe." }
-];
-
-// PAGINATION INSPIRASI - KHUSUS HP (4 per halaman)
-const inspirasiPerHalaman = 4;
-let inspirasiPage = 1;
-const totalInspirasiPages = Math.ceil(contohData.length / inspirasiPerHalaman);
-let isMobile = window.innerWidth < 768;
-
-function getInspirasiForPage(page) {
-    const start = (page - 1) * inspirasiPerHalaman;
-    const end = start + inspirasiPerHalaman;
-    return contohData.slice(start, end);
-}
-
-function renderContoh() {
-    const grid = document.getElementById('contohGrid');
-    if (!grid) return;
-    let inspirasiTampil;
-    if (isMobile) {
-        inspirasiTampil = getInspirasiForPage(inspirasiPage);
-        document.getElementById('contohPageInfo').innerText = `Halaman ${inspirasiPage} dari ${totalInspirasiPages}`;
-        document.getElementById('contohPrevBtn').disabled = (inspirasiPage === 1);
-        document.getElementById('contohNextBtn').disabled = (inspirasiPage === totalInspirasiPages);
-        document.getElementById('contohPagination').style.display = 'flex';
-    } else {
-        inspirasiTampil = contohData;
-        document.getElementById('contohPagination').style.display = 'none';
-    }
-    grid.innerHTML = '';
-    inspirasiTampil.forEach((item, idx) => {
-        let c = document.createElement('div'); c.className = 'contoh-item';
-        c.innerHTML = `<div class="contoh-image"><img src="${item.gambar}" alt="${item.nama}" onerror="this.src='https://placehold.co/1000x667/1b5e3f/white?text=${item.nama}'"></div><div class="contoh-info"><p>🍽️ ${item.nama}</p></div>`;
-        c.onclick = () => showInspirasiModal(contohData.indexOf(item));
-        grid.appendChild(c);
-    });
-}
-
-function inspirasiPrevPage() { if (inspirasiPage > 1) { inspirasiPage--; renderContoh(); } }
-function inspirasiNextPage() { if (inspirasiPage < totalInspirasiPages) { inspirasiPage++; renderContoh(); } }
-
-let inspirasiIndex = 0;
-
-function showInspirasiModal(index){
-    inspirasiIndex = index;
-    updateInspirasiModal();
-    document.getElementById('modalInspirasi').classList.add('active');
-}
-
-function updateInspirasiModal(){
-    const item = contohData[inspirasiIndex];
-    const mt = document.getElementById('modalInspirasiTitle');
-    const mi = document.getElementById('modalInspirasiImage');
-    const mDetail = document.getElementById('modalInspirasiDetail');
-    const mw = document.getElementById('modalInspirasiWaLink');
-    const counter = document.getElementById('inspirasiCounter');
-    
-    mt.innerText = "💡 Inspirasi: " + item.nama;
-    mi.src = item.gambar;
-    mi.alt = item.nama;
-    mi.onerror = function(){ this.src = 'https://placehold.co/1000x667/1b5e3f/white?text=' + item.nama; };
-    mDetail.innerHTML = `<p>${item.narasi}</p>`;
-    setupImageZoom(mi);
-    
-    mw.onclick = (e) => { 
-        e.preventDefault(); 
-        window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan kemasan untuk ${item.nama}. Mohon info desain dan harga.`)}`, '_blank'); 
-    };
-    counter.innerText = `${inspirasiIndex + 1} / ${contohData.length}`;
-    
-    // Update status tombol panah kiri kanan
-    const prevBtn = document.getElementById('inspirasiPrevBtn');
-    const nextBtn = document.getElementById('inspirasiNextBtn');
-    if (prevBtn) prevBtn.disabled = (inspirasiIndex === 0);
-    if (nextBtn) nextBtn.disabled = (inspirasiIndex === contohData.length - 1);
-}
-
-function inspirasiPrev() { if (inspirasiIndex > 0) { inspirasiIndex--; updateInspirasiModal(); } }
-function inspirasiNext() { if (inspirasiIndex < contohData.length - 1) { inspirasiIndex++; updateInspirasiModal(); } }
-
-// ========== BAHAN ==========
-const bahanData = [
-    { nama:"Kraft Liner", deskripsi:"Kertas kraft alami, kuat, ramah lingkungan", spesifikasi:"Gramatur: 275 | 315 | 350 Gr", icon:"📦", gambar:"images/bahan/kraft-liner.jpg" },
-    { nama:"Kraft Laminasi", deskripsi:"Tahan minyak dan air", spesifikasi:"Gramatur: 290 | 325 Gr", icon:"💧", gambar:"images/bahan/kraft-pe.jpg" },
-    { nama:"Duplek", deskripsi:"Permukaan halus, cetak tajam", spesifikasi:"Gramatur: 250 | 310 | 350 Gr", icon:"📄", gambar:"images/bahan/duplek.jpg" },
-    { nama:"Ivory", deskripsi:"Putih bersih, mewah, eksklusif", spesifikasi:"Gramatur: 230 | 250 | 270 | 300 Gr", icon:"✨", gambar:"images/bahan/ivori.jpg" }
-];
-
-function renderBahan(){
-    let g = document.getElementById('bahanGrid'); if(!g) return; g.innerHTML = '';
-    bahanData.forEach(b => {
-        let c = document.createElement('div'); c.className = 'bahan-item';
-        c.innerHTML = `<div class="bahan-icon">${b.icon}</div><span>${b.nama}</span><small>${b.spesifikasi.split('|')[0]}</small>`;
-        c.onclick = () => showBahanModal(b);
-        g.appendChild(c);
-    });
-}
-
-function showBahanModal(b){
-    let m = document.getElementById('modalInspirasi');
-    let mt = document.getElementById('modalInspirasiTitle');
-    let mi = document.getElementById('modalInspirasiImage');
-    let mDetail = document.getElementById('modalInspirasiDetail');
-    let mw = document.getElementById('modalInspirasiWaLink');
-    const counter = document.getElementById('inspirasiCounter');
-    
-    mt.innerText = b.nama;
-    mi.src = b.gambar;
-    mi.alt = b.nama;
-    mi.onerror = function(){ this.src = 'https://placehold.co/500x500/1b5e3f/white?text=' + b.nama; };
-    mDetail.innerHTML = `<p><strong>📝 ${b.deskripsi}</strong></p><p><strong>📊 ${b.spesifikasi}</strong></p><p style="margin-top:10px;">✨ Tertarik dengan bahan ini? Klik tombol di bawah untuk konsultasi.</p>`;
-    mw.onclick = (e) => { e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan bahan ${b.nama} (${b.spesifikasi}). Mohon info lebih lanjut dan contohnya.`)}`, '_blank'); };
-    if (counter) counter.innerText = '';
-    m.classList.add('active');
-    setupImageZoom(mi);
-}
-
-// ========== LAYANAN ==========
-const layananData = [
-    { nama:"Desain", deskripsi:"Jasa desain kemasan profesional", fitur:"✓ File siap cetak (CDR/AI/PDF)\n✓ Revisi 2x gratis\n✓ Konsultasi desain", icon:"🎨", gambar:"images/layanan/desain.jpg" },
-    { nama:"Cetak", deskripsi:"Cetak berkualitas tinggi", fitur:"✓ Hasil cetak tajam\n✓ Pilihan bahan lengkap\n✓ Proses cepat", icon:"🖨️", gambar:"images/layanan/cetak.jpg" },
-    { nama:"Desain & Cetak", deskripsi:"Paket lengkap dari konsep hingga jadi", fitur:"✓ Konsultasi gratis\n✓ Cetak berkualitas\n✓ Garansi kepuasan", icon:"⭐", gambar:"images/layanan/desain-cetak.jpg" }
-];
-
-function renderLayanan(){
-    let g = document.getElementById('layananGrid'); if(!g) return; g.innerHTML = '';
-    layananData.forEach(l => {
-        let c = document.createElement('div'); c.className = 'layanan-item';
-        c.innerHTML = `<div class="layanan-icon">${l.icon}</div><h3>${l.nama}</h3><p>${l.deskripsi}</p><small>Klik untuk detail</small>`;
-        c.onclick = () => showLayananModal(l);
-        g.appendChild(c);
-    });
-}
-
-function showLayananModal(l){
-    let m = document.getElementById('modalInspirasi');
-    let mt = document.getElementById('modalInspirasiTitle');
-    let mi = document.getElementById('modalInspirasiImage');
-    let mDetail = document.getElementById('modalInspirasiDetail');
-    let mw = document.getElementById('modalInspirasiWaLink');
-    const counter = document.getElementById('inspirasiCounter');
-    
-    mt.innerText = l.nama;
-    mi.src = l.gambar;
-    mi.alt = l.nama;
-    mi.onerror = function(){ this.src = 'https://placehold.co/500x500/1b5e3f/white?text=' + l.nama; };
-    mDetail.innerHTML = `<p><strong>📝 ${l.deskripsi}</strong></p><p><strong>Fitur:</strong><br>${l.fitur.replace(/\n/g, '<br>')}</p><p style="margin-top:10px;">✨ Tertarik dengan layanan ini? Klik tombol di bawah untuk konsultasi.</p>`;
-    mw.onclick = (e) => { e.preventDefault(); window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan layanan ${l.nama}. Mohon info lebih lanjut dan harga.`)}`, '_blank'); };
-    if (counter) counter.innerText = '';
-    m.classList.add('active');
-    setupImageZoom(mi);
-}
-
-// ========== FUNGSI ZOOM GAMBAR ==========
-function setupImageZoom(imgElement) {
-    if (!imgElement) return;
-    imgElement.removeEventListener('click', handleImageZoom);
-    imgElement.addEventListener('click', handleImageZoom);
-    imgElement.style.cursor = 'zoom-in';
-}
-
-function handleImageZoom(e) {
-    e.stopPropagation();
-    const img = e.target;
-    if (img.classList.contains('zoomed')) {
-        img.classList.remove('zoomed');
-        img.style.transform = 'scale(1)';
-        img.style.cursor = 'zoom-in';
-    } else {
-        img.classList.add('zoomed');
-        img.style.transform = 'scale(1.5)';
-        img.style.cursor = 'zoom-out';
-    }
-}
-
-function resetZoomProduk() {
-    const modalImage = document.getElementById('modalProdukImage');
-    if (modalImage) {
-        modalImage.classList.remove('zoomed');
-        modalImage.style.transform = 'scale(1)';
-        modalImage.style.cursor = 'zoom-in';
-    }
-}
-
-// ========== FUNGSI MODAL PRODUK ==========
-let produkIndex = 0;
-
-function showProductModal(id){
-    produkIndex = semuaProduk.findIndex(p => p.id === id);
-    updateProdukModal();
-    document.getElementById('modalProduk').classList.add('active');
-}
-
-function updateProdukModal(){
-    const cp = semuaProduk[produkIndex];
-    if (!cp) return;
-    
-    const mt = document.getElementById('modalProdukTitle');
-    const mi = document.getElementById('modalProdukImage');
-    const mDetail = document.getElementById('modalProdukDetail');
-    const mw = document.getElementById('modalProdukWaLink');
-    const counter = document.getElementById('produkCounter');
-    
-    mt.innerText = cp.nama;
-    mi.src = cp.gambar;
-    mi.alt = cp.nama;
-    mi.onerror = function(){ this.src = 'https://placehold.co/300x300/1b5e3f/white?text=' + cp.nama; };
-    
-    let infoDetail = '';
-    
-    if (cp.tipe === "reguler") {
-        infoDetail = `
-            <div class="info-detail">
-                <p><strong>📏 Ukuran:</strong> ${cp.ukuranBox}</p>
-                <p><strong>📄 Bahan:</strong> ${cp.bahan}</p>
-                <p><strong>🔧 Model:</strong> ${cp.jenis}</p>
-                <p><strong>📦 Isi per Pack:</strong> ${cp.isiPerPack} pcs</p>
-                <p><strong>📦 Isi per Ikat:</strong> ${cp.isiPerIkat} pack = ${cp.isiPerIkat * cp.isiPerPack} pcs</p>
-            </div>
-            <p style="font-size:0.75rem; color:#666; margin-top:5px;">💡 Klik tombol di bawah untuk tanya harga & pesan</p>
-        `;
-        mw.onclick = (e) => { 
-            e.preventDefault(); 
-            let message = `Halo BungkusKita, saya tertarik dengan produk:\n${cp.nama}\n📏 Ukuran Box: ${cp.ukuranBox}\n📄 Bahan: ${cp.bahan}\n🔧 Model: ${cp.jenis}\n📦 Isi per Pack: ${cp.isiPerPack} pcs\n📦 Isi per Ikat: ${cp.isiPerIkat} pack (${cp.isiPerIkat * cp.isiPerPack} pcs)\n\nMohon info harga dan ketersediaan. Terima kasih.`;
-            window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(message)}`, '_blank'); 
-        };
-    } 
-    else if (cp.tipe === "custom") {
-        infoDetail = `
-            <div class="info-detail">
-                <p><strong>📏 Ukuran:</strong> ${cp.ukuranBox}</p>
-                <p><strong>📄 Bahan:</strong> ${cp.bahan}</p>
-                <p><strong>🔧 Model:</strong> ${cp.jenis}</p>
-                <p><strong>📦 Min Pesan:</strong> ${cp.minPesan}</p>
-                <p><strong>💰 ${cp.kenaBiaya}</strong></p>
-            </div>
-            <p style="font-size:0.75rem; color:#666; margin-top:5px;">💡 Klik tombol di bawah untuk tanya harga & pesan</p>
-        `;
-        mw.onclick = (e) => { 
-            e.preventDefault(); 
-            let message = `Halo BungkusKita, saya tertarik dengan produk:\n${cp.nama}\n📏 Ukuran: ${cp.ukuranBox}\n📄 Bahan: ${cp.bahan}\n📦 Min Pesan: ${cp.minPesan}\n💰 ${cp.kenaBiaya}\n\nMohon info harga dan ketersediaan. Terima kasih.`;
-            window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(message)}`, '_blank'); 
-        };
-    }
-   else if (cp.tipe === "nota") {
-    infoDetail = `
-        <div class="info-detail">
-            <p><strong>📏 Ukuran:</strong> ${cp.ukuranBox}</p>
-            <p><strong>📄 Bahan:</strong> ${cp.bahan}</p>
-            <p><strong>🔧 Model:</strong> ${cp.jenis}</p>
-            <p><strong>📖 Isi Buku:</strong> ${cp.isiBuku}</p>
+        <div class="filter">
+            <h3>❌ Bukan Layanan Kami</h3>
+            <ul>
+                <li>Karton gelombang</li>
+                <li>Produksi mass murah</li>
+                <li>Gift / hampers</li>
+            </ul>
         </div>
-        <p style="font-size:0.75rem; color:#666; margin-top:5px;">💡 Klik tombol di bawah untuk tanya harga & pesan</p>
-    `;
-    
-    mw.onclick = (e) => { 
-        e.preventDefault(); 
-        let message = `Halo BungkusKita, saya tertarik dengan produk:\n${cp.nama}\n📏 Ukuran: ${cp.ukuranBox}\n📄 Bahan: ${cp.bahan}\n📖 Isi Buku: ${cp.isiBuku}\n\nMohon info harga dan ketersediaan. Terima kasih.`;
-        window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(message)}`, '_blank'); 
-    };
-}
-    
-    mDetail.innerHTML = infoDetail;
-    counter.innerText = `${produkIndex + 1} / ${semuaProduk.length}`;
-    
-    const prevBtn = document.getElementById('produkPrevBtn');
-    const nextBtn = document.getElementById('produkNextBtn');
-    if (prevBtn) prevBtn.disabled = (produkIndex === 0);
-    if (nextBtn) nextBtn.disabled = (produkIndex === semuaProduk.length - 1);
-    
-    setupImageZoom(mi);
-}
 
-function produkPrev() { if (produkIndex > 0) { produkIndex--; updateProdukModal(); } }
-function produkNext() { if (produkIndex < semuaProduk.length - 1) { produkIndex++; updateProdukModal(); } }
+        <div class="filter">
+            <h3>✅ Fokus Kami</h3>
+            <ul>
+                <li>Box makanan premium</li>
+                <li>Folding carton</li>
+                <li>Brand kuliner naik kelas</li>
+            </ul>
+        </div>
 
-// ========== MENU ==========
-const menuToggle = document.getElementById('menuToggle');
-const sideMenu = document.getElementById('sideMenu');
-const menuOverlay = document.getElementById('menuOverlay');
-const menuClose = document.getElementById('menuClose');
+    </div>
+</section>
 
-function openMenu() { sideMenu.classList.add('active'); menuOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
-function closeMenu() { sideMenu.classList.remove('active'); menuOverlay.classList.remove('active'); document.body.style.overflow = ''; }
+<!-- CTA -->
+<section class="cta">
+    <h2>Kami Siap Membantu Brand Anda Naik Kelas</h2>
+    <br>
+    <a href="#" class="btn">Konsultasi Sekarang</a>
+</section>
 
-if (menuToggle) menuToggle.addEventListener('click', openMenu);
-if (menuClose) menuClose.addEventListener('click', closeMenu);
-if (menuOverlay) menuOverlay.addEventListener('click', closeMenu);
+<footer>
+    © 2026 Bungkuskita
+</footer>
 
-const container = document.querySelector('.sections-container');
-function showSection(sectionId) {
-    const target = document.getElementById(sectionId);
-    if (target && container) container.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
-    closeMenu();
-}
-document.querySelectorAll('.menu-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        showSection(link.getAttribute('href').substring(1));
-    });
-});
-document.querySelectorAll('.scroll-indicator').forEach(ind => {
-    ind.addEventListener('click', () => {
-        if (container) container.scrollTo({ top: container.scrollTop + window.innerHeight, behavior: 'smooth' });
-    });
-});
-
-// Modal close handlers
-const modalProduk = document.getElementById('modalProduk');
-const modalProdukClose = document.querySelector('#modalProduk .modal-close');
-function closeModalProduk() { modalProduk.classList.remove('active'); resetZoomProduk(); }
-if (modalProdukClose) modalProdukClose.addEventListener('click', closeModalProduk);
-modalProduk.addEventListener('click', (e) => { if (e.target === modalProduk) closeModalProduk(); });
-
-const modalInspirasi = document.getElementById('modalInspirasi');
-const modalInspirasiClose = document.querySelector('#modalInspirasi .modal-close');
-function closeModalInspirasi() { 
-    modalInspirasi.classList.remove('active');
-    const img = document.getElementById('modalInspirasiImage');
-    if (img) {
-        img.classList.remove('zoomed');
-        img.style.transform = 'scale(1)';
-        img.style.cursor = 'zoom-in';
-    }
-}
-if (modalInspirasiClose) modalInspirasiClose.addEventListener('click', closeModalInspirasi);
-modalInspirasi.addEventListener('click', (e) => { if (e.target === modalInspirasi) closeModalInspirasi(); });
-
-// Button event listeners
-document.getElementById('prevBtn').addEventListener('click', prevPage);
-document.getElementById('nextBtn').addEventListener('click', nextPage);
-document.getElementById('produkPrevBtn').addEventListener('click', produkPrev);
-document.getElementById('produkNextBtn').addEventListener('click', produkNext);
-document.getElementById('inspirasiPrevBtn').addEventListener('click', inspirasiPrev);
-document.getElementById('inspirasiNextBtn').addEventListener('click', inspirasiNext);
-document.getElementById('contohPrevBtn').addEventListener('click', inspirasiPrevPage);
-document.getElementById('contohNextBtn').addEventListener('click', inspirasiNextPage);
-
-// Resize handler
-window.addEventListener('resize', function() { 
-    isMobile = window.innerWidth < 768;
-    renderContoh();
-});
-
-// ========== INISIALISASI ==========
-renderBahan();
-renderLayanan();
-renderContoh();
-loadProducts();
-</script>
 </body>
 </html>
