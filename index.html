@@ -28,13 +28,15 @@
             content: '';position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(0,0,0,0) 70%);pointer-events: none;
         }
         
-        /* LOGO 1:1 DENGAN ANIMASI GLOW */
+        /* ANIMASI GLOW UNTUK LOGO */
         @keyframes logoGlow {
             0%{filter:drop-shadow(0 0 5px rgba(255,215,0,0.3));opacity:0.9}
             50%{filter:drop-shadow(0 0 25px rgba(255,215,0,0.9));opacity:1}
             100%{filter:drop-shadow(0 0 5px rgba(255,215,0,0.3));opacity:0.9}
         }
-        .hero-logo {
+        
+        /* LOGO DI HERO, TENTANG, LAYANAN - SAMA BESAR */
+        .hero-logo, .section-logo {
             width: 160px;
             max-width: 70%;
             height: auto;
@@ -44,12 +46,12 @@
             animation: logoGlow 3s ease-in-out infinite;
             border-radius: 16px;
         }
-        .hero-logo:hover {
+        .hero-logo:hover, .section-logo:hover {
             transform: scale(1.02);
             filter: drop-shadow(0 0 30px rgba(255,215,0,1));
         }
         
-        /* TOMBOL AJUKAN KERJASAMA - WARNA HIJAU SEPERTI AWAL */
+        /* TOMBOL AJUKAN KERJASAMA */
         .btn-wa {
             display: inline-block;
             background: #25D366;
@@ -206,7 +208,7 @@
         
         /* RESPONSIVE */
         @media(max-width:767px){
-            .hero-logo{width:120px;margin-bottom:15px}
+            .hero-logo, .section-logo{width:120px;margin-bottom:15px}
             .btn-wa{padding:10px 20px;font-size:0.9rem}
             .produk-grid{grid-template-columns:repeat(2,1fr);gap:12px}
             .produk-icon-img{height:150px;object-fit:cover}
@@ -264,6 +266,7 @@
 <div class="menu-overlay" id="menuOverlay"></div>
 
 <main class="sections-container">
+    <!-- BERANDA -->
     <section id="beranda" class="section active">
         <div class="section-bg" style="background-image:url('images/bg-beranda.jpg')"></div>
         <div class="section-overlay"></div>
@@ -278,11 +281,13 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
+    <!-- TENTANG KAMI -->
     <section id="tentang" class="section">
         <div class="section-bg" style="background-image:url('images/bg-tentang.jpg')"></div>
         <div class="section-overlay"></div>
         <div class="section-content">
             <div class="content-wrapper">
+                <img src="images/logo.png" alt="BungkusKita" class="section-logo">
                 <h2 class="fade-up">Tentang <span>Kami</span></h2>
                 <div class="about-box fade-up delay-1">
                     <div class="visi-misi">
@@ -295,6 +300,7 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
+    <!-- PRODUK -->
     <section id="produk" class="section">
         <div class="section-bg" style="background-image:url('images/bg-produk.jpg')"></div>
         <div class="section-overlay"></div>
@@ -317,6 +323,7 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
+    <!-- BAHAN -->
     <section id="bahan" class="section">
         <div class="section-bg" style="background-image:url('images/bg-bahan.jpg')"></div>
         <div class="section-overlay"></div>
@@ -329,11 +336,13 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
+    <!-- LAYANAN -->
     <section id="layanan" class="section">
         <div class="section-bg" style="background-image:url('images/bg-layanan.jpg')"></div>
         <div class="section-overlay"></div>
         <div class="section-content">
             <div class="content-wrapper">
+                <img src="images/logo.png" alt="BungkusKita" class="section-logo">
                 <h2 class="fade-up">Layanan <span>Kami</span></h2>
                 <div class="layanan-grid fade-up delay-2" id="layananGrid"></div>
             </div>
@@ -341,6 +350,7 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
+    <!-- GALLERY INSPIRASI -->
     <section id="contoh" class="section">
         <div class="section-bg" style="background-image:url('images/bg-contoh.jpg')"></div>
         <div class="section-overlay"></div>
@@ -360,6 +370,7 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
+    <!-- KONTAK -->
     <section id="kontak" class="section">
         <div class="section-bg" style="background-image:url('images/bg-kontak.jpg')"></div>
         <div class="section-overlay"></div>
