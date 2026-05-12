@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>BungkusKita - Premium Box Packaging</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Inter','Segoe UI',sans-serif;overflow-x:hidden;background:#0a0a0a}
@@ -73,6 +73,43 @@
         }
         .btn-wa:active {
             transform: translateY(0);
+        }
+        
+        /* RUNNING TEXT / MARQUEE */
+        .running-text-container {
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(90deg, rgba(255,183,3,0.15), rgba(255,183,3,0.05));
+            padding: 12px 0;
+            margin-top: 25px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,183,3,0.3);
+        }
+        
+        .running-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: runText 12s linear infinite;
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ffb703, #ffd966);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255,183,3,0.5);
+        }
+        
+        @keyframes runText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* Hover pause */
+        .running-text-container:hover .running-text {
+            animation-play-state: paused;
         }
         
         /* SCROLL REVEAL */
@@ -210,6 +247,8 @@
         @media(max-width:767px){
             .hero-logo, .section-logo{width:120px;margin-bottom:15px}
             .btn-wa{padding:10px 20px;font-size:0.9rem}
+            .running-text{font-size:0.9rem;letter-spacing:1px}
+            .running-text-container{padding:8px 0;margin-top:20px}
             .produk-grid{grid-template-columns:repeat(2,1fr);gap:12px}
             .produk-icon-img{height:150px;object-fit:cover}
             .contoh-grid{grid-template-columns:repeat(2,1fr);gap:12px}
@@ -276,6 +315,11 @@
                 <h1 class="fade-up">Bungkus<span>Kita</span></h1>
                 <p class="tagline fade-up delay-1">Premium Box Packaging | Desain & Cetak Berkualitas</p>
                 <a href="https://wa.me/6285716967671?text=Halo%20saya%20ingin%20konsultasi%20box" class="btn-wa fade-up delay-2" target="_blank">📞 Ajukan Kerjasama</a>
+                
+                <!-- RUNNING TEXT DI BERANDA -->
+                <div class="running-text-container fade-up delay-3">
+                    <div class="running-text"> ⭐ Bungkus Kita | Premium Box Packaging | Box Cap Garuda⭐ </div>
+                </div>
             </div>
         </div>
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
