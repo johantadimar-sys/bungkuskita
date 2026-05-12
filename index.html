@@ -75,7 +75,7 @@
             transform: translateY(0);
         }
         
-        /* RUNNING TEXT / MARQUEE */
+        /* RUNNING TEXT */
         .running-text-container {
             width: 100%;
             overflow: hidden;
@@ -86,7 +86,6 @@
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255,183,3,0.3);
         }
-        
         .running-text {
             display: inline-block;
             white-space: nowrap;
@@ -101,13 +100,10 @@
             color: transparent;
             text-shadow: 0 0 10px rgba(255,183,3,0.5);
         }
-        
         @keyframes runText {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
-        
-        /* Hover pause */
         .running-text-container:hover .running-text {
             animation-play-state: paused;
         }
@@ -127,7 +123,7 @@
         
         /* PAGINATION */
         .pagination{display:flex;justify-content:center;align-items:center;gap:15px;margin-top:20px;flex-wrap:wrap}
-        .page-btn{background:#ffb703;color:#2c1810;border:none;width:45px;height:45px;border-radius:50%;font-size:1.3rem;font-weight:bold;cursor:pointer;transition:all 0.3s cubic-bezier(0.2,0.9,0.4,1.1);display:inline-flex;align-items:center;justify-content:center}
+        .page-btn{background:#ffb703;color:#2c1810;border:none;width:45px;height:45px;border-radius:50%;font-size:1.3rem;font-weight:bold;cursor:pointer;transition:all 0.3s ease;display:inline-flex;align-items:center;justify-content:center}
         .page-btn:hover{transform:scale(1.1) translateY(-2px);background:#e6a500;box-shadow:0 5px 15px rgba(255,183,3,0.5)}
         .page-btn:disabled{background:#ccc;cursor:not-allowed;transform:none;opacity:0.5}
         .page-info{color:white;font-size:.85rem;background:rgba(0,0,0,.5);padding:5px 12px;border-radius:20px}
@@ -149,9 +145,66 @@
         .layanan-item p{font-size:.7rem;margin-bottom:4px;color:#fff}
         .layanan-item small{font-size:.6rem;opacity:.8;color:#ccc}
         
+        /* TESTIMONI GRID - SEPERTI GALLERY */
+        .testimoni-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .testimoni-item {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .testimoni-item:hover {
+            transform: translateY(-8px);
+            background: linear-gradient(135deg, rgba(27,94,63,0.95), rgba(27,94,63,0.85));
+            border-color: #ffb703;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 15px rgba(255,183,3,0.3);
+        }
+        .testimoni-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        .testimoni-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .testimoni-item:hover .testimoni-image img {
+            transform: scale(1.08);
+        }
+        .testimoni-info {
+            padding: 15px;
+            text-align: center;
+        }
+        .testimoni-info .nama {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffb703;
+        }
+        .testimoni-info .usaha {
+            font-size: 0.75rem;
+            color: #ddd;
+            margin-top: 4px;
+        }
+        .testimoni-info .rating {
+            color: #ffb703;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-top: 8px;
+        }
+        
         /* CONTOH GRID */
         .contoh-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:20px}
-        .contoh-item{background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.4s cubic-bezier(0.2,0.9,0.4,1.1);border:1px solid rgba(255,255,255,.1)}
+        .contoh-item{background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.4s ease;border:1px solid rgba(255,255,255,.1)}
         .contoh-item:hover{transform:translateY(-10px) scale(1.02);background:linear-gradient(135deg,rgba(27,94,63,0.95),rgba(27,94,63,0.85));border-color:#ffb703;box-shadow:0 20px 40px rgba(0,0,0,0.4),0 0 15px rgba(255,183,3,0.3)}
         .contoh-image{width:100%;height:150px;overflow:hidden}
         .contoh-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease,box-shadow 0.4s ease}
@@ -159,7 +212,7 @@
         .contoh-info{padding:12px;text-align:center}
         .contoh-info p{font-size:.75rem;font-weight:500;color:#fff}
         .contoh-pagination{display:flex;justify-content:center;align-items:center;gap:15px;margin-top:20px;flex-wrap:wrap}
-        .contoh-page-btn{background:#ffb703;color:#2c1810;border:none;width:45px;height:45px;border-radius:50%;font-size:1.3rem;font-weight:bold;cursor:pointer;transition:all 0.3s cubic-bezier(0.2,0.9,0.4,1.1);display:inline-flex;align-items:center;justify-content:center}
+        .contoh-page-btn{background:#ffb703;color:#2c1810;border:none;width:45px;height:45px;border-radius:50%;font-size:1.3rem;font-weight:bold;cursor:pointer;transition:all 0.3s ease;display:inline-flex;align-items:center;justify-content:center}
         .contoh-page-btn:hover{transform:scale(1.1) translateY(-2px);background:#e6a500;box-shadow:0 5px 15px rgba(255,183,3,0.5)}
         .contoh-page-btn:disabled{background:#ccc;cursor:not-allowed;transform:none;opacity:0.5}
         .contoh-page-info{color:white;font-size:.85rem;background:rgba(0,0,0,.5);padding:5px 12px;border-radius:20px}
@@ -194,10 +247,30 @@
         .menu-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:1001;display:none}
         .menu-overlay.active{display:block}
         
+        /* MODAL TESTIMONI */
+        .modal-testimoni{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:1100;justify-content:center;align-items:center}
+        .modal-testimoni.active{display:flex;animation:modalFadeIn 0.3s ease}
+        @keyframes modalFadeIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+        .modal-testimoni .modal-content{background:#fff;padding:20px;border-radius:20px;max-width:800px;width:90%;border:1px solid #ffb703;box-shadow:0 20px 40px rgba(0,0,0,0.5);position:relative;display:flex;flex-direction:column;max-height:90vh}
+        .modal-testimoni .modal-close{position:absolute;top:15px;right:20px;font-size:28px;cursor:pointer;color:#666;transition:all .2s;z-index:10}
+        .modal-testimoni .modal-close:hover{color:#1b5e3f;transform:scale(1.1)}
+        .testimoni-nav{display:flex;justify-content:center;align-items:center;gap:20px;margin-bottom:15px}
+        .testimoni-nav-btn{background:#ffb703;color:#2c1810;border:none;width:40px;height:40px;border-radius:50%;font-size:1.2rem;font-weight:bold;cursor:pointer;transition:all .3s ease}
+        .testimoni-nav-btn:hover{transform:scale(1.1);background:#e6a500;box-shadow:0 5px 15px rgba(255,183,3,0.5)}
+        .testimoni-nav-btn:disabled{background:#ccc;cursor:not-allowed;transform:none}
+        .testimoni-detail-header{display:flex;gap:20px;margin-bottom:20px;flex-wrap:wrap}
+        .testimoni-detail-foto{width:120px;height:120px;border-radius:50%;overflow:hidden;border:3px solid #ffb703}
+        .testimoni-detail-foto img{width:100%;height:100%;object-fit:cover}
+        .testimoni-detail-info{flex:1}
+        .testimoni-detail-info .nama{font-size:1.5rem;font-weight:800;color:#1b5e3f}
+        .testimoni-detail-info .usaha{font-size:1rem;color:#666;margin-top:5px}
+        .testimoni-detail-info .alamat{font-size:0.85rem;color:#888;margin-top:3px}
+        .testimoni-detail-info .rating{color:#ffb703;font-size:1rem;margin-top:8px}
+        .testimoni-detail-text{background:#e8f5e9;padding:15px;border-radius:14px;margin:15px 0;border:1px solid #a5d6a7;text-align:left;font-size:1rem;line-height:1.6;color:#333}
+        
         /* MODAL PRODUK */
         .modal-produk{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:1100;justify-content:center;align-items:center}
         .modal-produk.active{display:flex;animation:modalFadeIn 0.3s ease}
-        @keyframes modalFadeIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
         .modal-produk .modal-content{background:#fff;padding:20px;border-radius:20px;max-width:900px;width:90%;text-align:center;max-height:85vh;overflow-y:auto;border:1px solid #ffb703;box-shadow:0 20px 40px rgba(0,0,0,0.5);position:relative}
         .modal-produk .modal-close{position:absolute;top:15px;right:20px;font-size:28px;cursor:pointer;color:#666;transition:all .2s;z-index:10}
         .modal-produk .modal-close:hover{color:#1b5e3f;transform:scale(1.1)}
@@ -216,7 +289,7 @@
         .info-detail{background:#e8f5e9;padding:12px;border-radius:14px;margin-bottom:15px;border:1px solid #a5d6a7}
         .info-detail p{margin:6px 0;color:#333;font-size:.85rem}
         .info-detail strong{color:#1b5e3f}
-        .btn-pesan-modal{display:inline-block;background:#25D366;color:#fff;padding:12px 20px;border-radius:50px;text-decoration:none;font-weight:600;margin-top:10px;width:100%;text-align:center;transition:all 0.3s cubic-bezier(0.2,0.9,0.4,1.1);border:none;cursor:pointer;font-size:.9rem}
+        .btn-pesan-modal{display:inline-block;background:#25D366;color:#fff;padding:12px 20px;border-radius:50px;text-decoration:none;font-weight:600;margin-top:10px;width:100%;text-align:center;transition:all 0.3s ease;border:none;cursor:pointer;font-size:.9rem}
         .btn-pesan-modal:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(37,211,102,0.4);filter:brightness(1.05)}
         
         /* MODAL INSPIRASI */
@@ -229,7 +302,7 @@
         .inspirasi-header h3{color:#1b5e3f;margin:0;font-size:1.2rem;border-bottom:none;padding-bottom:0}
         .inspirasi-counter{color:#1b5e3f;font-weight:bold;background:#e8f5e9;padding:5px 12px;border-radius:20px;font-size:.85rem;display:inline-block;flex-shrink:0;margin-right:40px}
         .inspirasi-slider-container{display:flex;align-items:center;justify-content:center;gap:15px;margin:15px 0}
-        .inspirasi-nav-btn{background:#ffb703;color:#2c1810;border:none;width:45px;height:45px;border-radius:50%;font-size:1.3rem;font-weight:bold;cursor:pointer;transition:all 0.3s cubic-bezier(0.2,0.9,0.4,1.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .inspirasi-nav-btn{background:#ffb703;color:#2c1810;border:none;width:45px;height:45px;border-radius:50%;font-size:1.3rem;font-weight:bold;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;flex-shrink:0}
         .inspirasi-nav-btn:hover{transform:scale(1.1);background:#e6a500;box-shadow:0 5px 15px rgba(255,183,3,0.5)}
         .inspirasi-nav-btn:disabled{background:#ccc;cursor:not-allowed;transform:none;opacity:0.5}
         .inspirasi-image-box{background:#e8f5e9;padding:15px;border-radius:14px;border:1px solid #a5d6a7;flex:1;max-width:400px}
@@ -251,17 +324,24 @@
             .running-text-container{padding:8px 0;margin-top:20px}
             .produk-grid{grid-template-columns:repeat(2,1fr);gap:12px}
             .produk-icon-img{height:150px;object-fit:cover}
+            .testimoni-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+            .testimoni-image{height:120px}
+            .testimoni-info .nama{font-size:0.8rem}
+            .testimoni-info .usaha{font-size:0.65rem}
             .contoh-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-            .modal-inspirasi .modal-content{max-width:95vw}
             .modal-produk .modal-content{max-width:95vw}
+            .modal-inspirasi .modal-content{max-width:95vw}
+            .modal-testimoni .modal-content{max-width:95vw}
             .modal-flex{flex-direction:column}
             .modal-image-area{min-width:auto}
             .modal-info-area{min-width:auto}
-            .produk-nav-btn,.page-btn,.contoh-page-btn,.inspirasi-nav-btn{width:35px;height:35px;font-size:1rem}
+            .produk-nav-btn,.page-btn,.contoh-page-btn,.inspirasi-nav-btn,.testimoni-nav-btn{width:35px;height:35px;font-size:1rem}
             .modal-product-image{width:90%;max-width:300px}
             .inspirasi-header h3{font-size:1rem}
             .inspirasi-counter{font-size:.7rem;padding:3px 8px;margin-right:30px}
             .inspirasi-image-box{max-width:250px}
+            .testimoni-detail-header{flex-direction:column;align-items:center;text-align:center}
+            .testimoni-detail-foto{width:100px;height:100px}
         }
         
         @media(min-width:768px){
@@ -269,16 +349,18 @@
             .produk-grid{grid-template-columns:repeat(4,1fr);gap:15px}
             .bahan-grid{grid-template-columns:repeat(4,1fr);gap:15px}
             .layanan-grid{grid-template-columns:repeat(3,1fr);gap:20px}
+            .testimoni-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+            .testimoni-image{height:200px}
             .contoh-grid{grid-template-columns:repeat(5,1fr);gap:20px}
             .content-wrapper{max-width:800px}
             .produk-icon-img{height:180px}
             .contoh-image{height:180px}
             .modal-produk .modal-content{max-width:900px}
             .modal-inspirasi .modal-content{max-width:700px}
+            .modal-testimoni .modal-content{max-width:700px}
         }
         @media(min-width:1024px){h1,h2{font-size:3rem}}
         
-        /* SCROLL BAR PREMIUM */
         ::-webkit-scrollbar{width:8px}
         ::-webkit-scrollbar-track{background:#1a1a1a}
         ::-webkit-scrollbar-thumb{background:#ffb703;border-radius:10px}
@@ -297,6 +379,7 @@
         <li><a href="#produk" class="menu-link">📦 Eksplor Desain Box</a></li>
         <li><a href="#bahan" class="menu-link">📄 Bahan</a></li>
         <li><a href="#layanan" class="menu-link">⚙️ Layanan</a></li>
+        <li><a href="#testimoni" class="menu-link">⭐ Testimoni</a></li>
         <li><a href="#contoh" class="menu-link">💡 Gallery Inspirasi</a></li>
         <li><a href="#kontak" class="menu-link">📞 Kontak</a></li>
     </ul>
@@ -315,10 +398,8 @@
                 <h1 class="fade-up">Bungkus<span>Kita</span></h1>
                 <p class="tagline fade-up delay-1">Premium Box Packaging | Desain & Cetak Berkualitas</p>
                 <a href="https://wa.me/6285716967671?text=Halo%20saya%20ingin%20konsultasi%20box" class="btn-wa fade-up delay-2" target="_blank">📞 Ajukan Kerjasama</a>
-                
-                <!-- RUNNING TEXT DI BERANDA -->
                 <div class="running-text-container fade-up delay-3">
-                    <div class="running-text"> ⭐ Solusi Kemasan Bisnis Anda | Chat Sekarang ⭐ </div>
+                    <div class="running-text">✨ Manjakan pelanggan Anda dengan 2 pilihan ukuran | Kualitas premium, harga lebih murah ✨</div>
                 </div>
             </div>
         </div>
@@ -394,6 +475,24 @@
         <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
     </section>
 
+    <!-- TESTIMONI UMKM - SEPERTI GALLERY -->
+    <section id="testimoni" class="section">
+        <div class="section-bg" style="background-image:url('images/bg-testimoni.jpg')"></div>
+        <div class="section-overlay"></div>
+        <div class="section-content">
+            <div class="content-wrapper">
+                <h2 class="fade-up">⭐ <span>Testimoni UMKM</span></h2>
+                <p class="section-subtitle fade-up delay-1">Dipercaya oleh puluhan pelaku usaha dari berbagai daerah</p>
+                
+                <div class="testimoni-grid fade-up delay-2" id="testimoniGrid">
+                    <!-- Akan diisi JavaScript -->
+                    <div class="loading-spinner">Memuat testimoni...</div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator"><span>Geser ke bawah</span><div class="scroll-arrow">▼</div></div>
+    </section>
+
     <!-- GALLERY INSPIRASI -->
     <section id="contoh" class="section">
         <div class="section-bg" style="background-image:url('images/bg-contoh.jpg')"></div>
@@ -436,6 +535,31 @@
         </div>
     </section>
 </main>
+
+<!-- MODAL TESTIMONI -->
+<div id="modalTestimoni" class="modal-testimoni">
+    <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <div class="testimoni-nav">
+            <button id="testimoniPrevBtn" class="testimoni-nav-btn">◀</button>
+            <span id="testimoniCounter" class="produk-counter">1 / 4</span>
+            <button id="testimoniNextBtn" class="testimoni-nav-btn">▶</button>
+        </div>
+        <div class="testimoni-detail-header">
+            <div class="testimoni-detail-foto">
+                <img id="modalTestimoniFoto" src="" alt="Foto customer">
+            </div>
+            <div class="testimoni-detail-info">
+                <div class="nama" id="modalTestimoniNama"></div>
+                <div class="usaha" id="modalTestimoniUsaha"></div>
+                <div class="alamat" id="modalTestimoniAlamat"></div>
+                <div class="rating" id="modalTestimoniRating">⭐⭐⭐⭐⭐</div>
+            </div>
+        </div>
+        <div class="testimoni-detail-text" id="modalTestimoniText"></div>
+        <a href="#" id="modalTestimoniWaLink" class="btn-pesan-modal" target="_blank">📞 Tertarik? Konsultasi Sekarang</a>
+    </div>
+</div>
 
 <!-- MODAL PRODUK -->
 <div id="modalProduk" class="modal-produk">
@@ -535,6 +659,101 @@ async function loadProducts() {
         document.getElementById('produkGrid').innerHTML = `<div class="loading-spinner" style="color:#ffb703;">⚠️ Gagal memuat data. Pastikan file produk.json ada.</div>`;
     }
 }
+
+// ========== DATA TESTIMONI ==========
+const testimoniData = [
+    {
+        id: 1,
+        nama: "Ibu Tari",
+        usaha: "Box Catering",
+        alamat: "📍 Jakarta Timur",
+        rating: "⭐⭐⭐⭐⭐",
+        text: '"Pesan 2 ukuran, harga lebih murah. Kemasan premium, pengiriman cepat. Customer saya senang dan puas dengan kualitas box dari BungkusKita. Sekarang bisnis catering saya semakin meningkat karena kemasan yang menarik."',
+        gambar: "images/testimoni/ibu-tari.jpg"
+    },
+    {
+        id: 2,
+        nama: "Pak Kasbulloh",
+        usaha: "Martabak Syakila 88",
+        alamat: "📍 Tugu Jasinga, Kec. Jasinga - Bogor",
+        rating: "⭐⭐⭐⭐⭐",
+        text: '"Box martabak kokoh, tahan minyak. Desain custom sesuai keinginan. Customer puas dan order terus meningkat! Pengiriman tepat waktu, harga bersaing. Terima kasih BungkusKita."',
+        gambar: "images/testimoni/pak-kasbulloh.jpg"
+    },
+    {
+        id: 3,
+        nama: "Pak Ayudin",
+        usaha: "Ayam Bakar Taliwang (Om Ayudin)",
+        alamat: "📍 Jl. Pandu Raya",
+        rating: "⭐⭐⭐⭐⭐",
+        text: '"Box ayam bakar tahan panas & minyak. Kemasan rapi, pelanggan suka. Pengiriman mantap! Sekarang omzet saya meningkat karena kemasan yang lebih menarik dan praktis untuk take away."',
+        gambar: "images/testimoni/pak-ayudin.jpg"
+    },
+    {
+        id: 4,
+        nama: "Bang Abung",
+        usaha: "Jajanan Tradisional",
+        alamat: "📍 Desa Telajung, Kec. Setu - Kab. Bekasi",
+        rating: "⭐⭐⭐⭐⭐",
+        text: '"Kemasan aman, barang sampai utuh. Harga bersaing dengan kualitas premium. Recomended untuk pelaku UMKM yang ingin naik kelas! Pelanggan saya suka dengan kemasan yang lebih modern."',
+        gambar: "images/testimoni/bang-abung.jpg"
+    }
+];
+
+let testimoniIndex = 0;
+
+function renderTestimoni() {
+    const grid = document.getElementById('testimoniGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    testimoniData.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'testimoni-item fade-up-scroll';
+        card.innerHTML = `
+            <div class="testimoni-image">
+                <img src="${item.gambar}" alt="${item.nama}" onerror="this.src='https://placehold.co/400x400/1b5e3f/white?text=${item.nama.charAt(0)}'">
+            </div>
+            <div class="testimoni-info">
+                <div class="nama">${item.nama}</div>
+                <div class="usaha">${item.usaha}</div>
+                <div class="rating">${item.rating}</div>
+            </div>
+        `;
+        card.onclick = () => showTestimoniModal(idx);
+        grid.appendChild(card);
+    });
+    setTimeout(() => { document.querySelectorAll('.fade-up-scroll').forEach(el => el.classList.add('visible')); }, 100);
+}
+
+function showTestimoniModal(index) {
+    testimoniIndex = index;
+    updateTestimoniModal();
+    document.getElementById('modalTestimoni').classList.add('active');
+}
+
+function updateTestimoniModal() {
+    const item = testimoniData[testimoniIndex];
+    document.getElementById('modalTestimoniFoto').src = item.gambar;
+    document.getElementById('modalTestimoniNama').innerText = item.nama;
+    document.getElementById('modalTestimoniUsaha').innerText = item.usaha;
+    document.getElementById('modalTestimoniAlamat').innerText = item.alamat;
+    document.getElementById('modalTestimoniRating').innerHTML = item.rating;
+    document.getElementById('modalTestimoniText').innerHTML = item.text;
+    document.getElementById('testimoniCounter').innerText = `${testimoniIndex + 1} / ${testimoniData.length}`;
+    
+    const prevBtn = document.getElementById('testimoniPrevBtn');
+    const nextBtn = document.getElementById('testimoniNextBtn');
+    if (prevBtn) prevBtn.disabled = (testimoniIndex === 0);
+    if (nextBtn) nextBtn.disabled = (testimoniIndex === testimoniData.length - 1);
+    
+    document.getElementById('modalTestimoniWaLink').onclick = (e) => {
+        e.preventDefault();
+        window.open(`https://wa.me/6285716967671?text=${encodeURIComponent(`Halo BungkusKita, saya tertarik dengan layanan Anda. Saya melihat testimoni dari ${item.nama} (${item.usaha}) dan ingin konsultasi untuk kemasan bisnis saya. Terima kasih.`)}`, '_blank');
+    };
+}
+
+function testimoniPrev() { if (testimoniIndex > 0) { testimoniIndex--; updateTestimoniModal(); } }
+function testimoniNext() { if (testimoniIndex < testimoniData.length - 1) { testimoniIndex++; updateTestimoniModal(); } }
 
 // ========== INSPIRASI ==========
 const contohData = [
@@ -724,8 +943,10 @@ document.querySelectorAll('.scroll-indicator').forEach(ind => {
 // MODAL CLOSE
 document.querySelector('#modalProduk .modal-close').onclick = () => document.getElementById('modalProduk').classList.remove('active');
 document.querySelector('#modalInspirasi .modal-close').onclick = () => document.getElementById('modalInspirasi').classList.remove('active');
+document.querySelector('#modalTestimoni .modal-close').onclick = () => document.getElementById('modalTestimoni').classList.remove('active');
 document.getElementById('modalProduk').onclick = (e) => { if (e.target === document.getElementById('modalProduk')) document.getElementById('modalProduk').classList.remove('active'); };
 document.getElementById('modalInspirasi').onclick = (e) => { if (e.target === document.getElementById('modalInspirasi')) document.getElementById('modalInspirasi').classList.remove('active'); };
+document.getElementById('modalTestimoni').onclick = (e) => { if (e.target === document.getElementById('modalTestimoni')) document.getElementById('modalTestimoni').classList.remove('active'); };
 
 // BUTTON LISTENERS
 document.getElementById('prevBtn').addEventListener('click', prevPage);
@@ -736,6 +957,8 @@ document.getElementById('inspirasiPrevBtn').addEventListener('click', inspirasiP
 document.getElementById('inspirasiNextBtn').addEventListener('click', inspirasiNext);
 document.getElementById('contohPrevBtn').addEventListener('click', inspirasiPrevPage);
 document.getElementById('contohNextBtn').addEventListener('click', inspirasiNextPage);
+document.getElementById('testimoniPrevBtn').addEventListener('click', testimoniPrev);
+document.getElementById('testimoniNextBtn').addEventListener('click', testimoniNext);
 
 window.addEventListener('resize', () => {
     isMobile = window.innerWidth < 768;
@@ -756,6 +979,7 @@ window.addEventListener('resize', checkVisibility);
 // INIT
 renderBahan();
 renderLayanan();
+renderTestimoni();
 renderContoh();
 loadProducts();
 setTimeout(checkVisibility, 500);
